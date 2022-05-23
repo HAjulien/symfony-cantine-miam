@@ -1,0 +1,97 @@
+<?php
+
+namespace App\Entity;
+
+use ApiPlatform\Core\Annotation\ApiResource;
+use App\Repository\FeatureRepository;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity(repositoryClass: FeatureRepository::class)]
+#[ApiResource]
+class Feature
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private $id;
+
+    #[ORM\Column(type: 'string', length: 120)]
+    private $title;
+
+    #[ORM\Column(type: 'text')]
+    private $paragraphe;
+
+    #[ORM\Column(type: 'string', length: 150, nullable: true)]
+    private $image;
+
+    #[ORM\Column(type: 'string', length: 50)]
+    private $buton;
+
+    #[ORM\Column(type: 'string', length: 100)]
+    private $chemin;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getParagraphe(): ?string
+    {
+        return $this->paragraphe;
+    }
+
+    public function setParagraphe(string $paragraphe): self
+    {
+        $this->paragraphe = $paragraphe;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getButon(): ?string
+    {
+        return $this->buton;
+    }
+
+    public function setButon(string $buton): self
+    {
+        $this->buton = $buton;
+
+        return $this;
+    }
+
+    public function getChemin(): ?string
+    {
+        return $this->chemin;
+    }
+
+    public function setChemin(string $chemin): self
+    {
+        $this->chemin = $chemin;
+
+        return $this;
+    }
+}
