@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\FeatureRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 
@@ -69,7 +70,7 @@ class Feature
     public function setImage(?string $image): self
     {
         $this->image = $image;
-3
+
         return $this;
     }
 
