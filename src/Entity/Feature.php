@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\FeatureRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\FeatureRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 
 #[ORM\Entity(repositoryClass: FeatureRepository::class)]
-#[ApiResource]
+#[ApiResource (attributes: ["pagination_items_per_page" => 3])]
+#[ApiFilter(OrderFilter::class, properties: ['id' => 'DESC'])]
 class Feature
 {
     #[ORM\Id]
@@ -67,7 +69,7 @@ class Feature
     public function setImage(?string $image): self
     {
         $this->image = $image;
-
+3
         return $this;
     }
 
