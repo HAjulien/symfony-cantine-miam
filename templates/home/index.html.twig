@@ -1,0 +1,222 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page Accueil!{% endblock %}
+
+{% block body %}
+            <div class="cardBox">
+                <a href="{{ path('test') }}">
+                    <div class="card">
+                        <div>
+                            <div class="numbers"> 1.2 </div>
+                            <div class="cardName"> croquette de poisson est le moins populaire </div>
+                        </div>
+                        <div class="iconBox">
+                            <ion-icon name="star-half-outline"></ion-icon>
+                        </div>
+                    </div>
+                </a>
+
+                <div class="card">
+                    <div>
+                        <a href="{{ path('test') }}">
+                            <div class="numbers"> 32 </div>
+                            <div class="cardName"> couscous a le plus de critique </div>
+                        </a>
+                    </div>
+                    <div class="iconBox">
+                        <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <a href="{{ path('test') }}">
+                            <div class="numbers"> 120 </div>
+                            <div class="cardName"> marge brute prévue pour aujourd'hui </div>
+                        </a>
+                    </div>
+                    <div class="iconBox">
+                        <ion-icon name="logo-euro"></ion-icon>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <a href="{{ path('test') }}">
+                            <div class="numbers"> 20 </div>
+                            <div class="cardName"> nouveaux inscrits </div>
+                        </a>
+                    </div>
+                    <div class="iconBox">
+                        <ion-icon name="person-outline"></ion-icon>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- detail liste -->
+
+            <div class="details">
+
+                <div class="recentOrders">
+
+                    <div class="cardHeader">
+                        <h2>Commandes recentes</h2>
+                        <a href="" class="btn">plus</a>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>Nom</td>
+                                <td>payé</td>
+                                <td>date</td>
+                                <td>Status</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Arthur</td>
+                                <td>30.25€</td>
+                                <td>25/5/2022</td>
+                                <td><span class="status personel"> personel </span></td>
+                            </tr>
+                            <tr>
+                                <td>Lois</td>
+                                <td>10.80€</td>
+                                <td>25/5/2022</td>
+                                <td><span class="status eleve"> élève </span></td>
+                            </tr>
+                            <tr>
+                                <td>Samantha</td>
+                                <td>54.10€</td>
+                                <td>25/5/2022</td>
+                                <td><span class="status personel"> personel </span></td>
+                            </tr>
+                            <tr>
+                                <td>Claude</td>
+                                <td>20.20€</td>
+                                <td>25/5/2022</td>
+                                <td><span class="status eleve"> élève </span></td>
+                            </tr>
+                            <tr>
+                                <td>Claude</td>
+                                <td>20.20€</td>
+                                <td>25/5/2022</td>
+                                <td><span class="status eleve"> élève </span></td>
+                            </tr>
+                            <tr>
+                                <td>Claude</td>
+                                <td>20.20€</td>
+                                <td>25/5/2022</td>
+                                <td><span class="status eleve"> élève </span></td>
+                            </tr>
+                            <tr>
+                                <td>Claude</td>
+                                <td>20.20€</td>
+                                <td>25/5/2022</td>
+                                <td><span class="status eleve"> élève </span></td>
+                            </tr>
+                            <tr>
+                                <td>Claude</td>
+                                <td>20.20€</td>
+                                <td>25/5/2022</td>
+                                <td><span class="status eleve"> élève </span></td>
+                            </tr>
+                            <tr>
+                                <td>Claude</td>
+                                <td>20.20€</td>
+                                <td>25/5/2022</td>
+                                <td><span class="status eleve"> élève </span></td>
+                            </tr>
+                            <tr>
+                                <td>Claude</td>
+                                <td>20.20€</td>
+                                <td>25/5/2022</td>
+                                <td><span class="status eleve"> élève </span></td>
+                            </tr>
+                            <tr>
+                                <td>Claude</td>
+                                <td>20.20€</td>
+                                <td>25/5/2022</td>
+                                <td><span class="status eleve"> élève </span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="recetteJour">
+                    <div class="cardHeader">
+                        <h2>plat du jour 25/5/2022</h2>
+                        <a href="" class="btn">modifier</a>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>photo</td>
+                                <td>nb vendu</td>
+                                <td>nom du plat</td>
+                                <td>prix</td>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td><div class="imgBox"><img class="imgPlat" src="" alt=""></div></td>
+                            <td>50</td>
+                            <td>burger bacon double chease</td>
+                            <td>4.50€</td>
+                        </tr>
+                        <tr>
+                            <td><div class="imgBox"><img class="imgPlat" src="" alt=""></div></td>
+                            <td>50</td>
+                            <td>burger bacon double chease</td>
+                            <td>4.50€</td>
+                        </tr>
+                        <tr>
+                            <td><div class="imgBox"><img class="imgPlat" src="" alt=""></div></td>
+                            <td>50</td>
+                            <td>burger bacon double chease</td>
+                            <td>4.50€</td>
+                        </tr>
+                        <tr>
+                            <td><div class="imgBox"><img class="imgPlat" src="" alt=""></div></td>
+                            <td>50</td>
+                            <td>burger bacon double chease</td>
+                            <td>4.50€</td>
+                        </tr>
+                        <tr>
+                            <td><div class="imgBox"><img class="imgPlat" src="" alt=""></div></td>
+                            <td>50</td>
+                            <td>burger bacon double chease</td>
+                            <td>4.50€</td>
+                        </tr>
+                        <tr>
+                            <td><div class="imgBox"><img class="imgPlat" src="" alt=""></div></td>
+                            <td>50</td>
+                            <td>burger bacon double chease</td>
+                            <td>4.50€</td>
+                        </tr>
+                        <tr>
+                            <td><div class="imgBox"><img class="imgPlat" src="" alt=""></div></td>
+                            <td>50</td>
+                            <td>burger bacon double chease</td>
+                            <td>4.50€</td>
+                        </tr>
+                        <tr>
+                            <td><div class="imgBox"><img class="imgPlat" src="" alt=""></div></td>
+                            <td>50</td>
+                            <td>burger bacon double chease</td>
+                            <td>4.50€</td>
+                        </tr>
+                        <tr>
+                            <td><div class="imgBox"><img class="imgPlat" src="" alt=""></div></td>
+                            <td>50</td>
+                            <td>burger bacon double chease</td>
+                            <td>4.50€</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+            </div>        
+        </div>
+{% endblock %}

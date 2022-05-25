@@ -1,0 +1,68 @@
+body{
+    background-color: #f8f8f8;
+    position: relative;
+}
+
+.main{
+    position: absolute;
+    top: 40vh;
+    left: 50vw;
+    background-color:#b0f2b6;
+    height: 400px;
+    width: 500px;
+    padding: 0 20px;
+    transform: translate(-50%, -50%);
+    border: 2px solid #000;
+    border-radius: 15px;
+}
+
+h1{
+    text-align: center;
+    padding: 30px 0;
+}
+
+p{
+    text-align: center;
+}
+
+.btn{
+    margin: 30px 190px;
+    height: 45px;
+    width: 125px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: .2s;
+}
+.btn:hover{
+    background-color: #009FB7;
+    color: #f8f8f8;
+    transform: scale(.9);
+    transition: .2s;
+}
+
+.champs{
+    display: flex;
+    justify-content: end;
+    background-color: #f8f8f8;
+    height: 20px;
+    margin: 10px 40px;
+    padding: 1px 15px;
+    width: 70%;
+    border-radius: 10px;
+    outline: none;
+}
+
+.message{
+    margin-top: 110px;
+    font-size: 18px;
+}
+
+@media (max-width: 500px){
+    .main{
+        width: 350px;
+        margin: auto;
+        transform: translate(0,0);
+
+    }
+    
+}
