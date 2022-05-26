@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Utilisateurs{% endblock %}
+        {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/users.css') }}" type="text/css" />
+        {% endblock %}
+
+{% block body %}
+        <h1>Liste des Utilisateurs</h1>
+
+        <h2><a class="usebtn" href="{{ path('app_register') }}">Ajouter un Utilisateur </a></h2>
+
+
+
+<table>
+        <thead>
+                <tr>
+                        <td>Pseudo</td>
+                        <td>identifiantAfpa</td>
+                        <td>role</td>
+                        <td>email</td>
+                        <td>n°tel</td>
+                        <td>pointFidélité</td>
+                        <td>vérifié</td>
+                </tr>
+        </thead>
+        <tbody>
+        {% for user in users  %}
+                <tr>
+                        <td>{{user.pseudo}}</td>
+                        <td>{{user.identifiantAfpa}}</td>
+                        <td>{{user.roles[0]}}</td>
+                        <td>{{user.email}}</td>
+                        <td> {{user.telephone}}</td>
+                        <td> {{user.pointFidelite}}</td>
+                        <td> {{user.isVerified}}</td>
+                </tr>
+        {% endfor %}
+        </tbody>
+</table>
+
+{% endblock %}

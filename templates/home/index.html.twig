@@ -2,6 +2,10 @@
 
 {% block title %}Page Accueil!{% endblock %}
 
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/home.css') }}" type="text/css" />
+{% endblock %}
+
 {% block body %}
             <div class="cardBox">
                 <a href="{{ path('test') }}">

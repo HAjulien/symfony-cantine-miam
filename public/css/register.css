@@ -1,0 +1,82 @@
+body{
+    background-color: #f8f8f8;
+    position: relative;
+}
+
+.principale{
+    margin: 50px auto;
+    background-color:#b0f2b6;
+    width: 500px;
+    min-height: 400px;
+    padding: 0 20px;
+    border: 2px solid #000;
+    border-radius: 15px;
+}
+
+h1{
+    text-align: center;
+    padding: 30px 0;
+}
+
+p{
+    text-align: center;
+}
+
+.btn{
+    margin-left: 150px;
+    height: 45px;
+    width: 125px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.b1{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.b2{
+    margin-bottom: 10px;
+}
+.btn a{
+    text-decoration: none;
+    color: var(--black);
+}
+
+.b1:hover, .b2:hover{
+    transform: scale(.9);
+    transition: .2s;
+}
+.b1:hover{
+    background-color: #009FB7;
+    color: #f8f8f8;
+}
+.b2:hover{
+    background-color:var(--red);
+}
+
+
+.champs{
+    display: flex;
+    justify-content: end;
+    background-color: #f8f8f8;
+    height: 20px;
+    margin: 10px 40px;
+    padding: 1px 15px;
+    width: 70%;
+    border-radius: 10px;
+    outline: none;
+}
+
+.message{
+    margin-top: 110px;
+    font-size: 18px;
+}
+
+@media (max-width: 500px){
+    .principale{
+        width: 350px;
+    }
+    
+}

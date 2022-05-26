@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %} Dashboard-sb admin {% endblock %} </title>
         <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
+        {% block stylesheets %}{% endblock %}
     </head>
     <body>
         <div class="container">
@@ -36,7 +37,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ path('home') }}">
+                        <a href="{{ path('user_index') }}">
                             <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
                             <span class="title"> Utilisateurs</span>
                         </a> 

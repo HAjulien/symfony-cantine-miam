@@ -1,15 +1,35 @@
-{% extends 'base_form.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block title %}S'enregistrer{% endblock %}
+{% block title %}Enregistrer{% endblock %}
+{% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/register.css') }}" type="text/css" />
+{% endblock %}
 
 {% block body %}
-
-    <h1>S'enregistrer</h1>
+<div class="container">
+    <div class="principale">
+    <h1>Enregistrer un membre du personnel</h1>
 
     {{ form_start(registrationForm) }}
 
         {{ form_row(registrationForm.email, {
-            label: 'Votre email:',
+            label: 'l\' email:',
+            'attr': {'class': 'champs'}
+            }) }}
+        {{ form_row(registrationForm.pseudo, {
+            label: 'Le pseudo:',
+            'attr': {'class': 'champs'}
+            }) }}
+        {{ form_row(registrationForm.identifiantAfpa, {
+            label: 'Le numero AFPA:',
+            'attr': {'class': 'champs'}
+            }) }}
+        {{ form_row(registrationForm.telephone, {
+            label: 'Le numéro de telephone:',
+            'attr': {'class': 'champs'}
+            }) }}
+        {{ form_row(registrationForm.Roles, {
+            label: 'Le role:',
             'attr': {'class': 'champs'}
             }) }}
 
@@ -22,7 +42,15 @@
         {{ form_row(registrationForm.agreeTerms, {
             label:'accepter les conditions'
         }) }}
+        {{ form_row(registrationForm.isVerified, {
+            label: 'valider tout de suite le compte',
+            'attr': {'class': 'valitation'}
+            }) }}
 
-        <button type="submit"  class="btn">S'enregistrer </button>
+        <button type="submit"  class="btn b1">Enregistrer </button>
+
     {{ form_end(registrationForm) }}
+        <button type="submit"  class="btn b2"><a href="{{ path('user_index') }}">retour liste des utilisateur</a> </button>
+    </div>
+    </div>
 {% endblock %}

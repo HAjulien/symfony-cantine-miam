@@ -8,8 +8,8 @@ body{
     top: 40vh;
     left: 50vw;
     background-color:#b0f2b6;
-    height: 400px;
-    width: 500px;
+    min-width: 500px;
+    min-height: 400px;
     padding: 0 20px;
     transform: translate(-50%, -50%);
     border: 2px solid #000;
