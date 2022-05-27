@@ -8,7 +8,7 @@
 {% block body %}
         <h1>Liste des Utilisateurs</h1>
 
-        <h2><a class="usebtn" href="{{ path('user_add') }}">Ajouter un Utilisateur </a></h2>
+        <h2><a class="usebtn" href="{{ path('app_register') }}">Ajouter un Utilisateur </a></h2>
 
 
 
@@ -22,7 +22,6 @@
                         <td>n°tel</td>
                         <td>pointFidélité</td>
                         <td>vérifié</td>
-                        <td></td>
                 </tr>
         </thead>
         <tbody>
@@ -35,54 +34,9 @@
                         <td> {{user.telephone}}</td>
                         <td> {{user.pointFidelite}}</td>
                         <td> {{user.isVerified}}</td>
-                        <td> 
-                                <a href="{{ path('user_update', {id: user.id}) }}" class="btn b1">Modifier</a>
-                                <a href="{{ path('user_delete', {id: user.id}) }}" class="btn b2">Supprimer</a>
-                        </td>
                 </tr>
         {% endfor %}
-
-
         </tbody>
 </table>
-
-<ul class="pagination">
-
-{# fleche pour revenir page 1 #}
-        <li class=" {{ (page == 1) ? 'disable' : '' }} ">
-                <a href="?page=1" id="a">
-                        <ion-icon name="play-back-outline"></ion-icon>
-                </a>
-        </li>
-{# fleche pour revenir en arriere #}
-        <li class=" {{ (page == 1) ? 'disable' : '' }} ">
-                <a href="{{ (page > 1) ? '?page=' ~ (page -1) : '' }}" id="a">
-                        <ion-icon name="arrow-back-outline"></ion-icon>
-                </a>
-        </li>
-
-{# calcul total / limit user par page que l'on arrondi au superieur avec ceil on enferme variable pages grâce set #}
-        {% set pages = (total / limit)|round(0,'ceil') %}
-        {% for item in 1..pages %}
-                <li class=" {{ (page == item) ? 'active' : '' }} ">
-                        <a href="?page={{ item }}" id="a"> {{ item }} </a>
-                </li>
-        {% endfor %}
-
-{# fleche pour aller vers suivant #}
-        <li class=" {{ (page == pages) ? 'disable' : '' }} ">
-                <a href="{{ (page < pages) ? '?page=' ~ (page +1) : '' }}" id="a">
-                        <ion-icon name="arrow-forward-outline"></ion-icon>
-                </a>
-        </li>
-
-{# fleche pour derniere page  #}
-        <li class=" {{ (page == pages) ? 'disable' : '' }} ">
-                <a href="?page= {{ pages }}" id="a">
-                        <ion-icon name="play-forward-outline"></ion-icon>
-                </a>
-        </li>
-
-</ul>
 
 {% endblock %}
