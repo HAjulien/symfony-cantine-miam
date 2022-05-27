@@ -55,3 +55,60 @@ table tr:last-child{
     border-bottom: none;
 }
 
+.btn{
+    padding: 7px 10px;
+    margin: 10px;
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.b1{
+    background-color: var(--yellow);
+}
+
+.b2{
+    background-color: var(--red);
+}
+.b1:hover, .b2:hover{
+    color: var(--black);
+    border: 3px solid #000;
+    padding: 5px 8px;
+    margin: 7px;
+    transition: .2s;
+}
+
+.pagination{
+    margin-left: 35px;
+}
+
+.pagination li{
+    display: inline-block;
+    margin: 15px 5px;
+    width: 30px;
+    height: 30px;
+    border: 1.5px solid #000;
+    border-radius: 10px;
+}
+
+.pagination li:hover{
+    background-color: rgb(203, 200, 200);
+}
+
+.pagination .active{
+    background-color: var(--green);
+
+}
+#a {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    text-decoration: none;
+    color: var(--black);
+}
+
+.pagination .disable{
+    display: none;
+}
