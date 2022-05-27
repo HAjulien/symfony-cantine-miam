@@ -65,6 +65,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     public function getPaginatedUsers($page, $limit){
         $query = $this->createQueryBuilder('a')
         //->where('a.isVerified = 1')
+        ->orderBy('a.id', 'DESC')
         ->setFirstResult(($page * $limit) - $limit)
         ->setMaxResults($limit)
         ;
