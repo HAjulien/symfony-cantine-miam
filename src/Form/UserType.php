@@ -55,7 +55,7 @@ class UserType extends AbstractType
                 ],
             ])
             ->add('Valider', SubmitType::class, array(
-                'attr' => ['class' => 'bouton b1'],
+                'attr' => ['class' => 'btn b1'],
             ))
         ;
 
