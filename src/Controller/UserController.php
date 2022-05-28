@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\SearchUserType;
 use App\Form\UserType;
 use App\Form\UserUpdateFormType;
 use App\Repository\UserRepository;
@@ -36,11 +37,21 @@ class UserController extends AbstractController
         $total = $userRepository->getTotalUsers();
         //dd($total);
 
+        $rechercheForm = $this->createForm(SearchUserType::class);
+
+        $search = $rechercheForm->handleRequest($request);
+
+        if($rechercheForm->isSubmitted() && $rechercheForm->isValid()){
+            //on recherche les users correspondant aux mots clés
+            $user = $userRepository->search($search->get('mots')->getData());
+        }
+
         return $this->render('user/index.html.twig', [
             'users' => $user ,
             'total' => $total,
             'limit' => $limit,
             'page' => $page,
+            'rechercheForm' => $rechercheForm->createView(),
         ]);
     }
 

@@ -25,6 +25,7 @@ class UserUpdateFormType extends AbstractType
                 'multiple' => false,
                 'expanded' => false,
                 'choices'  => [
+                'User' => 'ROLE_USER',
                 'Personel' => 'ROLE_PERSONNEL',
                 'Admin' => 'ROLE_ADMIN',
                 ],

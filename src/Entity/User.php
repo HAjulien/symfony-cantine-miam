@@ -2,13 +2,17 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
+use Doctrine\ORM\Mapping\Index;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+// pour faire les recherches
+#[ORM\Index(name: 'user', columns: ['pseudo', 'identifiant_afpa'], flags: ['fulltext'])]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {

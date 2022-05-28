@@ -86,6 +86,21 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $query->getQuery()->getSingleScalarResult();
     }
 
+    /**
+    * recherche les users en fonction du formulaire
+    * @return void
+    */
+    public function search($mots){
+        $query = $this->createQueryBuilder('u');
+        if($mots != null){
+            // en reference au doctrine yaml match_against
+            $query->andWhere('MATCH_AGAINST(u.pseudo, u.identifiantAfpa) AGAINST(:mots boolean)>0')
+                ->setParameter('mots', $mots);
+        }
+
+        return $query->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */
