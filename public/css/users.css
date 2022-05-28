@@ -7,8 +7,8 @@ h1{
 }
 
 h2{
-    display: flex;
-    justify-content: center;
+    display: inline-block;
+    margin: 40px 30px 40px 0px;
     font-size: 1.3rem;
 }
 h2 .usebtn{
@@ -58,7 +58,7 @@ table tr:last-child{
 .btn{
     padding: 7px 10px;
     margin: 10px;
-    color: var(--black);
+    color: var(--white);
     text-decoration: none;
     border-radius: 15px;
     cursor: pointer;
@@ -113,8 +113,34 @@ table tr:last-child{
     display: none;
 }
 
+/* barre recherche */
 .recherche{
-    margin-left: 20px;
-    width: 500px;
+    margin-left: calc(50vw - 400px);
+    width: 400px;
     height: 30px;
+}
+
+.recherche:focus::placeholder{
+    color: transparent;
+    transition: 0.2s;
+}
+.recherche::placeholder{
+    text-align: center;
+    font-size: 16px;
+    color: var(--green2);
+    transition: 0.2s;
+
+}
+
+
+
+.btn.rechercheButon{
+    color: var(--black);
+    margin-left:calc(50vw - 250px);
+}
+
+.btn.rechercheButon:hover{
+    color: var(--white);
+    background-color: var(--blue);
+    transform: scale(0.9);
 }

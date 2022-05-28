@@ -37,6 +37,19 @@ class UserController extends AbstractController
         $total = $userRepository->getTotalUsers();
         //dd($total);
 
+        return $this->render('user/index.html.twig', [
+            'users' => $user ,
+            'total' => $total,
+            'limit' => $limit,
+            'page' => $page,
+        ]);
+    }
+
+    #[Route('/recherche', name: 'recherche')]
+    public function recherche( UserRepository $userRepository, Request $request ): Response
+    {
+        $user = $userRepository;
+
         $rechercheForm = $this->createForm(SearchUserType::class);
 
         $search = $rechercheForm->handleRequest($request);
@@ -46,11 +59,8 @@ class UserController extends AbstractController
             $user = $userRepository->search($search->get('mots')->getData());
         }
 
-        return $this->render('user/index.html.twig', [
-            'users' => $user ,
-            'total' => $total,
-            'limit' => $limit,
-            'page' => $page,
+        return $this->render('user/recherche.html.twig', [
+            'users' => $user,
             'rechercheForm' => $rechercheForm->createView(),
         ]);
     }

@@ -9,7 +9,11 @@
         <h1>Liste des Utilisateurs</h1>
 
         <h2><a class="usebtn" href="{{ path('user_add') }}">Ajouter un Utilisateur </a></h2>
-        <h2><a class="usebtn" href="{{ path('user_recherche') }}">Faire une recherche </a></h2>
+        <h2><a class="usebtn" href="{{ path('user_index') }}">Retour à la liste </a></h2>
+        
+        <div class="form">
+        {{ form(rechercheForm)}}
+        </div>
 
 <table>
         <thead>
@@ -44,44 +48,5 @@
 
         </tbody>
 </table>
-
-<ul class="pagination">
-
-{# fleche pour revenir page 1 #}
-        <li class=" {{ (page == 1) ? 'disable' : '' }} ">
-                <a href="?page=1" id="a">
-                        <ion-icon name="play-back-outline"></ion-icon>
-                </a>
-        </li>
-{# fleche pour revenir en arriere #}
-        <li class=" {{ (page == 1) ? 'disable' : '' }} ">
-                <a href="{{ (page > 1) ? '?page=' ~ (page -1) : '' }}" id="a">
-                        <ion-icon name="arrow-back-outline"></ion-icon>
-                </a>
-        </li>
-
-        {% set pages = (total / limit)|round(0,'ceil') %}
-{# calcul total / limit user par page que l'on arrondi au superieur avec ceil on enferme variable pages grâce set #}
-        {% for item in 1..pages %}
-                <li class=" {{ (page == item) ? 'active' : '' }} ">
-                        <a href="?page={{ item }}" id="a"> {{ item }} </a>
-                </li>
-        {% endfor %}
-
-{# fleche pour aller vers suivant #}
-        <li class=" {{ (page == pages) ? 'disable' : '' }} ">
-                <a href="{{ (page < pages) ? '?page=' ~ (page +1) : '' }}" id="a">
-                        <ion-icon name="arrow-forward-outline"></ion-icon>
-                </a>
-        </li>
-
-{# fleche pour derniere page  #}
-        <li class=" {{ (page == pages) ? 'disable' : '' }} ">
-                <a href="?page= {{ pages }}" id="a">
-                        <ion-icon name="play-forward-outline"></ion-icon>
-                </a>
-        </li>
-
-</ul>
 
 {% endblock %}

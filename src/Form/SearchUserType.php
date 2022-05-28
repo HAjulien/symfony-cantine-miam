@@ -20,7 +20,11 @@ class SearchUserType extends AbstractType
                     'placeholder' => 'Entrez pseudo ou identifiant AFPA'
                 ]
             ])
-            ->add('Rechercher', SubmitType::class,)
+            ->add('Rechercher', SubmitType::class, [
+                'attr' => [
+                    'class' => 'rechercheButon',
+                ]
+            ])
         ;
     }
 

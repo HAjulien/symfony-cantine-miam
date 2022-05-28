@@ -95,7 +95,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         if($mots != null){
             // en reference au doctrine yaml match_against
             $query->andWhere('MATCH_AGAINST(u.pseudo, u.identifiantAfpa) AGAINST(:mots boolean)>0')
-                ->setParameter('mots', $mots);
+                ->setParameter('mots', '*' . $mots . '*');
         }
 
         return $query->getQuery()->getResult();
