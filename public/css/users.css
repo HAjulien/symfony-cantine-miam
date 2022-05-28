@@ -40,7 +40,6 @@ table{
 
 }
 
-
 table tr{
     height: 70px;
     text-align: center;
@@ -55,6 +54,29 @@ table tr:last-child{
     border-bottom: none;
 }
 
+.ROLE_ADMIN, .ROLE_PERSONNEL, .ROLE_USER{
+    padding: 10px;
+    border-radius: 8px;
+    color: var(--white);
+}
+
+.ROLE_PERSONNEL{
+    background-color: var(--blue);
+}
+.ROLE_ADMIN{
+    background-color: var(--green2);
+}
+.ROLE_USER{
+    background-color: var(--yellow);
+
+}
+/* pour les utilisateur identifié */
+[class="1"]{
+    background-color: var(--green2);
+    color: var(--green2);
+    padding: 6px 8px;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
 .btn{
     padding: 7px 10px;
     margin: 10px;

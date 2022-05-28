@@ -10,7 +10,7 @@
 
         <h2><a class="usebtn" href="{{ path('user_add') }}">Ajouter un Utilisateur </a></h2>
         <h2><a class="usebtn" href="{{ path('user_index') }}">Retour à la liste </a></h2>
-        
+
         <div class="form">
         {{ form(rechercheForm)}}
         </div>
@@ -33,7 +33,7 @@
                 <tr>
                         <td>{{user.pseudo}}</td>
                         <td>{{user.identifiantAfpa}}</td>
-                        <td>{{user.roles[0]}}</td>
+                        <td> <span class="{{user.roles[0]}}" >{{user.roles[0]}} </span></td>
                         <td>{{user.email}}</td>
                         <td> {{user.telephone}}</td>
                         <td> {{user.pointFidelite}}</td>
