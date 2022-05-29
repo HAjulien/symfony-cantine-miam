@@ -42,6 +42,49 @@ class UserController extends AbstractController
             'total' => $total,
             'limit' => $limit,
             'page' => $page,
+            'titre' => 'Liste des Utilisateurs'
+        ]);
+    }
+
+    #[Route('/personnel', name: 'personnel')]
+    public function personnel( UserRepository $userRepository, Request $request ): Response
+    {
+        $limit= 5;
+        $page = (int)$request->query->get("page", 1);
+        //dd($page);
+        $user = $userRepository->getPaginatedPersonnel($page, $limit);
+        //dd($user);
+
+        $total = $userRepository->getTotalUsersPersonnel();
+        //dd($total);
+
+        return $this->render('user/index.html.twig', [
+            'users' => $user ,
+            'total' => $total,
+            'limit' => $limit,
+            'page' => $page,
+            'titre' => 'Liste des membre du Personnel'
+        ]);
+    }
+
+    #[Route('/nonVerifie', name: 'nonVerifie')]
+    public function nonVerifie( UserRepository $userRepository, Request $request ): Response
+    {
+        $limit= 5;
+        $page = (int)$request->query->get("page", 1);
+        //dd($page);
+        $user = $userRepository->getPaginatedNonVerifie($page, $limit);
+        //dd($user);
+
+        $total = $userRepository->getTotalUsersNonVerifie();
+        //dd($total);
+
+        return $this->render('user/index.html.twig', [
+            'users' => $user ,
+            'total' => $total,
+            'limit' => $limit,
+            'page' => $page,
+            'titre' => 'Liste des Utilisateurs Non Vérifiés'
         ]);
     }
 
@@ -62,6 +105,8 @@ class UserController extends AbstractController
         return $this->render('user/recherche.html.twig', [
             'users' => $user,
             'rechercheForm' => $rechercheForm->createView(),
+            'titre' => 'Faire une recherche'
+
         ]);
     }
 

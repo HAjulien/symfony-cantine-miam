@@ -6,10 +6,12 @@
         {% endblock %}
 
 {% block body %}
-        <h1>Liste des Utilisateurs</h1>
+        <h1>{{ titre }}</h1>
 
         <h2><a class="usebtn" href="{{ path('user_add') }}">Ajouter un Utilisateur </a></h2>
-        <h2><a class="usebtn" href="{{ path('user_index') }}">Retour à la liste </a></h2>
+        <h2><a class="usebtn" href="{{ path('user_personnel') }}">Personnel </a></h2>
+        <h2><a class="usebtn" href="{{ path('user_nonVerifie') }}">Utilisateur Non Vérifié</a></h2>
+        <h2><a class="usebtn retour" href="{{ path('user_index') }}">Retour à la liste </a></h2>
 
         <div class="form">
         {{ form(rechercheForm)}}
@@ -33,11 +35,11 @@
                 <tr>
                         <td>{{user.pseudo}}</td>
                         <td>{{user.identifiantAfpa}}</td>
-                        <td> <span class="{{user.roles[0]}}" >{{user.roles[0]}} </span></td>
+                        <td> <span class="{{user.roles[0]}}" ></span></td>
                         <td>{{user.email}}</td>
                         <td> {{user.telephone}}</td>
                         <td> {{user.pointFidelite}}</td>
-                        <td> {{user.isVerified}}</td>
+                        <td><span class=" {{ (user.isVerified == 1) ? 'valide' : 'invalide' }}" > {{user.isVerified}}</span></td>
                         <td> 
                                 <a href="{{ path('user_update', {id: user.id}) }}" class="btn b1">Modifier</a>
                                 <a href="{{ path('user_delete', {id: user.id}) }}" class="btn b2">Supprimer</a>

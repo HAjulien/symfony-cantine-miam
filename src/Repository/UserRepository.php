@@ -86,6 +86,74 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $query->getQuery()->getSingleScalarResult();
     }
 
+
+    /**
+    * return all users non verifie per page 
+    * @return void
+    */
+    public function getPaginatedNonVerifie($page, $limit){
+        $query = $this->createQueryBuilder('a')
+        ->where('a.isVerified != 1')
+        ->setFirstResult(($page * $limit) - $limit)
+        ->setMaxResults($limit)
+        ;
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+    * return number of Users non verifie
+    * @return void
+    */
+    public function getTotalUsersNonVerifie()
+    {
+        $query = $this->createQueryBuilder('a')
+        ->select('COUNT(a)')
+        -> where('a.isVerified != 1')
+        ;
+        //seulement chiffre décimaux texte, pas tableau getSingleScalarResult
+        return $query->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+    * return all personnel per page 
+    * @return void
+    */
+    public function getPaginatedPersonnel($page, $limit){
+        $query = $this->createQueryBuilder('a')
+        ->where('a.roles LIKE :role ')
+        ->orWhere('a.roles LIKE :role2 ')
+        ->setParameter('role', '%"'.'ROLE_PERSONNEL'.'"%')
+        ->setParameter('role2', '%"'.'ROLE_ADMIN'.'"%')
+        ->orderBy('a.roles', 'DESC')
+        ->setFirstResult(($page * $limit) - $limit)
+        ->setMaxResults($limit)
+        ;
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+    * return number of personnel
+    * @return void
+    */
+    public function getTotalUsersPersonnel()
+    {
+        $query = $this->createQueryBuilder('a')
+        ->select('COUNT(a)')
+        ->where('a.roles LIKE :role')
+        ->orWhere('a.roles LIKE :role2 ')
+        ->setParameter('role', '%"'.'ROLE_PERSONNEL'.'"%')
+        ->setParameter('role2', '%"'.'ROLE_ADMIN'.'"%')
+        ;
+        //seulement chiffre décimaux texte, pas tableau getSingleScalarResult
+        return $query->getQuery()->getSingleScalarResult();
+    }
+
+
+
+
+
+
+
     /**
     * recherche les users en fonction du formulaire
     * @return void
