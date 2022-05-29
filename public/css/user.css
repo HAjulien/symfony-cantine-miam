@@ -32,11 +32,16 @@ h2 .usebtn{
     margin-bottom: -4px;
     margin-left: 7px;
 }
+.usebtn.ajout{
+    background-color: var(--green);
+    color: var(--black);
+}
 .usebtn.retour{
     background-color:var(--blue2);
 }
-.usebtn.retour:hover{
+.usebtn.retour:hover,.usebtn.ajout:hover {
     background-color: var(--yellow);
+    color: var(--blue);
 }
 
 table{

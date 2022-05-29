@@ -2,13 +2,13 @@
 
 {% block title %}Liste des Utilisateurs{% endblock %}
         {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('css/users.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('css/user.css') }}" type="text/css" />
         {% endblock %}
 
 {% block body %}
         <h1>{{ titre }}</h1>
 
-        <h2><a class="usebtn" href="{{ path('user_add') }}">Ajouter un Utilisateur </a></h2>
+        <h2><a class="usebtn ajout" href="{{ path('user_add') }}">Ajouter un Utilisateur </a></h2>
         <h2><a class="usebtn" href="{{ path('user_personnel') }}">Personnel </a></h2>
         <h2><a class="usebtn" href="{{ path('user_nonVerifie') }}"> Non Vérifié</a></h2>
         <h2><a class="usebtn" href="{{ path('user_recherche') }}">rechercher <ion-icon name="search"></ion-icon> </a></h2>
@@ -39,7 +39,7 @@
                         <td><span class=" {{ (user.isVerified == 1) ? 'valide' : 'invalide' }}" > {{user.isVerified}}</span></td>
                         <td> 
                                 <a href="{{ path('user_update', {id: user.id}) }}" class="btn b1">Modifier</a>
-                                <a href="{{ path('user_delete', {id: user.id}) }}" class="btn b2">Supprimer</a>
+                                <a href="{{ path('user_delete', {id: user.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')">Supprimer</a>
                         </td>
                 </tr>
         {% endfor %}

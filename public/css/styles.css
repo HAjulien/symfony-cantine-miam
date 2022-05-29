@@ -175,6 +175,28 @@ body{
     object-fit: cover;
 }
 
+/* les messages flash */
+.messageFlash{
+    position: fixed;
+    left: 70;
+    top: 20;
+    bottom: 50;
+    right: 0;
+    padding: 20px 40px;
+    margin-right: 40px;
+    text-align: center;
+    background-color: var(--green);
+    color: var(--black);
+    font-size: 1.5rem;
+    border-radius: 8px;
+}
+
+.messageFlash.hidden{
+    opacity: 0;
+    z-index: -10;
+    transition: 0.3s;
+}
+
 @media (max-width: 1000px){
     .navigation{
         left: -300px;

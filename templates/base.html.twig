@@ -59,6 +59,10 @@
                     </div>
                     <div class="user"> <img src="" alt=""></div>
                 </div>
+                
+                {% for message in app.flashes('success') %}
+                    <div id="alert" class="messageFlash"> {{ message }} </div>
+                {% endfor %}
 
                 {% block body %}{% endblock %}
 
@@ -80,5 +84,16 @@
             navigation.classList.toggle('active')
             main.classList.toggle('active')
         }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            
+            setTimeout(notification, 2000)
+
+            function notification () {
+            document.getElementById("alert").classList.add('hidden')
+
+            }
+        }) 
+
     </script>
 </html>
