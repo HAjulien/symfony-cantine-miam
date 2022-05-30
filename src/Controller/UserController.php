@@ -133,6 +133,7 @@ class UserController extends AbstractController
             $em->persist($user);
             //on insert avec flush
             $em->flush();
+            $this->addFlash('success', 'Utilisateur ajouté !');
             return $this->redirectToRoute('user_index');
         }
         

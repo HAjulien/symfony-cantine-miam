@@ -48,7 +48,7 @@ class UserType extends AbstractType
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'votre mot de passe doit avoir au moins {{ limit }} charactères',
+                        'minMessage' => 'votre mot de passe doit avoir au moins {{ limit }} caractères',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
