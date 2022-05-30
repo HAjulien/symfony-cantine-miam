@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\FeatureRepository;
+use Gedmo\Mapping\Annotation as Gedmo;
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
@@ -32,6 +33,12 @@ class Feature
 
     #[ORM\Column(type: 'string', length: 100)]
     private $chemin;
+
+    /**
+     * @Gedmo\Timestampable(on="create")
+     */
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private $createAt;
 
     public function getId(): ?int
     {
@@ -94,6 +101,18 @@ class Feature
     public function setChemin(string $chemin): self
     {
         $this->chemin = $chemin;
+
+        return $this;
+    }
+
+    public function getCreateAt(): ?\DateTimeInterface
+    {
+        return $this->createAt;
+    }
+
+    public function setCreateAt(?\DateTimeInterface $createAt): self
+    {
+        $this->createAt = $createAt;
 
         return $this;
     }

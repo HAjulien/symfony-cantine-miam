@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Enregistrer un nouvel article{% endblock %}
+{% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/article.css') }}" type="text/css" />
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="principale">
+    <h1>Enregistrer un nouvel article</h1>
+
+    {{ form_start(form) }}
+
+        {{ form_row(form.title, {
+            label: 'titre de l\'article:',
+            'label_attr': {'class': 'label'},
+            'attr': {'class': 'champs'}
+            }) }}
+        {{ form_row(form.paragraphe, {
+            label: 'Le contenu:',
+            'label_attr': {'class': 'label'},
+            'attr': {'class': 'champs paragraphe'}
+            }) }}
+        {{ form_row(form.image, {
+            label: 'L\'URL de image:',
+            'label_attr': {'class': 'label'},
+            'attr': {'class': 'champs'}
+            }) }}
+        {{ form_row(form.buton, {
+            label: 'Le libellé du bouton:',
+            'label_attr': {'class': 'label'},
+            'attr': {'class': 'champs'}
+            }) }}
+        {{ form_row(form.chemin, {
+            label: 'Le lien dans le buton:',
+            'label_attr': {'class': 'label'},
+            'attr': {'class': 'champs'}
+            }) }}
+
+    {{ form_end(form) }}
+<button type="submit"  class="btn b2"><a href="{{ path('feature_index') }}">retour liste des article</a> </button>
+    </div>
+    </div>
+{% endblock %}

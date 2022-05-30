@@ -39,6 +39,35 @@ class FeatureRepository extends ServiceEntityRepository
         }
     }
 
+        /**
+    * return all Features per page 
+    * @return void
+    */
+    public function getPaginatedFeatures($page, $limit){
+        $query = $this->createQueryBuilder('f')
+        //->where('a.isVerified = 1')
+        ->orderBy('f.createAt', 'DESC')
+        ->setFirstResult(($page * $limit) - $limit)
+        ->setMaxResults($limit)
+        ;
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+    * return number of Features
+    * @return void
+    */
+    public function getTotalFeatures()
+    {
+        $query = $this->createQueryBuilder('f')
+        ->select('COUNT(f)')
+        //-> where('a.isVerified = 1')
+        ;
+        //seulement chiffre décimaux texte, pas tableau getSingleScalarResult
+        return $query->getQuery()->getSingleScalarResult();
+    }
+
+
 //    /**
 //     * @return Feature[] Returns an array of Feature objects
 //     */

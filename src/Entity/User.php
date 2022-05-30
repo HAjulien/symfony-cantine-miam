@@ -36,7 +36,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 60)]
     private $pseudo;
 
-    #[ORM\Column(type: 'string', length: 15)]
+    #[ORM\Column(type: 'string', length: 12, unique: true)]
     private $identifiantAfpa;
 
     #[ORM\Column(type: 'integer', nullable: true)]

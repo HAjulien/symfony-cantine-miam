@@ -1,0 +1,87 @@
+body{
+    background-color: #f8f8f8;
+    position: relative;
+}
+
+.principale{
+    margin: 50px 20px;
+    padding: 0 20px;
+    background-color: #218380;
+    border: 2px solid rgb(0, 0, 0, 0.4);
+    border-radius: 7px;
+
+}
+
+h1{
+    text-align: center;
+    padding: 30px 0;
+    color: #CEFF1A;
+}
+
+p{
+    text-align: center;
+}
+
+.btn{
+    margin-left: 35vw;
+    height: 45px;
+    width: 125px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.b1{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.b2{
+    margin-bottom: 10px;
+}
+.btn a{
+    text-decoration: none;
+    color: var(--black);
+}
+
+.b1:hover, .b2:hover{
+    transform: scale(.9);
+    transition: .2s;
+}
+.b1:hover{
+    background-color: #009FB7;
+    color: #f8f8f8;
+}
+.b2:hover{
+    background-color:var(--red);
+}
+
+
+.champs{
+    display: flex;
+    justify-content: end;
+    min-height: 35px;
+    margin: 15px 40px;
+    padding: 5px 15px;
+    width: 90%;
+    font-size: 20px;
+    border-radius: 5px;
+    outline: none;
+    background-color: #F4FAFF;
+}
+
+.champs.paragraphe{
+    min-height: 250px;
+}
+.message{
+    margin-top: 110px;
+    font-size: 18px;
+}
+
+.label{
+    margin-left: 45px;
+    font-size: 20px;
+    font-weight: 500;
+    color: #CEFF1A;
+    text-decoration: underline;
+}

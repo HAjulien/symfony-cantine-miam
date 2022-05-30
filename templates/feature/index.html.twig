@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des Utilisateurs{% endblock %}
+{% block title %}Liste des Articles{% endblock %}
         {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('css/user.css') }}" type="text/css" />
         {% endblock %}
@@ -8,39 +8,30 @@
 {% block body %}
         <h1>{{ titre }}</h1>
 
-        <h2><a class="usebtn ajout" href="{{ path('user_add') }}">Ajouter un Utilisateur </a></h2>
-        <h2><a class="usebtn" href="{{ path('user_personnel') }}">Personnel </a></h2>
-        <h2><a class="usebtn" href="{{ path('user_nonVerifie') }}"> Non Vérifié</a></h2>
-        <h2><a class="usebtn" href="{{ path('user_recherche') }}">rechercher <ion-icon name="search"></ion-icon> </a></h2>
-        <h2><a class="usebtn retour" href="{{ path('user_index') }}">retour à la Liste</a></h2>
+        <h2><a class="usebtn ajout" href="{{ path('feature_add') }}">Ajouter un Article </a></h2>
+        {# <h2><a class="usebtn" href="{{ path('') }}">rechercher <ion-icon name="search"></ion-icon> </a></h2> #}
 
-        <h3>{{total}} Utilisateurs</h3>
+        <h3>{{total}} Articles</h3>
 <table>
         <thead>
                 <tr>
-                        <td>Pseudo</td>
-                        <td>identifiantAfpa</td>
-                        <td>role</td>
-                        <td>email</td>
-                        <td>n°tel</td>
-                        <td>pointFidélité</td>
-                        <td>vérifié</td>
+                        <td>titre</td>
+                        <td>contenu</td>
+                        <td>libellé buton</td>
+                        <td>date création</td>
                         <td></td>
                 </tr>
         </thead>
         <tbody>
-        {% for user in users  %}
+        {% for feature in features  %}
                 <tr>
-                        <td>{{user.pseudo}}</td>
-                        <td>{{user.identifiantAfpa}}</td>
-                        <td> <span class="{{user.roles[0]}}" ></span></td>
-                        <td>{{user.email}}</td>
-                        <td> {{user.telephone}}</td>
-                        <td> {{user.pointFidelite}}</td>
-                        <td><span class=" {{ (user.isVerified == 1) ? 'valide' : 'invalide' }}" > {{user.isVerified}}</span></td>
+                        <td>{{feature.title}}</td>
+                        <td>{{feature.paragraphe | raw | u.truncate (50, '...')}}</td>
+                        <td>{{feature.buton}}</td>
+                        <td> {{feature.createAt | date("d/m/Y") }}</td>
                         <td> 
-                                <a href="{{ path('user_update', {id: user.id}) }}" class="btn b1">Modifier</a>
-                                <a href="{{ path('user_delete', {id: user.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')">Supprimer</a>
+                                <a href="{{ path('feature_update', {id: feature.id}) }}" class="btn b1">Modifier</a>
+                                <a href="{{ path('feature_delete', {id: feature.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')">Supprimer</a>
                         </td>
                 </tr>
         {% endfor %}
@@ -89,3 +80,4 @@
 </ul>
 
 {% endblock %}
+

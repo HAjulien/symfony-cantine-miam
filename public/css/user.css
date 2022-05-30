@@ -44,6 +44,9 @@ h2 .usebtn{
     color: var(--blue);
 }
 
+h3{
+    margin-left: 30px;
+}
 table{
     width: 95%;
     margin: auto;
@@ -85,7 +88,7 @@ table tr:last-child{
     background-color: var(--green2);
 }
 .ROLE_USER::before{
-    content: 'utilisateur';
+    content: 'élève';
     background-color: var(--yellow);
 
 }
