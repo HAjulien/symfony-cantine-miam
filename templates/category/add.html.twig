@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Enregistrer un nouvel article{% endblock %}
+{% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/article.css') }}" type="text/css" />
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="principale">
+    <h1>Enregistrer une nouvelle catégorie</h1>
+
+    {{ form_start(form) }}
+
+        {{ form_row(form.nom, {
+            label: 'nom:',
+            'label_attr': {'class': 'label'},
+            'attr': {'class': 'champs'}
+            }) }}
+
+
+    {{ form_end(form) }}
+<button type="submit"  class="btn b2"><a href="{{ path('category_index') }}">retour à la liste </a> </button>
+    </div>
+    </div>
+{% endblock %}

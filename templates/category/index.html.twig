@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Articles{% endblock %}
+        {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/tableau.css') }}" type="text/css" />
+        {% endblock %}
+
+{% block body %}
+        <h1>{{ titre }}</h1>
+
+        <h2><a class="usebtn ajout" href="{{ path('category_add') }}">Ajouter une catégorie </a></h2>
+        <h2><a class="usebtn" href="{{ path('category_recherche') }}">rechercher <ion-icon name="search"></ion-icon> </a></h2>
+
+        <h3>{{total}} catégories</h3>
+<table>
+        <thead>
+                <tr>
+                        <td>nom</td>
+                        <td>slug</td>
+                        <td></td>
+                </tr>
+        </thead>
+        <tbody>
+        {% for category in categories  %}
+                <tr>
+                        <td>{{category.nom}}</td>
+                        <td> {{category.slug}}</td>
+                        <td> 
+                                <a href="{{ path('category_update', {id: category.id}) }}" class="btn b1"><ion-icon name="create-outline"></ion-icon></a>
+                                <a href="{{ path('category_delete', {id: category.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')"><ion-icon name="trash-outline"></ion-icon></a>
+                        </td>
+                </tr>
+        {% endfor %}
+
+
+        </tbody>
+</table>
+
+<ul class="pagination">
+
+{# fleche pour revenir page 1 #}
+        <li class=" {{ (page == 1) ? 'disable' : '' }} ">
+                <a href="?page=1" id="a">
+                        <ion-icon name="play-back-outline"></ion-icon>
+                </a>
+        </li>
+{# fleche pour revenir en arriere #}
+        <li class=" {{ (page == 1) ? 'disable' : '' }} ">
+                <a href="{{ (page > 1) ? '?page=' ~ (page -1) : '' }}" id="a">
+                        <ion-icon name="arrow-back-outline"></ion-icon>
+                </a>
+        </li>
+
+        {% set pages = (total / limit)|round(0,'ceil') %}
+{# calcul total / limit user par page que l'on arrondi au superieur avec ceil on enferme variable pages grâce set #}
+        {% for item in 1..pages %}
+                <li class=" {{ (page == item) ? 'active' : '' }} ">
+                        <a href="?page={{ item }}" id="a"> {{ item }} </a>
+                </li>
+        {% endfor %}
+
+{# fleche pour aller vers suivant #}
+        <li class=" {{ (page == pages) ? 'disable' : '' }} ">
+                <a href="{{ (page < pages) ? '?page=' ~ (page +1) : '' }}" id="a">
+                        <ion-icon name="arrow-forward-outline"></ion-icon>
+                </a>
+        </li>
+
+{# fleche pour derniere page  #}
+        <li class=" {{ (page == pages) ? 'disable' : '' }} ">
+                <a href="?page= {{ pages }}" id="a">
+                        <ion-icon name="play-forward-outline"></ion-icon>
+                </a>
+        </li>
+
+</ul>
+
+{% endblock %}

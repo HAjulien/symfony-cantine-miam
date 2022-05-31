@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Equipe;
+use App\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Equipe>
+ * @extends ServiceEntityRepository<Category>
  *
- * @method Equipe|null find($id, $lockMode = null, $lockVersion = null)
- * @method Equipe|null findOneBy(array $criteria, array $orderBy = null)
- * @method Equipe[]    findAll()
- * @method Equipe[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Category|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Category|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Category[]    findAll()
+ * @method Category[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class EquipeRepository extends ServiceEntityRepository
+class CategoryRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Equipe::class);
+        parent::__construct($registry, Category::class);
     }
 
-    public function add(Equipe $entity, bool $flush = false): void
+    public function add(Category $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class EquipeRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Equipe $entity, bool $flush = false): void
+    public function remove(Category $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -39,14 +39,14 @@ class EquipeRepository extends ServiceEntityRepository
         }
     }
 
+
     /**
-    * return all employé par page 
+    * return all category par page 
     * @return void
     */
-    public function getPaginatedEquipe($page, $limit){
-        $query = $this->createQueryBuilder('e')
-        //->where('a.isVerified = 1')
-        ->orderBy('e.createAt', 'DESC')
+    public function getPaginatedCategory($page, $limit){
+        $query = $this->createQueryBuilder('c')
+        ->orderBy('c.nom', 'ASC')
         ->setFirstResult(($page * $limit) - $limit)
         ->setMaxResults($limit)
         ;
@@ -57,11 +57,10 @@ class EquipeRepository extends ServiceEntityRepository
     * return number of Features
     * @return void
     */
-    public function getTotalEquipe()
+    public function getTotalCategory()
     {
-        $query = $this->createQueryBuilder('e')
-        ->select('COUNT(e)')
-        //-> where('a.isVerified = 1')
+        $query = $this->createQueryBuilder('c')
+        ->select('COUNT(c)')
         ;
         //seulement chiffre décimaux texte, pas tableau getSingleScalarResult
         return $query->getQuery()->getSingleScalarResult();
@@ -72,35 +71,34 @@ class EquipeRepository extends ServiceEntityRepository
     * @return void
     */
     public function search($mots){
-        $query = $this->createQueryBuilder('e');
+        $query = $this->createQueryBuilder('c');
         if($mots != null){
             // en reference au doctrine yaml match_against
-            $query->andWhere('MATCH_AGAINST(e.nom, e.prenom, e.surnom, e.contenu) AGAINST(:mots boolean)>0')
+            $query->andWhere('MATCH_AGAINST(c.nom ) AGAINST(:mots boolean)>0')
                 ->setParameter('mots', '*' . $mots . '*');
         }
 
         return $query->getQuery()->getResult();
     }
-
 //    /**
-//     * @return Equipe[] Returns an array of Equipe objects
+//     * @return Category[] Returns an array of Category objects
 //     */
 //    public function findByExampleField($value): array
 //    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
+//        return $this->createQueryBuilder('c')
+//            ->andWhere('c.exampleField = :val')
 //            ->setParameter('val', $value)
-//            ->orderBy('e.id', 'ASC')
+//            ->orderBy('c.id', 'ASC')
 //            ->setMaxResults(10)
 //            ->getQuery()
 //            ->getResult()
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Equipe
+//    public function findOneBySomeField($value): ?Category
 //    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
+//        return $this->createQueryBuilder('c')
+//            ->andWhere('c.exampleField = :val')
 //            ->setParameter('val', $value)
 //            ->getQuery()
 //            ->getOneOrNullResult()

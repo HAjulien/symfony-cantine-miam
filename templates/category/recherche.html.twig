@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche d'une catégorie{% endblock %}
+        {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/tableau.css') }}" type="text/css" />
+        {% endblock %}
+
+{% block body %}
+
+        <h1>{{ titre }}</h1>
+        <h2><a class="usebtn ajout" href="{{ path('category_add') }}">Ajouter d'une catégorie </a></h2>
+        <h2><a class="usebtn retour" href="{{ path('category_index') }}">retour Liste</a></h2>
+
+                {{ form_start(rechercheForm) }}
+                        {{ form_row(rechercheForm.mots, {
+                                'attr': {'class': 'recherche', 'placeholder': 'Nom de la catégorie'}
+                                }) }}
+                {{ form_end(rechercheForm) }}
+
+        {% if categories | length > 1   %}
+                <h3>Nombre de résultat de la recherche: {{ categories | length }}</h3>
+        {% elseif categories | length == 0 %}
+                <h3>Aucune catégorie trouvé</h3>
+        {% endif %}
+
+<table>
+        <thead>
+                <tr>
+                        <td>nom</td>
+                        <td>slug</td>
+                        <td></td>
+                </tr>
+        </thead>
+        <tbody>
+        {% for category in categories  %}
+                <tr>
+                        <td>{{category.nom}}</td>
+                        <td>{{category.slug}}</td>
+                        <td> 
+                                <a href="{{ path('category_update', {id: category.id}) }}" class="btn b1"><ion-icon name="create-outline"></ion-icon></a>
+                                <a href="{{ path('category_delete', {id: category.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')"><ion-icon name="trash-outline"></ion-icon></a>
+                        </td>
+                </tr>
+        {% endfor %}
+
+
+        </tbody>
+</table>
+
+{% endblock %}
