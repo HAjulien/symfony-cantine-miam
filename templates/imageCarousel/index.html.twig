@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des Articles{% endblock %}
+{% block title %}Liste des images du carousel{% endblock %}
         {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('css/tableau.css') }}" type="text/css" />
         {% endblock %}
@@ -8,33 +8,26 @@
 {% block body %}
         <h1>{{ titre }}</h1>
 
-        <h2><a class="usebtn ajout" href="{{ path('feature_add') }}">Ajouter un Employé </a></h2>
-        <h2><a class="usebtn" href="{{ path('feature_recherche') }}">rechercher <ion-icon name="search"></ion-icon> </a></h2>
+        <h2><a class="usebtn ajout" href="{{ path('imageCarousel_add') }}">Ajouter une image </a></h2>
 
         <h3>{{total}} Articles</h3>
 <table>
         <thead>
                 <tr>
-                        <td>titre</td>
                         <td>image</td>
-                        <td>lien du buton</td>
-                        <td>date création</td>
-                        <td></td>
+                        <td>description</td>
                 </tr>
         </thead>
         <tbody>
-        {% for feature in features  %}
+        {% for image in images  %}
                 <tr>
-                        <td>{{feature.title}}</td>
                         <td>
-                                <div><img src="{{feature.image}}" alt="{{ feature.altImage }}" class="img" ></div>
+                                <div><img src="{{image.image}}" alt="{{ image.descriptionImage }}" class="img" ></div>
                         </td>
-                        <td>{{feature.chemin}}</td>
-                        <td> {{feature.createAt | date("d/m/Y") }}</td>
+                        <td> {{ image.descriptionImage }}</td>
                         <td> 
-                                <a href="{{ path('feature_update', {id: feature.id}) }}" class="btn b1"><ion-icon name="create-outline"></ion-icon></a>
-                                <a href="{{ path('feature_delete', {id: feature.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')"><ion-icon name="trash-outline"></ion-icon></a>
-                                <a href="{{ path('feature_apercu', {id: feature.id}) }}" class="btn b3"><ion-icon name="eye-outline"></ion-icon></a>
+                                <a href="{{ path('imageCarousel_update', {id: image.id}) }}" class="btn b1"><ion-icon name="create-outline"></ion-icon></a>
+                                <a href="{{ path('imageCarousel_delete', {id: image.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')"><ion-icon name="trash-outline"></ion-icon></a>
                         </td>
                 </tr>
         {% endfor %}

@@ -112,7 +112,7 @@ class FeatureController extends AbstractController
     {
         return $this->render('feature/apercu.html.twig', [
             'feature' => $feature,
-            'title' => 'apercu d\' article',
+            'title' => 'aperçu d\' article',
 
         ]);
     }

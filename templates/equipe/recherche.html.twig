@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Utilisateurs{% endblock %}
+        {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/tableau.css') }}" type="text/css" />
+        {% endblock %}
+
+{% block body %}
+
+        <h1>{{ titre }}</h1>
+        <h2><a class="usebtn ajout" href="{{ path('equipe_add') }}">Ajouter un Employé </a></h2>
+        <h2><a class="usebtn retour" href="{{ path('equipe_index') }}">retour Liste</a></h2>
+
+                {{ form_start(rechercheForm) }}
+                        {{ form_row(rechercheForm.mots, {
+                                'attr': {'class': 'recherche', 'placeholder': 'Nom, prénom, Surnom, Contenu'}
+                                }) }}
+                {{ form_end(rechercheForm) }}
+
+        {% if equipes | length > 1   %}
+                <h3>Nombre de résultat de la recherche: {{ equipes | length }}</h3>
+        {% elseif equipes | length == 0 %}
+                <h3>Aucun Employé trouvé</h3>
+        {% endif %}
+
+<table>
+        <thead>
+                <tr>
+                        <td>nom</td>
+                        <td>prénom</td>
+                        <td>surnom</td>
+                        <td>image</td>
+                        <td>date de création</td>
+                        <td></td>
+                </tr>
+        </thead>
+        <tbody>
+        {% for equipe in equipes  %}
+                <tr>
+                        <td>{{equipe.nom}}</td>
+                        <td>{{equipe.prenom}}</td>
+                        <td>{{equipe.surnom}}</td>
+                        <td>
+                                <div><img src="{{equipe.image}}" alt="{{ equipe.imageDescription }}" class="img" ></div>
+                        </td>
+                        <td> {{equipe.createAt | date("d/m/Y") }}</td>
+                        <td> 
+                                <a href="{{ path('equipe_update', {id: equipe.id}) }}" class="btn b1"><ion-icon name="create-outline"></ion-icon></a>
+                                <a href="{{ path('equipe_delete', {id: equipe.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')"><ion-icon name="trash-outline"></ion-icon></a>
+                                <a href="{{ path('equipe_apercu', {id: equipe.id}) }}" class="btn b3"><ion-icon name="eye-outline"></ion-icon></a>
+                        </td>
+                </tr>
+        {% endfor %}
+
+
+        </tbody>
+</table>
+
+{% endblock %}

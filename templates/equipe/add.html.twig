@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Enregistrer un nouvel article{% endblock %}
+{% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/article.css') }}" type="text/css" />
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="principale">
+    <h1>Enregistrer un nouvel Employé</h1>
+
+    {{ form_start(form) }}
+
+        {{ form_row(form.nom, {
+            label: 'Prénom:',
+            'label_attr': {'class': 'label'},
+            'attr': {'class': 'champs'}
+            }) }}
+        {{ form_row(form.prenom, {
+            label: 'Nom:',
+            'label_attr': {'class': 'label'},
+            'attr': {'class': 'champs'}
+            }) }}
+        {{ form_row(form.surnom, {
+            label: 'Surnom:',
+            'label_attr': {'class': 'label'},
+            'attr': {'class': 'champs'}
+            }) }}
+        {{ form_row(form.contenu, {
+            label: 'Le contenu:',
+            'label_attr': {'class': 'label'},
+            'attr': {'class': 'champs paragraphe'}
+            }) }}
+        {{ form_row(form.image, {
+            label: 'L\'URL de image:',
+            'label_attr': {'class': 'label'},
+            'attr': {'class': 'champs'}
+            }) }}
+        {{ form_row(form.imageDescription, {
+            label: 'La description de l\'image:',
+            'label_attr': {'class': 'label'},
+            'attr': {'class': 'champs'}
+            }) }}
+
+    {{ form_end(form) }}
+<button type="submit"  class="btn b2"><a href="{{ path('feature_index') }}">retour liste des article</a> </button>
+    </div>
+    </div>
+{% endblock %}

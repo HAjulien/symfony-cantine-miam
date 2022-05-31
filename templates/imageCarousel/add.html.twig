@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Enregistrer un nouvel article{% endblock %}
+{% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/article.css') }}" type="text/css" />
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="principale">
+    <h1>Enregistrer une nouvelle image</h1>
+
+    {{ form_start(form) }}
+
+        {{ form_row(form.image, {
+            label: 'URL de l\'image:',
+            'label_attr': {'class': 'label'},
+            'attr': {'class': 'champs'}
+            }) }}
+        {{ form_row(form.descriptionImage, {
+            label: 'La description de l\'image:',
+            'label_attr': {'class': 'label'},
+            'attr': {'class': 'champs'}
+            }) }}
+
+    {{ form_end(form) }}
+<button type="submit"  class="btn b2"><a href="{{ path('imageCarousel_index') }}">retour liste des article</a> </button>
+    </div>
+    </div>
+{% endblock %}

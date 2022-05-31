@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Feature;
+use App\Entity\Equipe;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Feature>
+ * @extends ServiceEntityRepository<Equipe>
  *
- * @method Feature|null find($id, $lockMode = null, $lockVersion = null)
- * @method Feature|null findOneBy(array $criteria, array $orderBy = null)
- * @method Feature[]    findAll()
- * @method Feature[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Equipe|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Equipe|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Equipe[]    findAll()
+ * @method Equipe[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class FeatureRepository extends ServiceEntityRepository
+class EquipeRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Feature::class);
+        parent::__construct($registry, Equipe::class);
     }
 
-    public function add(Feature $entity, bool $flush = false): void
+    public function add(Equipe $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class FeatureRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Feature $entity, bool $flush = false): void
+    public function remove(Equipe $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -39,14 +39,14 @@ class FeatureRepository extends ServiceEntityRepository
         }
     }
 
-    /**
-    * return all Features per page 
+        /**
+    * return all employé par page 
     * @return void
     */
-    public function getPaginatedFeatures($page, $limit){
-        $query = $this->createQueryBuilder('f')
+    public function getPaginatedEquipe($page, $limit){
+        $query = $this->createQueryBuilder('e')
         //->where('a.isVerified = 1')
-        ->orderBy('f.createAt', 'DESC')
+        ->orderBy('e.createAt', 'DESC')
         ->setFirstResult(($page * $limit) - $limit)
         ->setMaxResults($limit)
         ;
@@ -57,10 +57,10 @@ class FeatureRepository extends ServiceEntityRepository
     * return number of Features
     * @return void
     */
-    public function getTotalFeatures()
+    public function getTotalEquipe()
     {
-        $query = $this->createQueryBuilder('f')
-        ->select('COUNT(f)')
+        $query = $this->createQueryBuilder('e')
+        ->select('COUNT(e)')
         //-> where('a.isVerified = 1')
         ;
         //seulement chiffre décimaux texte, pas tableau getSingleScalarResult
@@ -72,38 +72,35 @@ class FeatureRepository extends ServiceEntityRepository
     * @return void
     */
     public function search($mots){
-        $query = $this->createQueryBuilder('a');
+        $query = $this->createQueryBuilder('e');
         if($mots != null){
             // en reference au doctrine yaml match_against
-            $query->andWhere('MATCH_AGAINST(a.title, a.paragraphe) AGAINST(:mots boolean)>0')
+            $query->andWhere('MATCH_AGAINST(e.nom, e.prenom, e.surnom, e.contenu) AGAINST(:mots boolean)>0')
                 ->setParameter('mots', '*' . $mots . '*');
         }
 
         return $query->getQuery()->getResult();
     }
 
-
-
-
 //    /**
-//     * @return Feature[] Returns an array of Feature objects
+//     * @return Equipe[] Returns an array of Equipe objects
 //     */
 //    public function findByExampleField($value): array
 //    {
-//        return $this->createQueryBuilder('f')
-//            ->andWhere('f.exampleField = :val')
+//        return $this->createQueryBuilder('e')
+//            ->andWhere('e.exampleField = :val')
 //            ->setParameter('val', $value)
-//            ->orderBy('f.id', 'ASC')
+//            ->orderBy('e.id', 'ASC')
 //            ->setMaxResults(10)
 //            ->getQuery()
 //            ->getResult()
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Feature
+//    public function findOneBySomeField($value): ?Equipe
 //    {
-//        return $this->createQueryBuilder('f')
-//            ->andWhere('f.exampleField = :val')
+//        return $this->createQueryBuilder('e')
+//            ->andWhere('e.exampleField = :val')
 //            ->setParameter('val', $value)
 //            ->getQuery()
 //            ->getOneOrNullResult()

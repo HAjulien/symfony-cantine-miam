@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Employé{% endblock %}
+        {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/tableau.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('css/apercu.css') }}" type="text/css" />
+        {% endblock %}
+
+{% block body %}
+        <h1>{{ title }}</h1>
+        <h2><a class="usebtn retour" href="{{ path('equipe_index') }}">retour Liste des articles</a></h2>
+
+        <div class="apercu">
+                <h3>{{equipe.nom}}  {{ equipe.prenom }} </h3>
+                <h3> {{equipe.surnom}} </h3>
+                <p>{{equipe.contenu | raw }}</p>
+                <div><img src="{{equipe.image}}" alt="{{ equipe.imageDescription }}" class="img" ></div>
+                <div class="buton">     
+                        <span> {{equipe.createAt | date("d/m/Y") }}</span>
+                </div>
+                
+        </div>
+
+
+
+{% endblock %}
