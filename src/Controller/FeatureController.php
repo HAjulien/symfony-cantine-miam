@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Feature;
 use App\Form\FeatureType;
+use App\Form\SearchUserType;
 use App\Repository\FeatureRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,6 +32,27 @@ class FeatureController extends AbstractController
             'limit' => $limit,
             'page' => $page,
             'titre' => 'Liste des Articles'
+        ]);
+    }
+
+    #[Route('/recherche', name: 'recherche')]
+    public function recherche( FeatureRepository $featureRepository, Request $request ): Response
+    {
+        $feature = $featureRepository;
+
+        $rechercheForm = $this->createForm(SearchUserType::class);
+
+        $search = $rechercheForm->handleRequest($request);
+
+        if($rechercheForm->isSubmitted() && $rechercheForm->isValid()){
+            //on recherche les articles correspondant aux mots clés
+            $feature = $featureRepository->search($search->get('mots')->getData());
+        }
+
+        return $this->render('feature/recherche.html.twig', [
+            'features' => $feature,
+            'rechercheForm' => $rechercheForm->createView(),
+            'titre' => 'Faire une recherche d\'article'
         ]);
     }
 
@@ -73,7 +95,7 @@ class FeatureController extends AbstractController
             $em = $doctrine->getManager();
             $em->persist($feature);
             $em->flush();
-            $this->addFlash('success', 'Utilisateur modifié !');
+            $this->addFlash('success', 'Article modifié !');
             return $this->redirectToRoute('feature_index');
         }
         
@@ -81,6 +103,16 @@ class FeatureController extends AbstractController
         return $this->render('feature/add.html.twig', [
             'form' => $form->createView(),
             'title' => 'Modification d\'un article',
+
+        ]);
+    }
+
+    #[Route("/apercu/{id}", name: "apercu")]
+    public function apercu(Feature $feature): Response
+    {
+        return $this->render('feature/apercu.html.twig', [
+            'feature' => $feature,
+            'title' => 'apercu d\' article',
 
         ]);
     }

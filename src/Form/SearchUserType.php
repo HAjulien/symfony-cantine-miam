@@ -15,10 +15,6 @@ class SearchUserType extends AbstractType
         $builder
             ->add('mots', SearchType::class, [
                 'label' => false,
-                'attr' => [
-                    'class' => 'recherche',
-                    'placeholder' => 'Entrez pseudo ou identifiant AFPA'
-                ]
             ])
             ->add('Rechercher', SubmitType::class, [
                 'attr' => [

@@ -2,7 +2,7 @@
 
 {% block title %}Liste des Utilisateurs{% endblock %}
         {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('css/user.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('css/tableau.css') }}" type="text/css" />
         {% endblock %}
 
 {% block body %}
@@ -13,9 +13,17 @@
         <h2><a class="usebtn" href="{{ path('user_nonVerifie') }}">Utilisateur Non Vérifié</a></h2>
         <h2><a class="usebtn retour" href="{{ path('user_index') }}">Retour à la liste </a></h2>
 
-        <div class="form">
-        {{ form(rechercheForm)}}
-        </div>
+                {{ form_start(rechercheForm) }}
+                        {{ form_row(rechercheForm.mots, {
+                                'attr': {'class': 'recherche', 'placeholder': 'Pseudo ou Idendifiant AFPA'}
+                                }) }}
+                {{ form_end(rechercheForm) }}
+        
+        {% if users | length > 1   %}
+                <h3>Nombre de résultat de la recherche: {{ users | length }}</h3>
+        {% elseif users | length == 0 %}
+                <h3>Aucun Utilisateur trouvé</h3>
+        {% endif %}
 
 <table>
         <thead>
@@ -41,8 +49,8 @@
                         <td> {{user.pointFidelite}}</td>
                         <td><span class=" {{ (user.isVerified == 1) ? 'valide' : 'invalide' }}" > {{user.isVerified}}</span></td>
                         <td> 
-                                <a href="{{ path('user_update', {id: user.id}) }}" class="btn b1">Modifier</a>
-                                <a href="{{ path('user_delete', {id: user.id}) }}" class="btn b2" onclick="return confirm('Suppression ? ')" >Supprimer</a>
+                                <a href="{{ path('user_update', {id: user.id}) }}" class="btn b1"><ion-icon name="create-outline"></ion-icon></a>
+                                <a href="{{ path('user_delete', {id: user.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')"><ion-icon name="trash-outline"></ion-icon></a>
                         </td>
                 </tr>
         {% endfor %}

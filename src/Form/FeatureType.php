@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Feature;
 use Symfony\Component\Form\AbstractType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -14,8 +15,13 @@ class FeatureType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('paragraphe')
+            ->add('paragraphe', CKEditorType::class, [
+                'attr' => [
+                    'class' => 'ckeditor',
+                ]
+            ])
             ->add('image')
+            ->add('altImage')
             ->add('buton')
             ->add('chemin')
             ->add('Valider', SubmitType::class, array(

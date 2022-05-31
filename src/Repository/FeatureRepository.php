@@ -67,6 +67,23 @@ class FeatureRepository extends ServiceEntityRepository
         return $query->getQuery()->getSingleScalarResult();
     }
 
+    /**
+    * recherche les articles en fonction du formulaire
+    * @return void
+    */
+    public function search($mots){
+        $query = $this->createQueryBuilder('a');
+        if($mots != null){
+            // en reference au doctrine yaml match_against
+            $query->andWhere('MATCH_AGAINST(a.title, a.paragraphe) AGAINST(:mots boolean)>0')
+                ->setParameter('mots', '*' . $mots . '*');
+        }
+
+        return $query->getQuery()->getResult();
+    }
+
+
+
 
 //    /**
 //     * @return Feature[] Returns an array of Feature objects

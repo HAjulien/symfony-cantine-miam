@@ -105,7 +105,7 @@ class UserController extends AbstractController
         return $this->render('user/recherche.html.twig', [
             'users' => $user,
             'rechercheForm' => $rechercheForm->createView(),
-            'titre' => 'Faire une recherche'
+            'titre' => 'Faire une recherche sur les utilisateurs'
 
         ]);
     }

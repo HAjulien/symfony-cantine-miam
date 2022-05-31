@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Articles{% endblock %}
+        {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/tableau.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('css/apercu.css') }}" type="text/css" />
+        {% endblock %}
+
+{% block body %}
+        <h1>{{ title }}</h1>
+        <h2><a class="usebtn retour" href="{{ path('feature_index') }}">retour Liste des articles</a></h2>
+
+        <div class="apercu">
+                <h3>{{feature.title}}</h3>
+                <p>{{feature.paragraphe | raw }}</p>
+                <div><img src="{{feature.image}}" alt="{{ feature.altImage }}" class="img" ></div>
+                <div class="buton">     
+                        <span>{{feature.buton}} </span>
+                        <span> {{feature.createAt | date("d/m/Y") }}</span>
+                </div>
+                
+        </div>
+
+
+
+{% endblock %}

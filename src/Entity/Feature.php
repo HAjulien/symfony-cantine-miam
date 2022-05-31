@@ -10,6 +10,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 
 #[ORM\Entity(repositoryClass: FeatureRepository::class)]
+#[ORM\Index(name: 'feature', columns: ['title', 'paragraphe'], flags: ['fulltext'])]
 #[ApiResource (attributes: ["pagination_items_per_page" => 3])]
 #[ApiFilter(OrderFilter::class, properties: ['id' => 'DESC'])]
 class Feature
@@ -39,6 +40,9 @@ class Feature
      */
     #[ORM\Column(type: 'datetime', nullable: true)]
     private $createAt;
+
+    #[ORM\Column(type: 'string', length: 70, nullable: true)]
+    private $altImage;
 
     public function getId(): ?int
     {
@@ -113,6 +117,18 @@ class Feature
     public function setCreateAt(?\DateTimeInterface $createAt): self
     {
         $this->createAt = $createAt;
+
+        return $this;
+    }
+
+    public function getAltImage(): ?string
+    {
+        return $this->altImage;
+    }
+
+    public function setAltImage(?string $altImage): self
+    {
+        $this->altImage = $altImage;
 
         return $this;
     }

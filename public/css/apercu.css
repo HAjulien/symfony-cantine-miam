@@ -1,0 +1,46 @@
+/* l'apercu */
+
+.apercu{
+
+    max-width: 700px;
+    margin: auto;
+    border: 1px solid #000;
+}
+
+.apercu h3, .apercu p{
+    margin: 15px 0;
+    text-align: center;
+    padding: 0 50px;
+}
+
+.apercu h3{
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.apercu p{
+    font-size: 16px;
+}
+
+.apercu div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0 10px;
+}
+
+.apercu .buton{
+    margin: 10px 0;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.apercu div .img{
+    height: 120px;
+}
+
+.apercu .buton span{
+    padding: 0 20px;
+}

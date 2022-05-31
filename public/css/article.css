@@ -45,7 +45,7 @@ p{
 }
 
 .b1:hover, .b2:hover{
-    transform: scale(.9);
+    transform: scale(1.2);
     transition: .2s;
 }
 .b1:hover{
@@ -55,7 +55,6 @@ p{
 .b2:hover{
     background-color:var(--red);
 }
-
 
 .champs{
     display: flex;
@@ -68,6 +67,7 @@ p{
     border-radius: 5px;
     outline: none;
     background-color: #F4FAFF;
+
 }
 
 .champs.paragraphe{
@@ -84,4 +84,9 @@ p{
     font-weight: 500;
     color: #CEFF1A;
     text-decoration: underline;
+}
+
+#cke_feature_paragraphe{
+    width: 90%;
+    margin: 20px 40px;
 }
