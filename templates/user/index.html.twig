@@ -34,7 +34,7 @@
                         <td>{{user.pseudo}}</td>
                         <td>{{user.identifiantAfpa}}</td>
                         <td> <span class="{{user.roles[0]}}" ></span></td>
-                        <td>{{user.email}}</td>
+                        <td> <a href="mailto:{{user.email}}">{{user.email}}</a></td>
                         <td> {{user.telephone}}</td>
                         <td> {{user.pointFidelite}}</td>
                         <td><span class=" {{ (user.isVerified == 1) ? 'valide' : 'invalide' }}" > {{user.isVerified}}</span></td>
