@@ -37,7 +37,7 @@ h2 .usebtn{
     color: var(--black);
 }
 
-span a{
+.butonCategorie{
     margin-left: 30px;
     padding: 8px 11px;
     font-size: 17px;
@@ -222,28 +222,27 @@ table tr:last-child{
     transform: scale(0.9);
 }
 
-[class="2"], [class="3"], [class="4"], [class="5"], [class="6"]{
+.entrée, .boisson, .dessert, .viande, .poisson{
     padding: 9px;
     border-radius: 7px;
-    color: var(--white);
 }
 
-[class="2"]{
-    background-color: var(--green);
+.entrée{
     color: var(--black);
-
+    background-color: var(--green);
 }
-[class="3"]{
+.boisson{
     background-color: var(--yellow);
 }
-[class="4"]{
+.dessert{
     color: var(--white);
     background-color: var(--pink);
 }
-[class="5"]{
+.viande{
+    color: var(--white);
     background-color: var(--red);
 }
-
-[class="6"]{
+.poisson{
     background-color: var(--blue);
+    color: var(--white);
 }
