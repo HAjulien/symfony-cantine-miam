@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Enregistrer{% endblock %}
+{% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/article.css') }}" type="text/css" />
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="principale">
+    <h1>Enregistrer un produit</h1>
+
+    {{ form_start(form) }}
+
+        {{ form_row(form.nom, {
+            label: 'le nom:',
+            'label_attr': {'class': 'label'},
+            'attr': {'class': 'champs'}
+            }) }}
+        {{ form_row(form.description, {
+            label: 'Description du produit:',
+            'label_attr': {'class': 'label'},
+            'attr': {'class': 'champs paragraphe'}
+            }) }}
+        {{ form_row(form.category, {
+            label: 'La category:',
+            'label_attr': {'class': 'label'},
+            'attr': {'class': 'champs'}
+            }) }}
+        {{ form_row(form.prix, {
+            label: 'Prix de vente €:',
+            'label_attr': {'class': 'label'},
+            'attr': {'class': 'champs'},
+            }) }}
+        {{ form_row(form.benefice, {
+            label: 'La marge brute €:',
+            'label_attr': {'class': 'label'},
+            'attr': {'class': 'champs'},
+            }) }}
+
+        {{ form_row(form.image, {
+            label: 'L\'URL de d\'image:',
+            'label_attr': {'class': 'label'},
+            'attr': {'class': 'champs'}
+            }) }}
+        {{ form_row(form.altImage, {
+            label: 'La description de l\'image:',
+            'label_attr': {'class': 'label'},
+            'attr': {'class': 'champs'}
+            }) }}
+
+        {{ form_row(form.selectionner, {
+            label: 'selectionner pour cette semaine',
+            'attr': {'class': 'valitation'}
+            }) }}
+
+    {{ form_end(form) }}
+        <button type="submit"  class="btn b2"><a href="{{ path('produit_index') }}">retour liste des produits</a> </button>
+    </div>
+    </div>
+{% endblock %}

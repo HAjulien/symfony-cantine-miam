@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des images du carousel{% endblock %}
+{% block title %}Liste des Produits{% endblock %}
         {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('css/tableau.css') }}" type="text/css" />
         {% endblock %}
@@ -8,27 +8,46 @@
 {% block body %}
         <h1>{{ titre }}</h1>
 
-        <h2><a class="usebtn ajout" href="{{ path('imageCarousel_add') }}">Ajouter une image </a></h2>
+        <h2><a class="usebtn ajout" href="{{ path('produit_add') }}">Ajouter un produits </a></h2>
+        <h2><a class="usebtn" href="{{ path('produit_recherche') }}">rechercher <ion-icon name="search"></ion-icon> </a></h2>
+        {% for category in categories  %}
+                <h2><a class="usebtn ajout" href="{{ path('produit_filtre', {id: category.id}) }}">{{category.nom}} </a></h2>
+        {% endfor %}
 
-        <h3>{{total}} Image</h3>
+
+
+        <h3>{{total}} produits</h3>
 <table>
         <thead>
                 <tr>
+                        <td>nom</td>
+                        <td>catégorie</td>
                         <td>image</td>
-                        <td>description</td>
+                        <td>prix</td>
+                        <td>marge brute</td>
+                        <td>date d'ajout</td>
+                        <td>semaine</td>
+                        <td></td>
                 </tr>
         </thead>
         <tbody>
-        {% for image in images  %}
+        {% for produit in produits  %}
                 <tr>
+                        <td>{{produit.nom}}</td>
                         <td>
-                                <div><img src="{{image.image}}" alt="{{ image.descriptionImage }}" class="img" ></div>
+                                <span class="{{ produit.category.nom }}"> {{ produit.category.nom }}</span></td>
+                        <td>
+                                <div><img src="{{ produit.image }}" alt="{{ produit.altImage }}" class="img" ></div>
                         </td>
-                        <td> {{ image.descriptionImage }}</td>
+                        <td>{{ produit.prix }} €</td>
+                        <td>{{ produit.benefice }} €</td>
+                        <td> {{ produit.createAt | date("d/m/Y") }}</td>
+                        <td> {{ produit.selectionner }}</td>
                         <td> 
-                                <a href="{{ path('imageCarousel_update', {id: image.id}) }}" class="btn b1"><ion-icon name="create-outline"></ion-icon></a>
-                                <a href="{{ path('imageCarousel_delete', {id: image.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')"><ion-icon name="trash-outline"></ion-icon></a>
-                        </td>
+                                <a href="{{ path('produit_update', {id: produit.id}) }}" class="btn b1"><ion-icon name="create-outline"></ion-icon></a>
+                                <a href="{{ path('produit_delete', {id: produit.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')"><ion-icon name="trash-outline"></ion-icon></a>
+                                <a href="{{ path('produit_apercu', {id: produit.id}) }}" class="btn b3">+</a>
+                        </td> 
                 </tr>
         {% endfor %}
 
@@ -76,4 +95,3 @@
 </ul>
 
 {% endblock %}
-

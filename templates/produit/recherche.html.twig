@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche d'un article{% endblock %}
+        {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/tableau.css') }}" type="text/css" />
+        {% endblock %}
+
+{% block body %}
+
+        <h1>{{ titre }}</h1>
+        <h2><a class="usebtn ajout" href="{{ path('produit_add') }}">Ajouter un Article </a></h2>
+        <h2><a class="usebtn retour" href="{{ path('produit_index') }}">retour Liste</a></h2>
+
+                {{ form_start(rechercheForm) }}
+                        {{ form_row(rechercheForm.mots, {
+                                'attr': {'class': 'recherche', 'placeholder': 'nom description ou ne rien écrire'}
+                                }) }}
+                        {{ form_row(rechercheForm.category, {
+                                'attr': {'class': 'recherche'}
+                                }) }}
+                {{ form_end(rechercheForm) }}
+
+        {% if produits | length > 1   %}
+                <h3>Nombre de résultat de la recherche: {{ produits | length }}</h3>
+        {% elseif produits | length == 0 %}
+                <h3>Aucun article trouvé</h3>
+        {% endif %}
+
+<table>
+        <thead>
+                <tr>
+                        <td>nom</td>
+                        <td>catégorie</td>
+                        <td>image</td>
+                        <td>prix</td>
+                        <td>marge brute</td>
+                        <td>date d'ajout</td>
+                        <td>semaine</td>
+                        <td></td>
+                </tr>
+        </thead>
+        <tbody>
+        {% for produit in produits  %}
+                <tr>
+                        <td>{{produit.nom}}</td>
+                        <td>
+                                <span class="{{ produit.category.nom }}"> {{ produit.category.nom }}</span></td>
+                        <td>
+                                <div><img src="{{ produit.image }}" alt="{{ produit.altImage }}" class="img" ></div>
+                        </td>
+                        <td>{{ produit.prix }} €</td>
+                        <td>{{ produit.benefice }} €</td>
+                        <td> {{ produit.createAt | date("d/m/Y") }}</td>
+                        <td> {{ produit.selectionner }}</td>
+                        <td> 
+                                <a href="{{ path('produit_update', {id: produit.id}) }}" class="btn b1"><ion-icon name="create-outline"></ion-icon></a>
+                                <a href="{{ path('produit_delete', {id: produit.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')"><ion-icon name="trash-outline"></ion-icon></a>
+                                <a href="{{ path('produit_apercu', {id: produit.id}) }}" class="btn b3">+</ion-icon></a>
+                        </td> 
+                </tr>
+        {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}fiche Produit :{{produit.nom}} {% endblock %}
+        {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/tableau.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('css/apercu.css') }}" type="text/css" />
+        {% endblock %}
+
+{% block body %}
+        <h1>{{ title }}</h1>
+        <h2><a class="usebtn retour" href="{{ path('produit_index') }}">retour Liste des articles</a></h2>
+
+        <div class="apercu">
+                <h3>{{produit.nom}}</h3>
+                <div><img src="{{produit.image}}" alt="{{ produit.altImage }}" class="img" ></div>
+                <p>{{produit.description | raw }}</p>
+                <div class="buton">     
+                        <span>Prix: {{produit.prix}} € </span>
+                        <span>{{produit.category.nom}} </span>
+                        <span> {{produit.createAt | date("d/m/Y") }}</span>
+                </div>
+                
+        </div>
+
+
+
+{% endblock %}

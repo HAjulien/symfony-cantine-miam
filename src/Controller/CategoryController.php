@@ -24,6 +24,7 @@ class CategoryController extends AbstractController
 
         $category = $categoryRepository->getPaginatedCategory($page, $limit);
 
+
         $total = $categoryRepository->getTotalCategory();
 
         return $this->render('category/index.html.twig', [

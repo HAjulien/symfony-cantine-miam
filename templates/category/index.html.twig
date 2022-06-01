@@ -12,16 +12,17 @@
         <h2><a class="usebtn" href="{{ path('category_recherche') }}">rechercher <ion-icon name="search"></ion-icon> </a></h2>
 
         <h3>{{total}} catégories</h3>
+
+
 <table>
         <thead>
                 <tr>
                         <td>nom</td>
                         <td>slug</td>
-                        <td></td>
                 </tr>
         </thead>
         <tbody>
-        {% for category in categories  %}
+        {% for category in categories %}
                 <tr>
                         <td>{{category.nom}}</td>
                         <td> {{category.slug}}</td>

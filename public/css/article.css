@@ -86,7 +86,7 @@ p{
     text-decoration: underline;
 }
 
-#cke_feature_paragraphe{
+#cke_feature_paragraphe, #cke_produit_description, #cke_equipe_contenu{
     width: 90%;
     margin: 20px 40px;
 }
