@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
 
+
+
 *{
     margin: 0;
     padding: 0;
@@ -22,6 +24,10 @@
     --red: #F95738;
 }
 
+::selection{
+    color: var(--white);
+    background-color: var(--pink);
+}
 body{
     min-height: 100vh;
     overflow-x: hidden;

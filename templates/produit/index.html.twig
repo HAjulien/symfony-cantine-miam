@@ -18,7 +18,7 @@
         <p>
                 {% for category in categories  %}
                         {% if category is defined and category is not null and categorieFiltrer is defined %}
-                                        <span><a class="butonCategorie {{ (categorieFiltrer == category) ? 'active' : '' }} " href="{{ path('produit_filtre', {id: category.id}) }}">{{category.nom}} </a></span>
+                                        <span><a class="{{ (categorieFiltrer == category) ? category.id : '' }}" href="{{ path('produit_filtre', {id: category.id}) }}">{{category.nom}} </a></span>
                         {% else %}
                                 <span><a class="butonCategorie " href="{{ path('produit_filtre', {id: category.id}) }}">{{category.nom}} </a></span>
                         {% endif %}
@@ -46,7 +46,7 @@
                 <tr>
                         <td>{{produit.nom}}</td>
                         <td>
-                                <span class="{{ produit.category.nom }}"> {{ produit.category.nom }}</span></td>
+                                <span class="{{ produit.category.id }}"> {{ produit.category.nom }}</span></td>
                         <td>
                                 <div><img src="{{ produit.image }}" alt="{{ produit.altImage }}" class="img" ></div>
                         </td>

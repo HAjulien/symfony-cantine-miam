@@ -37,7 +37,7 @@ h2 .usebtn{
     color: var(--black);
 }
 
-.butonCategorie{
+span a{
     margin-left: 30px;
     padding: 8px 11px;
     font-size: 17px;
@@ -222,19 +222,28 @@ table tr:last-child{
     transform: scale(0.9);
 }
 
-.entrée, .boisson, .dessert{
-    padding: 6px;
-    border-radius: 5px;
+[class="2"], [class="3"], [class="4"], [class="5"], [class="6"]{
+    padding: 9px;
+    border-radius: 7px;
+    color: var(--white);
 }
 
-.entrée{
-    color: var(--white);
-    background-color: var(--green2);
+[class="2"]{
+    background-color: var(--green);
+    color: var(--black);
+
 }
-.boisson{
+[class="3"]{
     background-color: var(--yellow);
 }
-.dessert{
+[class="4"]{
     color: var(--white);
-    background-color: var(--black);
+    background-color: var(--pink);
+}
+[class="5"]{
+    background-color: var(--red);
+}
+
+[class="6"]{
+    background-color: var(--blue);
 }
