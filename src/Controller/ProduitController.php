@@ -37,6 +37,26 @@ class ProduitController extends AbstractController
         ]);
     }
 
+
+    #[Route('/semaine', name: 'semaine')]
+    public function produitsSemaine(ProduitRepository $ProduitRepository, CategoryRepository $categoryRepository, Request $request ): Response
+    {
+        $limit= 5;
+        $page = (int)$request->query->get("page", 1);
+        $produit = $ProduitRepository->getPaginatedProduitsSemaine($page, $limit);
+        $category = $categoryRepository->findAll();
+        $total = $ProduitRepository->getTotalProduitsSemaine();
+
+        return $this->render('produit/index.html.twig', [
+            'categories' => $category,
+            'produits' => $produit ,
+            'total' => $total,
+            'limit' => $limit,
+            'page' => $page,
+            'titre' => 'Liste des Produits de la semaine'
+        ]);
+    }
+
     #[Route('/recherche', name: 'recherche')]
     public function recherche( ProduitRepository $ProduitRepository, Request $request ): Response
     {

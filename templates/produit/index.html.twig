@@ -8,8 +8,9 @@
 {% block body %}
         <h1>{{ titre }}</h1>
         <h2><a class="usebtn ajout" href="{{ path('produit_add') }}">Ajouter un produits </a></h2>
+        <h2><a class="usebtn ajout" href="{{ path('produit_semaine') }}">Produits de la semaine </a></h2>
         <h2><a class="usebtn" href="{{ path('produit_recherche') }}">rechercher <ion-icon name="search"></ion-icon> </a></h2>
-        <h2><a class="usebtn retour" href="{{ path('produit_index') }}">retour Liste des articles</a></h2>
+        <h2><a class="usebtn retour" href="{{ path('produit_index') }}">Liste des produits</a></h2>
         {% for category in categories  %}
                 <h2><a class="usebtn ajout " href="{{ path('produit_filtre', {id: category.id}) }}">{{category.nom}} </a></h2>
         {% endfor %}

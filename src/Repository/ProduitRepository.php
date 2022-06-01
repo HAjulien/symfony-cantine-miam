@@ -47,7 +47,6 @@ class ProduitRepository extends ServiceEntityRepository
     */
     public function getPaginatedProduit($page, $limit){
         $query = $this->createQueryBuilder('p')
-        //->where('a.isVerified = 1')
         ->orderBy('p.createAt', 'DESC')
         ->setFirstResult(($page * $limit) - $limit)
         ->setMaxResults($limit)
@@ -60,6 +59,33 @@ class ProduitRepository extends ServiceEntityRepository
     * @return void
     */
     public function getTotalProduit()
+    {
+        $query = $this->createQueryBuilder('p')
+        ->select('COUNT(p)')
+        ;
+        //seulement chiffre décimaux texte, pas tableau getSingleScalarResult
+        return $query->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+    * return all product per page 
+    * @return void
+    */
+    public function getPaginatedProduitsSemaine($page, $limit){
+        $query = $this->createQueryBuilder('p')
+        ->where('p.selectionner = 1')
+        ->orderBy('p.createAt', 'DESC')
+        ->setFirstResult(($page * $limit) - $limit)
+        ->setMaxResults($limit)
+        ;
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+    * return number of Products
+    * @return void
+    */
+    public function getTotalProduitsSemaine()
     {
         $query = $this->createQueryBuilder('p')
         ->select('COUNT(p)')
@@ -91,7 +117,7 @@ class ProduitRepository extends ServiceEntityRepository
 
 
     /**
-    * return all product per page 
+    * return all product filter per category per page 
     * @return void
     */
     public function getPaginatedProduitFiltre($page, $limit, $categorieFiltrer){
@@ -107,7 +133,7 @@ class ProduitRepository extends ServiceEntityRepository
     }
 
     /**
-    * return number of Products
+    * return number of Products filter per category
     * @return void
     */
     public function getTotalProduitFiltre($categorieFiltrer)
