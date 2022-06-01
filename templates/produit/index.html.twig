@@ -53,7 +53,10 @@
                         <td>{{ produit.prix }} €</td>
                         <td>{{ produit.benefice }} €</td>
                         <td> {{ produit.createAt | date("d/m/Y") }}</td>
-                        <td> {{ produit.selectionner }}</td>
+                        <td>
+                        <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="active" id="customSwitch{{ produit.id }}" data-id="{{ produit.id }}" {{ produit.selectionner ? 'checked' : null}}></td>
+                        </div>
                         <td> 
                                 <a href="{{ path('produit_update', {id: produit.id}) }}" class="btn b1"><ion-icon name="create-outline"></ion-icon></a>
                                 <a href="{{ path('produit_delete', {id: produit.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')"><ion-icon name="trash-outline"></ion-icon></a>

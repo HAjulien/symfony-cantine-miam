@@ -93,6 +93,8 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
     <script>
+    window.onload = () => {
+
         //menu toggle dans le layout side bar
         let toggle = document.querySelector('.toggle');
         let navigation = document.querySelector('.navigation');
@@ -103,15 +105,22 @@
             main.classList.toggle('active')
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            
-            setTimeout(notification, 2000)
+        setTimeout(notification, 2000)
 
-            function notification () {
-            document.getElementById("alert").classList.add('hidden')
+        function notification () {
+        document.getElementById("alert").classList.add('hidden')
 
-            }
-        }) 
+        }
+
+        let activate = document.querySelectorAll("[type=checkbox]")
+        for(let button of activate) {
+            button.addEventListener("click", function(){
+                let xmlhttp = new XMLHttpRequest
+                xmlhttp.open("get", `/produit/activate/${this.dataset.id}`)
+                xmlhttp.send() 
+            })
+        }
+    }
 
     </script>
 </html>

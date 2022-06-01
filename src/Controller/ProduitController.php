@@ -91,7 +91,7 @@ class ProduitController extends AbstractController
 
         
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) { 
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $doctrine->getManager();
             $em->persist($produit);
             $em->flush();
@@ -168,5 +168,16 @@ class ProduitController extends AbstractController
         $em->flush();
         $this->addFlash('success', 'Produit supprimé !');
         return $this->redirectToRoute('produit_index');
+    }
+
+    #[Route("/activate/{id}", name: "activate")]
+    public function active(Produit $produit, ManagerRegistry $doctrine): Response
+    {
+
+        $produit->setSelectionner(($produit->isSelectionner()) ? false : true);
+        $em = $doctrine->getManager();
+        $em->flush();
+        return New Response("true");
+
     }
 }
