@@ -21,7 +21,6 @@ class ProduitController extends AbstractController
     public function index(ProduitRepository $ProduitRepository, CategoryRepository $categoryRepository, Request $request): Response
     {
         $limit= 5;
-
         $page = (int)$request->query->get("page", 1);
 
         $produit = $ProduitRepository->getPaginatedProduit($page, $limit);
@@ -94,8 +93,9 @@ class ProduitController extends AbstractController
         $produit = $ProduitRepository->getPaginatedProduitFiltre($page, $limit, $categorieFiltrer);
         $total = $ProduitRepository->getTotalProduitFiltre($categorieFiltrer);
 
-        return $this->render('produit/index.html.twig', [
+        return $this->render('produit/filtre.html.twig', [
             'categories' => $category,
+            'categorieFiltrer' => $categorieFiltrer,
             'produits' => $produit,
             'total' => $total,
             'limit' => $limit,

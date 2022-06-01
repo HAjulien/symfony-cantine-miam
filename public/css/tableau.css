@@ -36,6 +36,10 @@ h2 .usebtn{
     background-color: var(--green);
     color: var(--black);
 }
+
+h2 .usebtn.ajout.active{
+    background-color: var(--yellow) ;
+}
 .usebtn.retour{
     background-color:var(--blue2);
 }
@@ -160,7 +164,6 @@ table tr:last-child{
 
 .pagination .active{
     background-color: var(--green);
-
 }
 #a {
     display: flex;

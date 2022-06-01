@@ -11,7 +11,7 @@
         <h2><a class="usebtn" href="{{ path('produit_recherche') }}">rechercher <ion-icon name="search"></ion-icon> </a></h2>
         <h2><a class="usebtn retour" href="{{ path('produit_index') }}">retour Liste des articles</a></h2>
         {% for category in categories  %}
-                <h2><a class="usebtn ajout " href="{{ path('produit_filtre', {id: category.id}) }}">{{category.nom}} </a></h2>
+                <h2><a class="usebtn ajout {{ (categorieFiltrer == category) ? 'active' : '' }} " href="{{ path('produit_filtre', {id: category.id}) }}">{{category.nom}} </a></h2>
         {% endfor %}
 
 
