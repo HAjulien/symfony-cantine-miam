@@ -12,8 +12,9 @@
         <h2><a class="usebtn" href="{{ path('user_personnel') }}">Personnel </a></h2>
         <h2><a class="usebtn" href="{{ path('user_nonVerifie') }}"> Non Vérifié</a></h2>
         <h2><a class="usebtn" href="{{ path('user_recherche') }}">rechercher <ion-icon name="search"></ion-icon> </a></h2>
-        <h2><a class="usebtn retour" href="{{ path('user_index') }}">retour à la Liste</a></h2>
-
+        {% if index is not defined %}
+                <h2><a class="usebtn retour" href="{{ path('user_index') }}">retour à la Liste</a></h2>
+        {% endif %}
         <h3>{{total}} Utilisateurs</h3>
 <table>
         <thead>

@@ -31,7 +31,7 @@ class FeatureController extends AbstractController
             'total' => $total,
             'limit' => $limit,
             'page' => $page,
-            'titre' => 'Liste des Articles'
+            'titre' => 'Liste des Articles de la Page Accueil'
         ]);
     }
 

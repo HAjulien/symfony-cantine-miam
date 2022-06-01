@@ -74,7 +74,7 @@ class ProduitRepository extends ServiceEntityRepository
     public function getPaginatedProduitsSemaine($page, $limit){
         $query = $this->createQueryBuilder('p')
         ->where('p.selectionner = 1')
-        ->orderBy('p.createAt', 'DESC')
+        ->orderBy('p.category', 'ASC')
         ->setFirstResult(($page * $limit) - $limit)
         ->setMaxResults($limit)
         ;

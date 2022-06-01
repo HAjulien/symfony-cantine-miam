@@ -41,6 +41,7 @@ class ProduitController extends AbstractController
     #[Route('/semaine', name: 'semaine')]
     public function produitsSemaine(ProduitRepository $ProduitRepository, CategoryRepository $categoryRepository, Request $request ): Response
     {
+        $semaine = 'semaine';
         $limit= 5;
         $page = (int)$request->query->get("page", 1);
         $produit = $ProduitRepository->getPaginatedProduitsSemaine($page, $limit);
@@ -48,6 +49,7 @@ class ProduitController extends AbstractController
         $total = $ProduitRepository->getTotalProduitsSemaine();
 
         return $this->render('produit/index.html.twig', [
+            'semaine' => $semaine,
             'categories' => $category,
             'produits' => $produit ,
             'total' => $total,
@@ -113,14 +115,14 @@ class ProduitController extends AbstractController
         $produit = $ProduitRepository->getPaginatedProduitFiltre($page, $limit, $categorieFiltrer);
         $total = $ProduitRepository->getTotalProduitFiltre($categorieFiltrer);
 
-        return $this->render('produit/filtre.html.twig', [
+        return $this->render('produit/index.html.twig', [
             'categories' => $category,
             'categorieFiltrer' => $categorieFiltrer,
             'produits' => $produit,
             'total' => $total,
             'limit' => $limit,
             'page' => $page,
-            'titre' => 'Les produits'
+            'titre' => 'Les produits filtré'
         ]);
     }
 

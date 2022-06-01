@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des Articles{% endblock %}
+{% block title %}Liste des Articles de la Page Accueil{% endblock %}
         {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('css/tableau.css') }}" type="text/css" />
         {% endblock %}
@@ -8,7 +8,7 @@
 {% block body %}
         <h1>{{ titre }}</h1>
 
-        <h2><a class="usebtn ajout" href="{{ path('feature_add') }}">Ajouter un Employé </a></h2>
+        <h2><a class="usebtn ajout" href="{{ path('feature_add') }}">Ajouter un Article </a></h2>
         <h2><a class="usebtn" href="{{ path('feature_recherche') }}">rechercher <ion-icon name="search"></ion-icon> </a></h2>
 
         <h3>{{total}} Articles</h3>
