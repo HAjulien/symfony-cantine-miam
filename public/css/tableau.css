@@ -97,6 +97,19 @@ tbody tr:hover{
 table tr:last-child{
     border-bottom: none;
 }
+.bonNote, .moyenneNote, .mauvaiseNote{
+    font-size: 20px;
+    font-weight: 600;
+}
+.bonNote{
+    color: #5DA221;
+}
+.moyenneNote{
+    color: var(--yellow);
+}
+.mauvaiseNote{
+    color: var(--red);
+}
 
 .form-check-input{
     height: 19px ;
@@ -219,8 +232,6 @@ table tr:last-child{
 
 }
 
-
-
 .btn.rechercheButon{
     color: var(--black);
     margin-left:calc(50vw - 250px);
@@ -232,13 +243,20 @@ table tr:last-child{
     transform: scale(0.9);
 }
 
+.pastille{
+    padding: 1px 10px;
+    margin-inline: 5px;
+    border-radius: 50%;
+}
+
 .entrée, .boisson, .dessert, .viande, .poisson, .végétarien{
-    padding: 9px;
-    border-radius: 7px;
     color: var(--white);
 
 }
-
+.test{
+    padding: 5px;
+    border-radius: 7px;
+}
 .entrée{
     color: var(--black);
     background-color: var(--green);

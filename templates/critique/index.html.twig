@@ -12,8 +12,8 @@
         <thead>
                 <tr>
                         <td>auteur</td>
-                        <td>Produit</td>
                         <td>categorie</td>
+                        <td>Produit</td>
                         <td>note /5</td>
                         <td>contenu</td>
                 </tr>
@@ -22,11 +22,14 @@
         {% for critique in critiques  %}
                 <tr>
                         <td> {{ critique.utilisateur.pseudo }}  </td>
-                        <td> {{ critique.produit.nom }}  </td>
-                        <td> 
-                                <span class="{{ critique.produit.category.nom }}"> {{ critique.produit.category.nom }} </span>
+                        <td> <span class=" test {{ critique.produit.category.nom }}">
+                        {{ critique.produit.category.nom }}
+                        </span>
                         </td>
-                        <td> {{ critique.note }} </td>
+                        <td> {{ critique.produit.nom }}  </td>
+                        <td>
+                                <span class=" {{ (critique.note > 3.7) ? 'bonNote' : (critique.note > 2.5) ? 'moyenneNote' : 'mauvaiseNote' }} ">{{ critique.note }} </span>
+                        </td>
                         <td> {{ critique.contenu }}</td>
                         <td> 
                                 <a href="{{ path('critique_delete', {id: critique.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')"><ion-icon name="trash-outline"></ion-icon></a>

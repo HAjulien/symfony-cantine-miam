@@ -26,35 +26,55 @@
 <table>
         <thead>
                 <tr>
-                        <td>nom</td>
-                        <td>catégorie</td>
                         <td>image</td>
-                        <td>prix</td>
-                        <td>marge brute</td>
-                        <td>date d'ajout</td>
+                        <td></td>
+                        <td>nom</td>
+                        <td>nb Avis</td>
+                        <td>note moyenne</td>
+                        <td>prix Vente €</td>
+                        <td>marge brute %</td>
                         <td>semaine</td>
                         <td></td>
                 </tr>
         </thead>
         <tbody>
+
+
         {% for produit in produits  %}
+                {% set sommeAvis = 0  %}
+                {% set moyenne = 0  %}
+                {% if produit.critiques | length > 0  %}
+                        {% for critique in produit.critiques %}
+                                {% set sommeAvis = sommeAvis + critique.note %}
+                                {% set moyenne = sommeAvis / (produit.critiques | length)  %}
+                        {% endfor %}
+                {% endif %}
                 <tr>
-                        <td>{{produit.nom}}</td>
-                        <td>
-                                <span class="{{ produit.category.nom }}"> {{ produit.category.nom }}</span></td>
                         <td>
                                 <div><img src="{{ produit.image }}" alt="{{ produit.altImage }}" class="img" ></div>
                         </td>
-                        <td>{{ produit.prixAchat }} €</td>
-                        <td>{{ produit.prixVente }} €</td>
-                        <td> {{ produit.createAt | date("d/m/Y") }}</td>
-                        <td> {{ produit.selectionner }}</td>
+                        <td> <span class=" pastille {{ produit.category.nom }}"></span> </td>
+                        <td> {{ produit.nom }}</td>
+                        <td>{{produit.critiques | length}}</td>
+                        <td>
+                {% if produit.critiques | length > 0  %}
+                        <span class=" {{ (moyenne > 3.7) ? 'bonNote' : (moyenne > 2.5) ? 'moyenneNote' : 'mauvaiseNote' }} " > {{ moyenne|round(1) }} </span>
+                {% endif %}
+                        </td>
+                        <td>{{ produit.prixAchat }} </td>
+                        <td>{{ (((produit.prixAchat - produit.prixVente) / produit.prixAchat ) * 100)|round }} </td>
+                        <td>
+                        <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="active" id="customSwitch{{ produit.id }}" data-id="{{ produit.id }}" {{ produit.selectionner ? 'checked' : null}}></td>
+                        </div>
                         <td> 
                                 <a href="{{ path('produit_update', {id: produit.id}) }}" class="btn b1"><ion-icon name="create-outline"></ion-icon></a>
                                 <a href="{{ path('produit_delete', {id: produit.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')"><ion-icon name="trash-outline"></ion-icon></a>
-                                <a href="{{ path('produit_apercu', {id: produit.id}) }}" class="btn b3">+</ion-icon></a>
+                                <a href="{{ path('produit_apercu', {id: produit.id}) }}" class="btn b3">+</a>
                         </td> 
                 </tr>
         {% endfor %}
+        </tbody>
+</table>
 
 {% endblock %}

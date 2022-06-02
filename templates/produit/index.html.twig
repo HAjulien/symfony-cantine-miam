@@ -33,6 +33,7 @@
         <thead>
                 <tr>
                         <td>image</td>
+                        <td></td>
                         <td>nom</td>
                         <td>nb Avis</td>
                         <td>note moyenne</td>
@@ -58,12 +59,14 @@
                         <td>
                                 <div><img src="{{ produit.image }}" alt="{{ produit.altImage }}" class="img" ></div>
                         </td>
-                        <td>
-                                <span class="{{ produit.category.nom }}"> {{ produit.nom }}</span>
-                        </td>
+                        <td> <span class=" pastille {{ produit.category.nom }}"></span> </td>
+                        <td> {{ produit.nom }}</td>
                         <td>{{produit.critiques | length}}</td>
-                        <td>{{ moyenne|round(1) }}</td>
-
+                        <td>
+                {% if produit.critiques | length > 0  %}
+                        <span class=" {{ (moyenne > 3.7) ? 'bonNote' : (moyenne > 2.5) ? 'moyenneNote' : 'mauvaiseNote' }} " > {{ moyenne|round(1) }} </span>
+                {% endif %}
+                        </td>
                         <td>{{ produit.prixAchat }} </td>
                         <td>{{ (((produit.prixAchat - produit.prixVente) / produit.prixAchat ) * 100)|round }} </td>
                         <td>
@@ -77,8 +80,6 @@
                         </td> 
                 </tr>
         {% endfor %}
-
-
         </tbody>
 </table>
 
