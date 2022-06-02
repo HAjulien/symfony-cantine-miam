@@ -31,12 +31,11 @@
 <table>
         <thead>
                 <tr>
-                        <td>nom</td>
                         <td>catégorie</td>
+                        <td>nom</td>
                         <td>image</td>
-                        <td>prix</td>
-                        <td>marge brute</td>
-                        <td>date d'ajout</td>
+                        <td>prix Vente €</td>
+                        <td>marge brute %</td>
                         <td>semaine</td>
                         <td></td>
                 </tr>
@@ -46,13 +45,13 @@
                 <tr>
                         <td>{{produit.nom}}</td>
                         <td>
-                                <span class="{{ produit.category.nom }}"> {{ produit.category.nom }}</span></td>
+                                <span class="{{ produit.category.nom }}"> {{ produit.category.nom }}</span>
+                        </td>
                         <td>
                                 <div><img src="{{ produit.image }}" alt="{{ produit.altImage }}" class="img" ></div>
                         </td>
-                        <td>{{ produit.prix }} €</td>
-                        <td>{{ produit.benefice }} €</td>
-                        <td> {{ produit.createAt | date("d/m/Y") }}</td>
+                        <td>{{ produit.prixAchat }} </td>
+                        <td>{{ (((produit.prixAchat - produit.prixVente) / produit.prixAchat ) * 100)|round }} </td>
                         <td>
                         <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" name="active" id="customSwitch{{ produit.id }}" data-id="{{ produit.id }}" {{ produit.selectionner ? 'checked' : null}}></td>

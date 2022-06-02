@@ -25,8 +25,8 @@ class ProduitType extends AbstractType
                 ]
             ])
             //->add('createAt')
-            ->add('prix', NumberType::class)
-            ->add('benefice', NumberType::class)
+            ->add('prixVente', NumberType::class)
+            ->add('prixAchat', NumberType::class)
             ->add('image')
             ->add('altImage')
             ->add('selectionner', CheckboxType::class, array(

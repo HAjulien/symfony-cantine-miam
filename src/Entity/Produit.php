@@ -32,10 +32,10 @@ class Produit
     private $createAt;
 
     #[ORM\Column(type: 'float')]
-    private $prix;
+    private $prixAchat;
 
     #[ORM\Column(type: 'float')]
-    private $benefice;
+    private $prixVente;
 
     #[ORM\Column(type: 'string', length: 150)]
     private $image;
@@ -95,26 +95,26 @@ class Produit
         return $this;
     }
 
-    public function getPrix(): ?float
+    public function getPrixAchat(): ?float
     {
-        return $this->prix;
+        return $this->prixAchat;
     }
 
-    public function setPrix(float $prix): self
+    public function setPrixAchat(float $prixAchat): self
     {
-        $this->prix = $prix;
+        $this->prixAchat = $prixAchat;
 
         return $this;
     }
 
-    public function getBenefice(): ?float
+    public function getPrixVente(): ?float
     {
-        return $this->benefice;
+        return $this->prixVente;
     }
 
-    public function setBenefice(float $benefice): self
+    public function setPrixVente(float $prixVente): self
     {
-        $this->benefice = $benefice;
+        $this->prixVente = $prixVente;
 
         return $this;
     }

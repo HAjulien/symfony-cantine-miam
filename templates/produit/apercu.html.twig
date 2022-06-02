@@ -15,7 +15,7 @@
                 <div><img src="{{produit.image}}" alt="{{ produit.altImage }}" class="img" ></div>
                 <p>{{produit.description | raw }}</p>
                 <div class="buton">     
-                        <span>Prix: {{produit.prix}} € </span>
+                        <span>Prix: {{produit.prixVente}} € </span>
                         <span>{{produit.category.nom}} </span>
                         <span> {{produit.createAt | date("d/m/Y") }}</span>
                 </div>

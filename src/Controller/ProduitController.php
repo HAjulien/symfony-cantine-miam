@@ -122,7 +122,7 @@ class ProduitController extends AbstractController
             'total' => $total,
             'limit' => $limit,
             'page' => $page,
-            'titre' => 'Les produits filtré'
+            'titre' => 'Les produits filtrés'
         ]);
     }
 

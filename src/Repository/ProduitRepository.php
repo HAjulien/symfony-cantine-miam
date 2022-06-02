@@ -89,6 +89,7 @@ class ProduitRepository extends ServiceEntityRepository
     {
         $query = $this->createQueryBuilder('p')
         ->select('COUNT(p)')
+        ->where('p.selectionner = 1')
         ;
         //seulement chiffre décimaux texte, pas tableau getSingleScalarResult
         return $query->getQuery()->getSingleScalarResult();
