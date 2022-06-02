@@ -20,8 +20,7 @@ class UserController extends AbstractController
     #[Route('/', name: 'index')]
     public function index( UserRepository $userRepository, Request $request ): Response
     {
-        // juste pour gerer la presense du bouton retour liste
-        $index = 'index';
+
         //on définit le nombre d'éléments par page
         $limit= 5;
 
@@ -40,7 +39,6 @@ class UserController extends AbstractController
         //dd($total);
 
         return $this->render('user/index.html.twig', [
-            'index' => $index,
             'users' => $user,
             'total' => $total,
             'limit' => $limit,

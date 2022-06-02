@@ -20,11 +20,8 @@
                                 }) }}
                 {{ form_end(rechercheForm) }}
 
-        {% if produits | length > 1   %}
                 <h3>Nombre de résultat de la recherche: {{ produits | length }}</h3>
-        {% elseif produits | length == 0 %}
-                <h3>Aucun article trouvé</h3>
-        {% endif %}
+
 
 <table>
         <thead>
@@ -48,8 +45,8 @@
                         <td>
                                 <div><img src="{{ produit.image }}" alt="{{ produit.altImage }}" class="img" ></div>
                         </td>
-                        <td>{{ produit.prix }} €</td>
-                        <td>{{ produit.benefice }} €</td>
+                        <td>{{ produit.prixAchat }} €</td>
+                        <td>{{ produit.prixVente }} €</td>
                         <td> {{ produit.createAt | date("d/m/Y") }}</td>
                         <td> {{ produit.selectionner }}</td>
                         <td> 

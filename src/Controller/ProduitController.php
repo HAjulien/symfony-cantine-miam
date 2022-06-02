@@ -41,7 +41,6 @@ class ProduitController extends AbstractController
     #[Route('/semaine', name: 'semaine')]
     public function produitsSemaine(ProduitRepository $ProduitRepository, CategoryRepository $categoryRepository, Request $request ): Response
     {
-        $semaine = 'semaine';
         $limit= 5;
         $page = (int)$request->query->get("page", 1);
         $produit = $ProduitRepository->getPaginatedProduitsSemaine($page, $limit);
@@ -49,7 +48,6 @@ class ProduitController extends AbstractController
         $total = $ProduitRepository->getTotalProduitsSemaine();
 
         return $this->render('produit/index.html.twig', [
-            'semaine' => $semaine,
             'categories' => $category,
             'produits' => $produit ,
             'total' => $total,
@@ -62,8 +60,7 @@ class ProduitController extends AbstractController
     #[Route('/recherche', name: 'recherche')]
     public function recherche( ProduitRepository $ProduitRepository, Request $request ): Response
     {
-        $produit = $ProduitRepository;
-
+        $produit = array();
         $rechercheForm = $this->createForm(SearchProduitType::class);
 
         $search = $rechercheForm->handleRequest($request);

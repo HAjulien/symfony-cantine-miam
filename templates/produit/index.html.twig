@@ -10,8 +10,8 @@
         <h2><a class="usebtn ajout" href="{{ path('produit_add') }}">Ajouter un produits </a></h2>
         <h2><a class="usebtn ajout" href="{{ path('produit_semaine') }}">Produits de la semaine </a></h2>
         <h2><a class="usebtn" href="{{ path('produit_recherche') }}">rechercher <ion-icon name="search"></ion-icon> </a></h2>
-        {% if categorieFiltrer is defined or semaine is defined %}
-                <h2><a class="usebtn retour" href="{{ path('produit_index') }}">Liste des produits</a></h2>
+        {% if  app.Request.pathInfo != "/produit/" %}
+                <h2><a class="usebtn retour" href="{{ path('produit_index') }}">retour à la Liste</a></h2>
         {% endif %}
         
 

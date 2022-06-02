@@ -7,12 +7,12 @@
 
 {% block body %}
         <h1>{{ titre }}</h1>
-
+                {# {{ dump(app.request) }} #}
         <h2><a class="usebtn ajout" href="{{ path('user_add') }}">Ajouter un Utilisateur </a></h2>
         <h2><a class="usebtn" href="{{ path('user_personnel') }}">Personnel </a></h2>
         <h2><a class="usebtn" href="{{ path('user_nonVerifie') }}"> Non Vérifié</a></h2>
         <h2><a class="usebtn" href="{{ path('user_recherche') }}">rechercher <ion-icon name="search"></ion-icon> </a></h2>
-        {% if index is not defined %}
+        {% if  app.Request.pathInfo != "/user/" %}
                 <h2><a class="usebtn retour" href="{{ path('user_index') }}">retour à la Liste</a></h2>
         {% endif %}
         <h3>{{total}} Utilisateurs</h3>
