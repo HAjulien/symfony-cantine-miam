@@ -38,7 +38,7 @@ class EquipeController extends AbstractController
     #[Route('/recherche', name: 'recherche')]
     public function recherche( EquipeRepository $equipeRepository, Request $request ): Response
     {
-        $equipe = $equipeRepository;
+        $equipe = array();
 
         $rechercheForm = $this->createForm(SearchUserType::class);
 

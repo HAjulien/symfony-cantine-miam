@@ -17,11 +17,8 @@
                                 }) }}
                 {{ form_end(rechercheForm) }}
 
-        {% if features | length > 1   %}
                 <h3>Nombre de résultat de la recherche: {{ features | length }}</h3>
-        {% elseif features | length == 0 %}
-                <h3>Aucun article trouvé</h3>
-        {% endif %}
+
 
 <table>
         <thead>

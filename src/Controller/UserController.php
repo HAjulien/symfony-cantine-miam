@@ -92,7 +92,7 @@ class UserController extends AbstractController
     #[Route('/recherche', name: 'recherche')]
     public function recherche( UserRepository $userRepository, Request $request ): Response
     {
-        $user = $userRepository;
+        $user = array();
 
         $rechercheForm = $this->createForm(SearchUserType::class);
 

@@ -39,7 +39,7 @@ class CategoryController extends AbstractController
     #[Route('/recherche', name: 'recherche')]
     public function recherche( CategoryRepository $categoryRepository, Request $request ): Response
     {
-        $category = $categoryRepository;
+        $category = array();
 
         $rechercheForm = $this->createForm(SearchUserType::class);
 

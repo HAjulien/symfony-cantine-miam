@@ -17,11 +17,8 @@
                                 }) }}
                 {{ form_end(rechercheForm) }}
 
-        {% if equipes | length > 1   %}
                 <h3>Nombre de résultat de la recherche: {{ equipes | length }}</h3>
-        {% elseif equipes | length == 0 %}
-                <h3>Aucun Employé trouvé</h3>
-        {% endif %}
+
 
 <table>
         <thead>

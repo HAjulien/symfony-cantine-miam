@@ -19,11 +19,8 @@
                                 }) }}
                 {{ form_end(rechercheForm) }}
         
-        {% if users | length > 1   %}
                 <h3>Nombre de résultat de la recherche: {{ users | length }}</h3>
-        {% elseif users | length == 0 %}
-                <h3>Aucun Utilisateur trouvé</h3>
-        {% endif %}
+
 
 <table>
         <thead>

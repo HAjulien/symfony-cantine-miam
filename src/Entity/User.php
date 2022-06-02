@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Index;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
@@ -44,6 +46,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 15, nullable: true)]
     private $telephone;
+
+    #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Critique::class, orphanRemoval: true)]
+    private $critiques;
+
+    public function __construct()
+    {
+        $this->critiques = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -190,6 +200,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setTelephone(?string $telephone): self
     {
         $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Critique>
+     */
+    public function getCritiques(): Collection
+    {
+        return $this->critiques;
+    }
+
+    public function addCritique(Critique $critique): self
+    {
+        if (!$this->critiques->contains($critique)) {
+            $this->critiques[] = $critique;
+            $critique->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCritique(Critique $critique): self
+    {
+        if ($this->critiques->removeElement($critique)) {
+            // set the owning side to null (unless already changed)
+            if ($critique->getUtilisateur() === $this) {
+                $critique->setUtilisateur(null);
+            }
+        }
 
         return $this;
     }

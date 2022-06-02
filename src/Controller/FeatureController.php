@@ -38,7 +38,7 @@ class FeatureController extends AbstractController
     #[Route('/recherche', name: 'recherche')]
     public function recherche( FeatureRepository $featureRepository, Request $request ): Response
     {
-        $feature = $featureRepository;
+        $feature = array();
 
         $rechercheForm = $this->createForm(SearchUserType::class);
 

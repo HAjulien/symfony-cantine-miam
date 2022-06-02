@@ -7,6 +7,7 @@
 
 {% block body %}
         <h1>{{ titre }}</h1>
+
         <h2><a class="usebtn ajout" href="{{ path('produit_add') }}">Ajouter un produits </a></h2>
         <h2><a class="usebtn ajout" href="{{ path('produit_semaine') }}">Produits de la semaine </a></h2>
         <h2><a class="usebtn" href="{{ path('produit_recherche') }}">rechercher <ion-icon name="search"></ion-icon> </a></h2>
@@ -20,7 +21,7 @@
                         {% if category is defined and category is not null and categorieFiltrer is defined %}
                                         <span><a class="butonCategorie {{ (categorieFiltrer == category) ? category.nom : '' }}" href="{{ path('produit_filtre', {id: category.id}) }}">{{category.nom}} </a></span>
                         {% else %}
-                                <span><a class="butonCategorie " href="{{ path('produit_filtre', {id: category.id}) }}">{{category.nom}} </a></span>
+                                <span><a class="butonCategorie {{category.nom}} " href="{{ path('produit_filtre', {id: category.id}) }}">{{category.nom}} </a></span>
                         {% endif %}
                 {% endfor %}
         </p>
@@ -31,9 +32,10 @@
 <table>
         <thead>
                 <tr>
-                        <td>catégorie</td>
-                        <td>nom</td>
                         <td>image</td>
+                        <td>nom</td>
+                        <td>nb Avis</td>
+                        <td>note moyenne</td>
                         <td>prix Vente €</td>
                         <td>marge brute %</td>
                         <td>semaine</td>
@@ -41,15 +43,27 @@
                 </tr>
         </thead>
         <tbody>
+
+
         {% for produit in produits  %}
+                {% set sommeAvis = 0  %}
+                {% set moyenne = 0  %}
+                {% if produit.critiques | length > 0  %}
+                        {% for critique in produit.critiques %}
+                                {% set sommeAvis = sommeAvis + critique.note %}
+                                {% set moyenne = sommeAvis / (produit.critiques | length)  %}
+                        {% endfor %}
+                {% endif %}
                 <tr>
-                        <td>{{produit.nom}}</td>
-                        <td>
-                                <span class="{{ produit.category.nom }}"> {{ produit.category.nom }}</span>
-                        </td>
                         <td>
                                 <div><img src="{{ produit.image }}" alt="{{ produit.altImage }}" class="img" ></div>
                         </td>
+                        <td>
+                                <span class="{{ produit.category.nom }}"> {{ produit.nom }}</span>
+                        </td>
+                        <td>{{produit.critiques | length}}</td>
+                        <td>{{ moyenne|round(1) }}</td>
+
                         <td>{{ produit.prixAchat }} </td>
                         <td>{{ (((produit.prixAchat - produit.prixVente) / produit.prixAchat ) * 100)|round }} </td>
                         <td>

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation\Slug;
 use App\Repository\ProduitRepository;
@@ -53,6 +55,14 @@ class Produit
     #[Gedmo\Slug(fields: ['nom'])]
     #[ORM\Column(type: 'string', length: 150)]
     private $slug;
+
+    #[ORM\OneToMany(mappedBy: 'produit', targetEntity: Critique::class, orphanRemoval: true)]
+    private $critiques;
+
+    public function __construct()
+    {
+        $this->critiques = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -175,6 +185,36 @@ class Produit
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Critique>
+     */
+    public function getCritiques(): Collection
+    {
+        return $this->critiques;
+    }
+
+    public function addCritique(Critique $critique): self
+    {
+        if (!$this->critiques->contains($critique)) {
+            $this->critiques[] = $critique;
+            $critique->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCritique(Critique $critique): self
+    {
+        if ($this->critiques->removeElement($critique)) {
+            // set the owning side to null (unless already changed)
+            if ($critique->getProduit() === $this) {
+                $critique->setProduit(null);
+            }
+        }
 
         return $this;
     }

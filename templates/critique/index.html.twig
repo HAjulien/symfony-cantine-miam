@@ -1,45 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des Articles{% endblock %}
+{% block title %}Liste des critiques{% endblock %}
         {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('css/tableau.css') }}" type="text/css" />
         {% endblock %}
 
 {% block body %}
-        <h1>{{ titre }}</h1>
+        <h1>{{titre}}</h1>
 
-        <h2><a class="usebtn ajout" href="{{ path('category_add') }}">Ajouter une catégorie </a></h2>
-        <h2><a class="usebtn" href="{{ path('category_recherche') }}">rechercher <ion-icon name="search"></ion-icon> </a></h2>
-
-        <h3>{{total}} catégories</h3>
-
-
-<table>
+        <h3>{{total}} Avis</h3><table>
         <thead>
                 <tr>
-                        <td>nom</td>
-                        <td>étiquette</td>
-                        <td>nombres de plat</td>
-                        <td></td>
+                        <td>auteur</td>
+                        <td>Produit</td>
+                        <td>categorie</td>
+                        <td>note /5</td>
+                        <td>contenu</td>
                 </tr>
         </thead>
         <tbody>
-        {% for category in categories %}
+        {% for critique in critiques  %}
                 <tr>
-                        <td> {{category.nom}}</td>
-                        <td>
-                                <span class="{{ category.nom }}"> {{ category.nom }}</span>
-                        </td>
-                        <td>{{category.produits | length}}</td>
+                        <td> {{ critique.utilisateur.pseudo }}  </td>
+                        <td> {{ critique.produit.nom }}  </td>
                         <td> 
-                                <a href="{{ path('category_update', {id: category.id}) }}" class="btn b1"><ion-icon name="create-outline"></ion-icon></a>
-                                <a href="{{ path('category_delete', {id: category.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')"><ion-icon name="trash-outline"></ion-icon></a>
-                                <a href="{{ path('produit_filtre', {id: category.id}) }}" class="btn b3">+</a>
+                                <span class="{{ critique.produit.category.nom }}"> {{ critique.produit.category.nom }} </span>
+                        </td>
+                        <td> {{ critique.note }} </td>
+                        <td> {{ critique.contenu }}</td>
+                        <td> 
+                                <a href="{{ path('critique_delete', {id: critique.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')"><ion-icon name="trash-outline"></ion-icon></a>
                         </td>
                 </tr>
         {% endfor %}
-
-
         </tbody>
 </table>
 
@@ -83,3 +76,4 @@
 </ul>
 
 {% endblock %}
+
