@@ -30,20 +30,24 @@
                         <td></td>
                         <td>nom</td>
                         <td>nb Avis</td>
-                        <td>note moyenne</td>
-                        <td>prix Vente €</td>
-                        <td>marge brute %</td>
+                        <td>note moy</td>
+                        <td>prix</td>
+                        <td>marge</td>
                         <td>semaine</td>
                         <td></td>
                 </tr>
         </thead>
         <tbody>
-
+        {# on initialise variable pour  classe note #}
+                {% set bonNote = 3.7 %}
+                {% set moyenneNote = 2.5 %}
 
         {% for produit in produits  %}
+        {# on initialise variable pour note moyenne dans la boucle pour éviter que tout les champs  ont la même note #}
                 {% set sommeAvis = 0  %}
                 {% set moyenne = 0  %}
                 {% if produit.critiques | length > 0  %}
+        {# on test si il y a des avis pour faire le calcul car impossible divisé par 0 #}
                         {% for critique in produit.critiques %}
                                 {% set sommeAvis = sommeAvis + critique.note %}
                                 {% set moyenne = sommeAvis / (produit.critiques | length)  %}
@@ -58,11 +62,13 @@
                         <td>{{produit.critiques | length}}</td>
                         <td>
                 {% if produit.critiques | length > 0  %}
-                        <span class=" {{ (moyenne > 3.7) ? 'bonNote' : (moyenne > 2.5) ? 'moyenneNote' : 'mauvaiseNote' }} " > {{ moyenne|round(1) }} </span>
+        {# on test si il y à des avis sinon on affiche rien, on laisse td vide #}
+                        <span class=" {{ (moyenne > bonNote) ? 'bonNote' : (moyenne > moyenneNote ) ? 'moyenneNote' : 'mauvaiseNote' }} " > {{ moyenne|round(1) }} </span>
                 {% endif %}
                         </td>
-                        <td>{{ produit.prixAchat }} </td>
-                        <td>{{ (((produit.prixAchat - produit.prixVente) / produit.prixAchat ) * 100)|round }} </td>
+                        <td>{{ produit.prixAchat }} €</td>
+        {# calcul pourcentage de la différence: PRIX ACHAT est le prix que l'utilisateur achète, PRIX VENTE est le prix que la cantine paie pour faire le produit#}
+                        <td>{{ (((produit.prixAchat - produit.prixVente) / produit.prixAchat ) * 100)|round }} %</td>
                         <td>
                         <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" name="active" id="customSwitch{{ produit.id }}" data-id="{{ produit.id }}" {{ produit.selectionner ? 'checked' : null}}></td>
