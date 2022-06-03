@@ -1,54 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des critiques{% endblock %}
+{% block title %}Liste des critiques de {% endblock %}
         {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('css/tableau.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('css/detail.css') }}" type="text/css" />
         {% endblock %}
 
 {% block body %}
-        <h1>{{titre}}</h1>
+
+        <h1>{{titre}} </h1>
 
         <h3>{{total}} Avis</h3><table>
         <thead>
                 <tr>
                         <td>auteur</td>
-                        <td>categorie</td>
-                        <td>Produit</td>
+                        <td>N° AFPA</td>
+                        <td>status</td>
                         <td>note /5</td>
-                        <td>contenu</td>
+                        <td>date</td>
+                        <td></td>
                 </tr>
         </thead>
-        <tbody>
         {% for critique in critiques  %}
-        
+        <tbody>
                 <tr>
                         <td> 
                                 <a href="{{ path('critique_filtreUser', {id: critique.utilisateur.id}) }}" id="a" > 
-                                        {{ critique.utilisateur.pseudo }}
-                                </a>   
-                        </td>
-                        <td> 
-                                <span class=" avisCategorie {{ critique.produit.category.nom }}">
-                                        {{ critique.produit.category.nom }}
-                                </span>
-                        </td>
-                        <td> 
-                                <a href="{{ path('critique_filtreProduit', {id: critique.produit.id}) }}" id="a"> 
-                                {{ critique.produit.nom }}
+                                        {{ critique.utilisateur.pseudo }} 
                                 </a>
                         </td>
+                        <td>
+                                <a href="{{ path('critique_filtreUser', {id: critique.utilisateur.id}) }}" id="a" > 
+                                        {{ critique.utilisateur.identifiantAfpa }}
+                                </a>
+                        </td>
+                        <td> <span class="{{critique.utilisateur.roles[0]}}" ></span></td>
                         <td>
                                 <span class=" {{ (critique.note > bonneNote) ? 'bonneNote' : (critique.note > moyenneNote) ? 'moyenneNote' : 'mauvaiseNote' }} ">
                                         {{ critique.note }}
                                 </span>
                         </td>
-                        <td> {{ critique.contenu| raw | u.truncate(30)}} ...</td>
+                        <td>  {{ critique.createAt | date }}   </td>
                         <td> 
                                 <a href="{{ path('critique_delete', {id: critique.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')"><ion-icon name="trash-outline"></ion-icon></a>
                         </td>
                 </tr>
-        {% endfor %}
+                <tr class="last">
+                        <td> critique:</td>
+                        <td colspan="5">{{ critique.contenu }}</td>
+                </tr>
+
         </tbody>
+        {% endfor %}
 </table>
 
 {% endblock %}

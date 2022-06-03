@@ -66,7 +66,37 @@ class CritiqueRepository extends ServiceEntityRepository
         return $query->getQuery()->getSingleScalarResult();
     }
 
+    /**
+    * return all critiques per page 
+    * @return void
+    */
+    public function getPaginatedCritiqueFiltre($page, $filtrer, $tableJoint){
+        $query = $this->createQueryBuilder('c');
+        $query->leftJoin($tableJoint , 'u');
+        $query->andWhere('u.id = :id')
+        ->setParameter('id', $filtrer)
+        ->orderBy('c.createAt', 'DESC')
+        ->setFirstResult(($page * $_ENV['LIMIT_PAGINATION_5']) - $_ENV['LIMIT_PAGINATION_5'])
+        ->setMaxResults($_ENV['LIMIT_PAGINATION_5'])
+        ;
+        return $query->getQuery()->getResult();
+    }
 
+    /**
+    * return number of Features
+    * @return void
+    */
+    public function getTotalCritiqueFiltre($filtrer, $tableJoint)
+    {
+        $query = $this->createQueryBuilder('c')
+        ->select('COUNT(c)');      
+        $query->leftJoin($tableJoint, 'u');
+        $query->andWhere('u.id = :id')
+        ->setParameter('id', $filtrer)
+        ;
+        //seulement chiffre décimaux texte, pas tableau getSingleScalarResult
+        return $query->getQuery()->getSingleScalarResult();
+    }
 //    /**
 //     * @return Critique[] Returns an array of Critique objects
 //     */

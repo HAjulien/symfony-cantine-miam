@@ -62,11 +62,17 @@
                                 </td>
                                 <td> <span class=" pastille {{ produit.category.nom }}"></span> </td>
                                 <td> {{ produit.nom }}</td>
-                                <td>{{produit.critiques | length}}</td>
+                                <td>
+                                        <a href="{{ path('critique_filtreProduit', {id: produit.id}) }}" id="a"> 
+                                                {{produit.critiques | length}}
+                                        </a>
+                                </td>
                                 <td>
                         {% if produit.critiques | length > 0  %}
 {# on test si il y à des avis sinon on affiche rien, on laisse td vide BO #}
-                                <span class=" {{ (moyenne > bonneNote) ? 'bonneNote' : (moyenne > moyenneNote ) ? 'moyenneNote' : 'mauvaiseNote' }} " > {{ moyenne|round(1) }} </span>
+                                        <a href="{{ path('critique_filtreProduit', {id: produit.id}) }}" id="a"> 
+                                                <span class=" {{ (moyenne > bonneNote) ? 'bonneNote' : (moyenne > moyenneNote ) ? 'moyenneNote' : 'mauvaiseNote' }} " > {{ moyenne|round(1) }} </span>
+                                        </a>
                         {% endif %}
                                 </td>
                                 <td>{{ produit.prixAchat }} €</td>
