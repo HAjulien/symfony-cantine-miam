@@ -18,18 +18,15 @@ class FeatureController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(FeatureRepository $featureRepository, Request $request): Response
     {
-        $limit= 5;
-
         $page = (int)$request->query->get("page", 1);
 
-        $feature = $featureRepository->getPaginatedfeatures($page, $limit);
+        $feature = $featureRepository->getPaginatedfeatures($page);
 
         $total = $featureRepository->getTotalfeatures();
 
         return $this->render('feature/index.html.twig', [
             'features' => $feature,
             'total' => $total,
-            'limit' => $limit,
             'page' => $page,
             'titre' => 'Liste des Articles de la Page Accueil'
         ]);

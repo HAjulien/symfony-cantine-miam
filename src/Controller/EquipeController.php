@@ -18,18 +18,16 @@ class EquipeController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(EquipeRepository $equipeRepository, Request $request): Response
     {
-        $limit= 5;
 
         $page = (int)$request->query->get("page", 1);
 
-        $equipe = $equipeRepository->getPaginatedEquipe($page, $limit);
+        $equipe = $equipeRepository->getPaginatedEquipe($page);
 
         $total = $equipeRepository->getTotalEquipe();
 
         return $this->render('equipe/index.html.twig', [
             'equipes' => $equipe,
             'total' => $total,
-            'limit' => $limit,
             'page' => $page,
             'titre' => 'Les membres de l\'équipe'
         ]);

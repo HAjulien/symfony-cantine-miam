@@ -21,15 +21,15 @@ class UserController extends AbstractController
     public function index( UserRepository $userRepository, Request $request ): Response
     {
 
-        //on définit le nombre d'éléments par page
-        $limit= 5;
+        // le nombre d'éléments par page est défini par variable env $_ENV['LIMIT_PAGINATION_5']
+
 
         //onrécupére le numéro de page
         $page = (int)$request->query->get("page", 1);
         //dd($page);
 
         //on récupére les users de la page
-        $user = $userRepository->getPaginatedUsers($page, $limit);
+        $user = $userRepository->getPaginatedUsers($page);
         //$user = $userRepository->findAll();
         //dd($user);
 
@@ -41,7 +41,6 @@ class UserController extends AbstractController
         return $this->render('user/index.html.twig', [
             'users' => $user,
             'total' => $total,
-            'limit' => $limit,
             'page' => $page,
             'titre' => 'Liste des Utilisateurs'
         ]);
@@ -50,10 +49,9 @@ class UserController extends AbstractController
     #[Route('/personnel', name: 'personnel')]
     public function personnel( UserRepository $userRepository, Request $request ): Response
     {
-        $limit= 5;
         $page = (int)$request->query->get("page", 1);
         //dd($page);
-        $user = $userRepository->getPaginatedPersonnel($page, $limit);
+        $user = $userRepository->getPaginatedPersonnel($page);
         //dd($user);
 
         $total = $userRepository->getTotalUsersPersonnel();
@@ -62,7 +60,6 @@ class UserController extends AbstractController
         return $this->render('user/index.html.twig', [
             'users' => $user ,
             'total' => $total,
-            'limit' => $limit,
             'page' => $page,
             'titre' => 'Liste des membre du Personnel'
         ]);
@@ -71,10 +68,9 @@ class UserController extends AbstractController
     #[Route('/nonVerifie', name: 'nonVerifie')]
     public function nonVerifie( UserRepository $userRepository, Request $request ): Response
     {
-        $limit= 5;
         $page = (int)$request->query->get("page", 1);
         //dd($page);
-        $user = $userRepository->getPaginatedNonVerifie($page, $limit);
+        $user = $userRepository->getPaginatedNonVerifie($page);
         //dd($user);
 
         $total = $userRepository->getTotalUsersNonVerifie();
@@ -83,7 +79,6 @@ class UserController extends AbstractController
         return $this->render('user/index.html.twig', [
             'users' => $user ,
             'total' => $total,
-            'limit' => $limit,
             'page' => $page,
             'titre' => 'Liste des Utilisateurs Non Vérifiés'
         ]);

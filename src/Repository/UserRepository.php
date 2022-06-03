@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
  * @method User|null findOneBy(array $criteria, array $orderBy = null)
  * @method User[]    findAll()
- * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method User[]    findBy(array $criteria, array $orderBy = null, $_ENV['LIMIT_PAGINATION_5'] = null, $offset = null)
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
@@ -62,12 +62,12 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     * return all users per page 
     * @return void
     */
-    public function getPaginatedUsers($page, $limit){
+    public function getPaginatedUsers($page){
         $query = $this->createQueryBuilder('a')
         //->where('a.isVerified = 1')
         ->orderBy('a.id', 'DESC')
-        ->setFirstResult(($page * $limit) - $limit)
-        ->setMaxResults($limit)
+        ->setFirstResult(($page * $_ENV['LIMIT_PAGINATION_5']) - $_ENV['LIMIT_PAGINATION_5'])
+        ->setMaxResults($_ENV['LIMIT_PAGINATION_5'])
         ;
         return $query->getQuery()->getResult();
     }
@@ -91,11 +91,11 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     * return all users non verifie per page 
     * @return void
     */
-    public function getPaginatedNonVerifie($page, $limit){
+    public function getPaginatedNonVerifie($page){
         $query = $this->createQueryBuilder('a')
         ->where('a.isVerified != 1')
-        ->setFirstResult(($page * $limit) - $limit)
-        ->setMaxResults($limit)
+        ->setFirstResult(($page * $_ENV['LIMIT_PAGINATION_5']) - $_ENV['LIMIT_PAGINATION_5'])
+        ->setMaxResults($_ENV['LIMIT_PAGINATION_5'])
         ;
         return $query->getQuery()->getResult();
     }
@@ -118,15 +118,15 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     * return all personnel per page 
     * @return void
     */
-    public function getPaginatedPersonnel($page, $limit){
+    public function getPaginatedPersonnel($page){
         $query = $this->createQueryBuilder('a')
         ->where('a.roles LIKE :role ')
         ->orWhere('a.roles LIKE :role2 ')
         ->setParameter('role', '%"'.'ROLE_PERSONNEL'.'"%')
         ->setParameter('role2', '%"'.'ROLE_ADMIN'.'"%')
         ->orderBy('a.roles', 'DESC')
-        ->setFirstResult(($page * $limit) - $limit)
-        ->setMaxResults($limit)
+        ->setFirstResult(($page * $_ENV['LIMIT_PAGINATION_5']) - $_ENV['LIMIT_PAGINATION_5'])
+        ->setMaxResults($_ENV['LIMIT_PAGINATION_5'])
         ;
         return $query->getQuery()->getResult();
     }

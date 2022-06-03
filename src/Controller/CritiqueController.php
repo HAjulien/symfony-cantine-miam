@@ -16,18 +16,16 @@ class CritiqueController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(CritiqueRepository $critiqueRepository, Request $request): Response
     {
-        $limit= 5;
 
         $page = (int)$request->query->get("page", 1);
 
-        $critique = $critiqueRepository->getPaginatedCritique($page, $limit);
+        $critique = $critiqueRepository->getPaginatedCritique($page);
 
         $total = $critiqueRepository->getTotalCritique();
 
         return $this->render('critique/index.html.twig', [
             'critiques' => $critique,
             'total' => $total,
-            'limit' => $limit,
             'page' => $page,
             'titre' => 'Liste des avis'
         ]);

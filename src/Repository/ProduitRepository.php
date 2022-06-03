@@ -45,11 +45,11 @@ class ProduitRepository extends ServiceEntityRepository
     * return all product per page 
     * @return void
     */
-    public function getPaginatedProduit($page, $limit){
+    public function getPaginatedProduit($page){
         $query = $this->createQueryBuilder('p')
         ->orderBy('p.createAt', 'DESC')
-        ->setFirstResult(($page * $limit) - $limit)
-        ->setMaxResults($limit)
+        ->setFirstResult(($page * $_ENV['LIMIT_PAGINATION_5']) - $_ENV['LIMIT_PAGINATION_5'])
+        ->setMaxResults($_ENV['LIMIT_PAGINATION_5'])
         ;
         return $query->getQuery()->getResult();
     }
@@ -68,15 +68,15 @@ class ProduitRepository extends ServiceEntityRepository
     }
 
     /**
-    * return all product per page 
+    * return all product of week per page 
     * @return void
     */
-    public function getPaginatedProduitsSemaine($page, $limit){
+    public function getPaginatedProduitsSemaine($page){
         $query = $this->createQueryBuilder('p')
         ->where('p.selectionner = 1')
         ->orderBy('p.category', 'ASC')
-        ->setFirstResult(($page * $limit) - $limit)
-        ->setMaxResults($limit)
+        ->setFirstResult(($page * $_ENV['LIMIT_PAGINATION_5']) - $_ENV['LIMIT_PAGINATION_5'])
+        ->setMaxResults($_ENV['LIMIT_PAGINATION_5'])
         ;
         return $query->getQuery()->getResult();
     }
@@ -121,14 +121,14 @@ class ProduitRepository extends ServiceEntityRepository
     * return all product filter per category per page 
     * @return void
     */
-    public function getPaginatedProduitFiltre($page, $limit, $categorieFiltrer){
+    public function getPaginatedProduitFiltre($page, $categorieFiltrer){
         $query = $this->createQueryBuilder('p');
         $query->leftJoin('p.category', 'c');
         $query->andWhere('c.id = :id')
         ->setParameter('id',  $categorieFiltrer)
         ->orderBy('p.createAt', 'DESC')
-        ->setFirstResult(($page * $limit) - $limit)
-        ->setMaxResults($limit)
+        ->setFirstResult(($page * $_ENV['LIMIT_PAGINATION_5']) - $_ENV['LIMIT_PAGINATION_5'])
+        ->setMaxResults($_ENV['LIMIT_PAGINATION_5'])
         ;
         return $query->getQuery()->getResult();
     }

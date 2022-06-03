@@ -43,12 +43,12 @@ class EquipeRepository extends ServiceEntityRepository
     * return all employé par page 
     * @return void
     */
-    public function getPaginatedEquipe($page, $limit){
+    public function getPaginatedEquipe($page){
         $query = $this->createQueryBuilder('e')
         //->where('a.isVerified = 1')
         ->orderBy('e.createAt', 'DESC')
-        ->setFirstResult(($page * $limit) - $limit)
-        ->setMaxResults($limit)
+        ->setFirstResult(($page * $_ENV['LIMIT_PAGINATION_5']) - $_ENV['LIMIT_PAGINATION_5'])
+        ->setMaxResults($_ENV['LIMIT_PAGINATION_5'])
         ;
         return $query->getQuery()->getResult();
     }

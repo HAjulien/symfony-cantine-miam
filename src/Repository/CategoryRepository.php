@@ -44,11 +44,11 @@ class CategoryRepository extends ServiceEntityRepository
     * return all category par page 
     * @return void
     */
-    public function getPaginatedCategory($page, $limit){
+    public function getPaginatedCategory($page){
         $query = $this->createQueryBuilder('c')
         ->orderBy('c.nom', 'ASC')
-        ->setFirstResult(($page * $limit) - $limit)
-        ->setMaxResults($limit)
+        ->setFirstResult(($page * $_ENV['LIMIT_PAGINATION_5']) - $_ENV['LIMIT_PAGINATION_5'])
+        ->setMaxResults($_ENV['LIMIT_PAGINATION_5'])
         ;
         return $query->getQuery()->getResult();
     }

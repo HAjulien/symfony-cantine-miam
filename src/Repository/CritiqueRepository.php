@@ -12,7 +12,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Critique|null find($id, $lockMode = null, $lockVersion = null)
  * @method Critique|null findOneBy(array $criteria, array $orderBy = null)
  * @method Critique[]    findAll()
- * @method Critique[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Critique[]    findBy(array $criteria, array $orderBy = null, $_ENV['LIMIT_PAGINATION_5'] = null, $offset = null)
  */
 class CritiqueRepository extends ServiceEntityRepository
 {
@@ -43,12 +43,12 @@ class CritiqueRepository extends ServiceEntityRepository
     * return all critiques per page 
     * @return void
     */
-    public function getPaginatedCritique($page, $limit){
+    public function getPaginatedCritique($page){
         $query = $this->createQueryBuilder('c')
         //->where('a.isVerified = 1')
         ->orderBy('c.createAt', 'DESC')
-        ->setFirstResult(($page * $limit) - $limit)
-        ->setMaxResults($limit)
+        ->setFirstResult(($page * $_ENV['LIMIT_PAGINATION_5']) - $_ENV['LIMIT_PAGINATION_5'])
+        ->setMaxResults($_ENV['LIMIT_PAGINATION_5'])
         ;
         return $query->getQuery()->getResult();
     }

@@ -43,11 +43,11 @@ class FeatureRepository extends ServiceEntityRepository
     * return all Features per page 
     * @return void
     */
-    public function getPaginatedFeatures($page, $limit){
+    public function getPaginatedFeatures($page){
         $query = $this->createQueryBuilder('f')
         ->orderBy('f.createAt', 'DESC')
-        ->setFirstResult(($page * $limit) - $limit)
-        ->setMaxResults($limit)
+        ->setFirstResult(($page * $_ENV['LIMIT_PAGINATION_5']) - $_ENV['LIMIT_PAGINATION_5'])
+        ->setMaxResults($_ENV['LIMIT_PAGINATION_5'])
         ;
         return $query->getQuery()->getResult();
     }

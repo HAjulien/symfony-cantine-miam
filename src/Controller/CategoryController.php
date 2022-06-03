@@ -18,11 +18,9 @@ class CategoryController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(CategoryRepository $categoryRepository, Request $request): Response
     {
-        $limit= 5;
-
         $page = (int)$request->query->get("page", 1);
 
-        $category = $categoryRepository->getPaginatedCategory($page, $limit);
+        $category = $categoryRepository->getPaginatedCategory($page);
 
 
         $total = $categoryRepository->getTotalCategory();
@@ -30,7 +28,6 @@ class CategoryController extends AbstractController
         return $this->render('category/index.html.twig', [
             'categories' => $category,
             'total' => $total,
-            'limit' => $limit,
             'page' => $page,
             'titre' => 'Les catégories'
         ]);

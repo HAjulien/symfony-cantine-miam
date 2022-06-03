@@ -17,18 +17,16 @@ class ImageCarouselController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(ImageCarouselRepository $imageCarouselRepository, Request $request): Response
     {
-        $limit= 5;
 
         $page = (int)$request->query->get("page", 1);
 
-        $image = $imageCarouselRepository->getPaginatedImage($page, $limit);
+        $image = $imageCarouselRepository->getPaginatedImage($page);
 
         $total = $imageCarouselRepository->getTotalImage();
 
         return $this->render('imageCarousel/index.html.twig', [
             'images' => $image,
             'total' => $total,
-            'limit' => $limit,
             'page' => $page,
             'titre' => 'Liste des images dans le carousel'
         ]);

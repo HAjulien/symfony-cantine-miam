@@ -43,12 +43,12 @@ class ImageCarouselRepository extends ServiceEntityRepository
     * return all image per page 
     * @return void
     */
-    public function getPaginatedImage($page, $limit){
+    public function getPaginatedImage($page){
         $query = $this->createQueryBuilder('i')
         //->where('a.isVerified = 1')
         ->orderBy('i.id', 'DESC')
-        ->setFirstResult(($page * $limit) - $limit)
-        ->setMaxResults($limit)
+        ->setFirstResult(($page * $_ENV['LIMIT_PAGINATION_5']) - $_ENV['LIMIT_PAGINATION_5'])
+        ->setMaxResults($_ENV['LIMIT_PAGINATION_5'])
         ;
         return $query->getQuery()->getResult();
     }

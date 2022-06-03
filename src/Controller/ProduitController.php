@@ -20,10 +20,9 @@ class ProduitController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(ProduitRepository $ProduitRepository, CategoryRepository $categoryRepository, Request $request): Response
     {
-        $limit= 5;
         $page = (int)$request->query->get("page", 1);
 
-        $produit = $ProduitRepository->getPaginatedProduit($page, $limit);
+        $produit = $ProduitRepository->getPaginatedProduit($page);
         $category = $categoryRepository->findAll();
         $total = $ProduitRepository->getTotalProduit();
 
@@ -31,7 +30,6 @@ class ProduitController extends AbstractController
             'categories' => $category,
             'produits' => $produit,
             'total' => $total,
-            'limit' => $limit,
             'page' => $page,
             'titre' => 'Les produits'
         ]);
@@ -41,9 +39,8 @@ class ProduitController extends AbstractController
     #[Route('/semaine', name: 'semaine')]
     public function produitsSemaine(ProduitRepository $ProduitRepository, CategoryRepository $categoryRepository, Request $request ): Response
     {
-        $limit= 5;
         $page = (int)$request->query->get("page", 1);
-        $produit = $ProduitRepository->getPaginatedProduitsSemaine($page, $limit);
+        $produit = $ProduitRepository->getPaginatedProduitsSemaine($page);
         $category = $categoryRepository->findAll();
         $total = $ProduitRepository->getTotalProduitsSemaine();
 
@@ -51,7 +48,6 @@ class ProduitController extends AbstractController
             'categories' => $category,
             'produits' => $produit ,
             'total' => $total,
-            'limit' => $limit,
             'page' => $page,
             'titre' => 'Liste des Produits de la semaine'
         ]);
@@ -105,11 +101,10 @@ class ProduitController extends AbstractController
     #[Route('/fitre/{id}', name: 'filtre')]
     public function filtre( ProduitRepository $ProduitRepository,CategoryRepository $categoryRepository ,Category $category, Request $request, ): Response
     {
-        $limit= 2;
         $categorieFiltrer =$category;
         $page = (int)$request->query->get("page", 1);
         $category = $categoryRepository->findAll();
-        $produit = $ProduitRepository->getPaginatedProduitFiltre($page, $limit, $categorieFiltrer);
+        $produit = $ProduitRepository->getPaginatedProduitFiltre($page, $categorieFiltrer);
         $total = $ProduitRepository->getTotalProduitFiltre($categorieFiltrer);
 
         return $this->render('produit/index.html.twig', [
@@ -117,7 +112,6 @@ class ProduitController extends AbstractController
             'categorieFiltrer' => $categorieFiltrer,
             'produits' => $produit,
             'total' => $total,
-            'limit' => $limit,
             'page' => $page,
             'titre' => 'Les produits filtrés'
         ]);
