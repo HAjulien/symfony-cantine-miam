@@ -97,11 +97,11 @@ tbody tr:hover{
 table tr:last-child{
     border-bottom: none;
 }
-.bonNote, .moyenneNote, .mauvaiseNote{
+.bonneNote, .moyenneNote, .mauvaiseNote{
     font-size: 21px;
     font-weight: 600;
 }
-.bonNote{
+.bonneNote{
     color: #5DA221;
 }
 .moyenneNote{

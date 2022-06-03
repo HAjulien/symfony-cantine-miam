@@ -28,7 +28,7 @@
                         </td>
                         <td> {{ critique.produit.nom }}  </td>
                         <td>
-                                <span class=" {{ (critique.note > 3.7) ? 'bonNote' : (critique.note > 2.5) ? 'moyenneNote' : 'mauvaiseNote' }} ">{{ critique.note }} </span>
+                                <span class=" {{ (critique.note > bonneNote) ? 'bonneNote' : (critique.note > moyenneNote) ? 'moyenneNote' : 'mauvaiseNote' }} ">{{ critique.note }} </span>
                         </td>
                         <td> {{ critique.contenu }}</td>
                         <td> 
@@ -38,53 +38,5 @@
         {% endfor %}
         </tbody>
 </table>
-
-<ul class="pagination">
-{% set pages = (total / limit)|round(0,'ceil') %}
-{# pour eviter probleme que page = 0 #}
-        {% if pages > 0 %}
-        {# fleche pour revenir page 1 #}
-                <li class=" {{ (page == 1) ? 'disable' : '' }} ">
-                        <a href="?page=1" id="a">
-                                <ion-icon name="play-back-outline"></ion-icon>
-                        </a>
-                </li>
-        {# fleche pour revenir en arriere #}
-                <li class=" {{ (page == 1) ? 'disable' : '' }} ">
-                        <a href="{{ (page > 1) ? '?page=' ~ (page -1) : '' }}" id="a">
-                                <ion-icon name="arrow-back-outline"></ion-icon>
-                        </a>
-                </li>
-
-        {# calcul total user / limit user par page que l'on arrondi au superieur avec ceil on enferme variable pages grâce set #}
-                {% for item in 1..pages %}
-                        <li class=" {{ (page == item) ? 'active' : '' }} ">
-                                <a href="?page={{ item }}" id="a"> {{ item }} </a>
-                        </li>
-                {% endfor %}
-
-        {# fleche pour aller vers suivant #}
-                <li class=" {{ (page == pages) ? 'disable' : '' }} ">
-                        <a href="{{ (page < pages) ? '?page=' ~ (page +1) : '' }}" id="a">
-                                <ion-icon name="arrow-forward-outline"></ion-icon>
-                        </a>
-                </li>
-
-        {# fleche pour derniere page  #}
-                <li class=" {{ (page == pages) ? 'disable' : '' }} ">
-                        <a href="?page= {{ pages }}" id="a">
-                                <ion-icon name="play-forward-outline"></ion-icon>
-                        </a>
-                </li>
-        {% else %}
-        {# quand il n'y a aucun resultat #}
-                <li class="active" >
-                        <a href="" id="a">
-                                1
-                        </a>
-                </li>
-
-        {% endif %}
-</ul>
 
 {% endblock %}

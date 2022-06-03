@@ -3,6 +3,8 @@ twig:
     form_themes: ['bootstrap_5_layout.html.twig']
     globals:
         limit: '%env(LIMIT_PAGINATION_5)%'
+        bonneNote: 3.7
+        moyenneNote: 2.4
 
 when@test:
     twig:
