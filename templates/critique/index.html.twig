@@ -8,6 +8,16 @@
 {% block body %}
         <h1>{{titre}}</h1>
 
+        <p>
+                {% for category in categories  %}
+                        {% if category is defined and category is not null and categorieFiltrer is defined %}
+                                        <span><a class="butonCategorie {{ (categorieFiltrer == category) ? category.nom : '' }}" href="{{ path('produit_filtre', {id: category.id}) }}">{{category.nom}} </a></span>
+                        {% else %}
+                                <span><a class="butonCategorie {{category.nom}} " href="{{ path('critique_filtreCategory', {id: category.id}) }} ">{{category.nom}} </a></span>
+                        {% endif %}
+                {% endfor %}
+        </p>        
+
         <h3>{{total}} Avis</h3><table>
         <thead>
                 <tr>
@@ -48,12 +58,12 @@
                         </td>
                 <tr class="last">
                         <td> critique:</td>
-                        <td colspan="5"> 
+                        <td colspan="5">      
+
                                 {{ critique.contenu| raw | u.truncate(maxlength)}}
 
                                 {% if critique.contenu | length > maxlength %}
                                 ...
-
                                 <a href="{{ path('critique_apercu', {id: critique.id}) }}" class="btn b3 more">
                                                 voir plus
                                 </a>

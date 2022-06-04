@@ -5,7 +5,8 @@ twig:
         limit: '%env(LIMIT_PAGINATION_5)%'
         bonneNote: 3.7
         moyenneNote: 2.4
-        maxlength: 400
+        maxlength: 500
+        maxlength2: 1500
 
 when@test:
     twig:

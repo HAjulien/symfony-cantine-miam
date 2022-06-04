@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Produit;
+use App\Entity\Category;
 use App\Entity\Critique;
+use App\Repository\CategoryRepository;
 use App\Repository\CritiqueRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,22 +18,50 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CritiqueController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(CritiqueRepository $critiqueRepository, Request $request): Response
+    public function index(CritiqueRepository $critiqueRepository,CategoryRepository $categoryRepository, Request $request): Response
     {
 
         $page = (int)$request->query->get("page", 1);
+
+        $category = $categoryRepository->findAll();
 
         $critique = $critiqueRepository->getPaginatedCritique($page);
 
         $total = $critiqueRepository->getTotalCritique();
 
         return $this->render('critique/index.html.twig', [
+            'categories' => $category,
             'critiques' => $critique,
             'total' => $total,
             'page' => $page,
             'titre' => 'Liste des avis'
         ]);
     }
+
+
+    #[Route('/filtreCategory/{id}', name: 'filtreCategory')]
+    public function filtreCategory( CritiqueRepository $critiqueRepository,CategoryRepository $categoryRepository, Category $category,  Request $request): Response
+    {
+        $categorieFiltrer = $category;
+        $category = $categoryRepository->findAll();
+        $filtrer =$categorieFiltrer;
+        $tableJoint = 'c.produit';
+
+        $page = (int)$request->query->get("page", 1);
+
+        $critique = $critiqueRepository->getPaginatedCritiqueFiltre($page, $filtrer, $tableJoint);
+
+        $total = $critiqueRepository->getTotalCritiqueFiltre($filtrer, $tableJoint);
+
+        return $this->render('critique/index.html.twig', [
+            'categories' => $category,
+            'critiques' => $critique,
+            'total' => $total,
+            'page' => $page,
+            'titre' => 'Liste des avis de : ' . $categorieFiltrer->getNom(),
+        ]);
+    }
+
 
     #[Route('/filtreUser/{id}', name: 'filtreUser')]
     public function filtreUserID( CritiqueRepository $critiqueRepository, User $user,  Request $request): Response

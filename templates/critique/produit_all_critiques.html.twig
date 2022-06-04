@@ -63,7 +63,15 @@
                 </tr>
                 <tr class="last">
                         <td> critique:</td>
-                        <td colspan="5">{{ critique.contenu }}</td>
+                        <td colspan="5">
+                                {{ critique.contenu | raw | u.truncate(maxlength2) }}
+                                {% if critique.contenu | length > maxlength2 %}
+                                ...
+                                <a href="{{ path('critique_apercu', {id: critique.id}) }}" class="btn b3 more">
+                                                voir plus
+                                </a>
+                                {% endif %}
+                        </td>
                 </tr>
 
         </tbody>
