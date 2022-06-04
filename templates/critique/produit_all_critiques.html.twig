@@ -8,6 +8,23 @@
 {% block body %}
 
         <h1>{{titre}} </h1>
+                {% set sommeAvis = 0 %}
+                {% set moyenne = 0 %}
+        {% if critiques | length > 0 %}
+                {% for critique in critiques %}
+                        {% set sommeAvis = sommeAvis +  critique.note  %}
+                {% endfor %}
+                {% set moyenne = (sommeAvis / critiques | length)|round(1)   %}
+
+                <h4 class="{{ (moyenne > bonneNote) ? 'bonneNote' : (moyenne > moyenneNote) ? 'moyenneNote' : 'mauvaiseNote' }} titre ">
+                        {{ moyenne }}
+                </h4>
+        {% endif %}
+
+        <h2><a class="usebtn retour" href="{{ app.request.headers.get('referer')}}">retour</a></h2>
+        <h2><a class="usebtn ajout" href="{{ path('critique_index') }}">aller aux avis</a></h2>
+        <h2><a class="usebtn ajout" href="{{ path('produit_index') }}">aller aux produits</a></h2>
+        <h2><a class="usebtn ajout" href="{{ path('user_index') }}">aller aux utilisateurs</a></h2>
 
         <h3>{{total}} Avis</h3><table>
         <thead>
@@ -24,8 +41,8 @@
         <tbody>
                 <tr>
                         <td> 
-                                <a href="{{ path('critique_filtreUser', {id: critique.utilisateur.id}) }}" id="a" > 
-                                        {{ critique.utilisateur.pseudo }} 
+                                <a href="{{ path('critique_filtreUser', {id: critique.utilisateur.id}) }}" id="a" class="paddingLeft10" > 
+                                        {{ critique.utilisateur.pseudo }}(+)
                                 </a>
                         </td>
                         <td>
@@ -39,7 +56,7 @@
                                         {{ critique.note }}
                                 </span>
                         </td>
-                        <td>  {{ critique.createAt | date }}   </td>
+                        <td>  {{ critique.createAt | date(" h:i d/m/Y") }}   </td>
                         <td> 
                                 <a href="{{ path('critique_delete', {id: critique.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')"><ion-icon name="trash-outline"></ion-icon></a>
                         </td>

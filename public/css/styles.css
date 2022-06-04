@@ -7,6 +7,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Unbuntu', sans-serif;
+    text-decoration: none;
 }
 
 :root{
@@ -14,6 +15,7 @@
     --brown: #7A6563;
     --green: #b0f2b6;
     --green2: #0d5a13;
+    --green3: #19d28f;
     --blue: #009FB7;
     --blue2: #375ad9;
     --white: #f8f8f8;
@@ -205,6 +207,9 @@ body{
     transition: 0.3s;
 }
 
+.white{
+    color: var(--white);
+}
 @media (max-width: 1000px){
     .navigation{
         left: -300px;

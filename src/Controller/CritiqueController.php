@@ -67,7 +67,7 @@ class CritiqueController extends AbstractController
 
         $total = $critiqueRepository->getTotalCritiqueFiltre($filtrer, $tableJoint);
 
-        return $this->render('critique/plat_all_critiques.html.twig', [
+        return $this->render('critique/produit_all_critiques.html.twig', [
             'critiques' => $critique,
             'total' => $total,
             'page' => $page,
@@ -75,6 +75,16 @@ class CritiqueController extends AbstractController
         ]);
     }
 
+    #[Route("/apercu/{id}", name:"apercu")]
+    public function apercu(Critique $critique, ): Response
+    {
+
+        return $this->render('critique/apercu.html.twig', [
+            'title' => 'aperçu critique',
+            'critique' => $critique
+
+        ]);
+    }
     #[Route("/delete/{id}", name: "delete")]
     public function delete(Critique $critique, ManagerRegistry $doctrine): Response
     {

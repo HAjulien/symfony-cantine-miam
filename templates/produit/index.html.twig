@@ -21,7 +21,7 @@
                         {% if category is defined and category is not null and categorieFiltrer is defined %}
                                         <span><a class="butonCategorie {{ (categorieFiltrer == category) ? category.nom : '' }}" href="{{ path('produit_filtre', {id: category.id}) }}">{{category.nom}} </a></span>
                         {% else %}
-                                <span><a class="butonCategorie {{category.nom}} " href="{{ path('produit_filtre', {id: category.id}) }}">{{category.nom}} </a></span>
+                                <span><a class="butonCategorie {{category.nom}} " href="{{ path('produit_filtre', {id: category.id}) }} ">{{category.nom}} </a></span>
                         {% endif %}
                 {% endfor %}
         </p>
@@ -60,12 +60,18 @@
                                 <td>
                                         <div><img src="{{ produit.image }}" alt="{{ produit.altImage }}" class="img" ></div>
                                 </td>
-                                <td> <span class=" pastille {{ produit.category.nom }}"></span> </td>
+                                <td> 
+                                        <a href="{{ path('produit_filtre', {id: produit.category.id}) }}">                        
+                                                <span class=" pastille {{ produit.category.nom }}"></span> 
+                                        </a>
+                                </td>
                                 <td> {{ produit.nom }}</td>
                                 <td>
+                        {% if produit.critiques | length > 0  %}
                                         <a href="{{ path('critique_filtreProduit', {id: produit.id}) }}" id="a"> 
                                                 {{produit.critiques | length}}
                                         </a>
+                        {% endif %}
                                 </td>
                                 <td>
                         {% if produit.critiques | length > 0  %}
@@ -83,9 +89,9 @@
                                 <input class="form-check-input" type="checkbox" name="active" id="customSwitch{{ produit.id }}" data-id="{{ produit.id }}" {{ produit.selectionner ? 'checked' : null}}></td>
                                 </div>
                                 <td> 
+                                        <a href="{{ path('produit_apercu', {id: produit.id}) }}" class="btn b3">+</a>
                                         <a href="{{ path('produit_update', {id: produit.id}) }}" class="btn b1"><ion-icon name="create-outline"></ion-icon></a>
                                         <a href="{{ path('produit_delete', {id: produit.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')"><ion-icon name="trash-outline"></ion-icon></a>
-                                        <a href="{{ path('produit_apercu', {id: produit.id}) }}" class="btn b3">+</a>
                                 </td> 
                         </tr>
                 {% endfor %}

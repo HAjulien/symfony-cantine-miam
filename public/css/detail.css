@@ -21,7 +21,14 @@ h2 .usebtn{
     border-radius: 8px;
     transition: 0.2s;
 }
+h2 .usebtn .produit{
+    background-color: var(--green2);
+}
 
+h4.titre{
+    text-align: center;
+    font-size: 3rem;
+}
 .usebtn:hover{
     transform: scale(.9);
     color: var(--white);
@@ -164,6 +171,17 @@ thead tr{
     background-color: var(--blue);
 }
 
+.more{
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    width: 80px;
+    font-size: 15px;
+    margin: auto;
+    margin-top: 10px;
+    color: var(--white);
+}
+
 .b1:hover, .b2:hover, .b3:hover, .b4:hover{
     color: var(--black);
     border: 2px solid #000;
@@ -212,8 +230,7 @@ thead tr{
     color: var(--white);
 }
 .entrée{
-    color: var(--black);
-    background-color: var(--green);
+    background-color: var(--green3);
 }
 .boisson{
     background-color: var(--yellow);
@@ -231,5 +248,8 @@ thead tr{
     background-color: var(--green2);
 }
 
+.paddingLeft10{
+    padding-left: 10px;
+}
 
 

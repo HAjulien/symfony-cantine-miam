@@ -9,6 +9,11 @@
 
         <h1>{{titre}} </h1>
 
+        <h2><a class="usebtn retour" href="{{ app.request.headers.get('referer')}}">retour</a></h2>
+        <h2><a class="usebtn ajout" href="{{ path('critique_index') }}">aller aux avis</a></h2>
+        <h2><a class="usebtn ajout" href="{{ path('produit_index') }}">aller aux produits</a></h2>
+        <h2><a class="usebtn ajout" href="{{ path('user_index') }}">aller aux utilisateurs</a></h2>
+
         <h3>{{total}} Avis</h3><table>
         <thead>
                 <tr>
@@ -24,14 +29,16 @@
         <tbody>
                 <tr>
                         <td> 
-                                <span class=" avisCategorie {{ critique.produit.category.nom }}">
-                                        {{ critique.produit.category.nom }}
+                                <span class=" avisCategorie {{ critique.produit.category.nom }} paddingLeft10">
+                                        <a href="{{ path('produit_filtre', {id: critique.produit.category.id}) }}" class="white " >                                 
+                                                {{ critique.produit.category.nom }}
+                                        </a>
                                 </span>
                         </td>
-                        <td><div><img src="{{critique.produit.image}}" alt="{{ critique.produit.image }}" class="img" ></div></td>
+                        <td><div><img src="{{critique.produit.image}}" alt="{{ critique.produit.altImage }}" class="img" ></div></td>
                         <td> 
                                 <a href="{{ path('critique_filtreProduit', {id: critique.produit.id}) }}" id="a"> 
-                                {{ critique.produit.nom }}
+                                {{ critique.produit.nom }}  (+)
                                 </a>
                         </td>
                         <td>
@@ -39,7 +46,7 @@
                                         {{ critique.note }}
                                 </span>
                         </td>
-                        <td>  {{ critique.createAt | date }}   </td>
+                        <td>  {{ critique.createAt | date("h:i d/m/Y") }}   </td>
                         <td> 
                                 <a href="{{ path('critique_delete', {id: critique.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')"><ion-icon name="trash-outline"></ion-icon></a>
                         </td>

@@ -139,7 +139,7 @@ input[type="checkbox"]:before{
 }
 
 input[type="checkbox"]:checked{
-    background-color: #19d28f;
+    background-color: var(--green3);
     transition: 0.3s;
 }
 
@@ -294,8 +294,7 @@ input[type="checkbox"]:checked:before{
     color: var(--white);
 }
 .entrée{
-    color: var(--black);
-    background-color: var(--green);
+    background-color: var(--green3);
 }
 .boisson{
     background-color: var(--yellow);

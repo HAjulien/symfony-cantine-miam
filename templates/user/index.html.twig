@@ -35,11 +35,12 @@
                         <td>{{user.pseudo}}</td>
                         <td>{{user.identifiantAfpa}}</td>
                         <td> <span class="{{user.roles[0]}}" ></span></td>
-                        <td> <a href="mailto:{{user.email}}">{{user.email}}</a></td>
+                        <td> <a href="mailto:{{user.email}}" id="a">{{user.email}}</a></td>
                         <td> {{user.telephone}}</td>
                         <td> {{user.pointFidelite}}</td>
                         <td><span class=" {{ (user.isVerified == 1) ? 'valide' : 'invalide' }}" > {{user.isVerified}}</span></td>
                         <td> 
+                                <a href="{{ path('critique_filtreUser', {id: user.id}) }}" class="btn b3"><ion-icon name="chatbox-ellipses-outline"></ion-icon></a>
                                 <a href="{{ path('user_update', {id: user.id}) }}" class="btn b1"><ion-icon name="create-outline"></ion-icon></a>
                                 <a href="{{ path('user_delete', {id: user.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')"><ion-icon name="trash-outline"></ion-icon></a>
                         </td>

@@ -38,9 +38,9 @@
                         </td>
                         <td>{{category.produits | length}}</td>
                         <td> 
+                                <a href="{{ path('produit_filtre', {id: category.id}) }}" class="btn b3">+</a>
                                 <a href="{{ path('category_update', {id: category.id}) }}" class="btn b1"><ion-icon name="create-outline"></ion-icon></a>
                                 <a href="{{ path('category_delete', {id: category.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')"><ion-icon name="trash-outline"></ion-icon></a>
-                                <a href="{{ path('produit_filtre', {id: category.id}) }}" class="btn b3">+</a>
                         </td>
                 </tr>
         {% endfor %}

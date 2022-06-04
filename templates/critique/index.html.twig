@@ -2,7 +2,7 @@
 
 {% block title %}Liste des critiques{% endblock %}
         {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('css/tableau.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('css/detail.css') }}" type="text/css" />
         {% endblock %}
 
 {% block body %}
@@ -15,7 +15,7 @@
                         <td>categorie</td>
                         <td>Produit</td>
                         <td>note /5</td>
-                        <td>contenu</td>
+                        <td>date</td>
                 </tr>
         </thead>
         <tbody>
@@ -23,8 +23,8 @@
         
                 <tr>
                         <td> 
-                                <a href="{{ path('critique_filtreUser', {id: critique.utilisateur.id}) }}" id="a" > 
-                                        {{ critique.utilisateur.pseudo }}
+                                <a href="{{ path('critique_filtreUser', {id: critique.utilisateur.id}) }}" id="a" class="paddingLeft10" > 
+                                        {{ critique.utilisateur.pseudo }}(+)
                                 </a>   
                         </td>
                         <td> 
@@ -34,7 +34,7 @@
                         </td>
                         <td> 
                                 <a href="{{ path('critique_filtreProduit', {id: critique.produit.id}) }}" id="a"> 
-                                {{ critique.produit.nom }}
+                                {{ critique.produit.nom }} (+)
                                 </a>
                         </td>
                         <td>
@@ -42,10 +42,24 @@
                                         {{ critique.note }}
                                 </span>
                         </td>
-                        <td> {{ critique.contenu| raw | u.truncate(30)}} ...</td>
+                        <td>  {{ critique.createAt | date("h:i d/m/Y") }}   </td>
                         <td> 
                                 <a href="{{ path('critique_delete', {id: critique.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')"><ion-icon name="trash-outline"></ion-icon></a>
                         </td>
+                <tr class="last">
+                        <td> critique:</td>
+                        <td colspan="5"> 
+                                {{ critique.contenu| raw | u.truncate(maxlength)}}
+
+                                {% if critique.contenu | length > maxlength %}
+                                ...
+
+                                <a href="{{ path('critique_apercu', {id: critique.id}) }}" class="btn b3 more">
+                                                voir plus
+                                </a>
+                                {% endif %}
+                        </td>
+                </tr>
                 </tr>
         {% endfor %}
         </tbody>

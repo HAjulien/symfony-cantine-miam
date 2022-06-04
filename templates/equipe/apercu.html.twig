@@ -8,7 +8,7 @@
 
 {% block body %}
         <h1>{{ title }}</h1>
-        <h2><a class="usebtn retour" href="{{ path('equipe_index') }}">retour Liste des articles</a></h2>
+        <h2><a class="usebtn retour" href="{{ app.request.headers.get('referer') }}">retour </a></h2>
 
         <div class="apercu">
                 <h3>{{equipe.nom}}  {{ equipe.prenom }} </h3>
