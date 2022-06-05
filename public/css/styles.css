@@ -31,7 +31,7 @@
     background-color: var(--pink);
 }
 body{
-    min-height: 100vh;
+    min-height: 110vh;
     overflow-x: hidden;
     background-color: var(--white)
 }
@@ -185,6 +185,31 @@ body{
     object-fit: cover;
 }
 
+.img{
+    margin-top: 5px;
+    padding: 2px;
+    max-height: 80px;
+    border-radius: 8px;
+}
+table{
+    width: 95%;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+    border-collapse: collapse;
+}
+thead tr{
+    font-weight: 700;
+    background-color: rgba(0,0,0,0.04);
+    border-bottom: 1.5px solid rgba(0,0,0,1);
+}
+tr{
+    height: 70px;
+    font-size: 18px;
+    text-align: center;
+}
 /* les messages flash */
 .messageFlash{
     position: fixed;

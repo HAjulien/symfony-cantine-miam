@@ -101,7 +101,9 @@ class CritiqueController extends AbstractController
             'critiques' => $critique,
             'total' => $total,
             'page' => $page,
-            'titre' => 'Avis pour ' . $produit->getNom()
+            'titre' => 'Avis pour ' . $produit->getNom(),
+            'image' =>$produit->getImage(),
+            'imageAlt' =>$produit->getAltImage(),
         ]);
     }
 

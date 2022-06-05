@@ -99,7 +99,7 @@ class ProduitController extends AbstractController
     }
 
     #[Route('/fitre/{id}', name: 'filtre')]
-    public function filtreCategory( ProduitRepository $ProduitRepository,CategoryRepository $categoryRepository ,Category $category, Request $request, ): Response
+    public function filtre( ProduitRepository $ProduitRepository,CategoryRepository $categoryRepository ,Category $category, Request $request, ): Response
     {
         $categorieFiltrer =$category;
         $page = (int)$request->query->get("page", 1);
@@ -113,7 +113,7 @@ class ProduitController extends AbstractController
             'produits' => $produit,
             'total' => $total,
             'page' => $page,
-            'titre' => $categorieFiltrer->getNom(),
+            'titre' => 'Les produits filtrés'
         ]);
     }
 

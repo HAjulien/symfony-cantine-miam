@@ -51,19 +51,23 @@
                                 <a href="{{ path('critique_delete', {id: critique.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')"><ion-icon name="trash-outline"></ion-icon></a>
                         </td>
                 </tr>
-                <tr class="last">
-                        <td> critique: </td>
-                        <td colspan="5">
-                                {{ critique.contenu | raw | u.truncate(maxlength2)}}
-                                {% if critique.contenu | length > maxlength2 %}
-                                ...
-                                <a href="{{ path('critique_apercu', {id: critique.id}) }}" class="btn b3 more">
-                                                voir plus
-                                </a>
-                                {% endif %}                                
-                        </td>
-                </tr>
-
+                {% if critique.contenu is empty %}
+                        <tr class="last2">
+                        </tr>
+                {% else %}                
+                        <tr class="last">
+                                <td> critique: </td>
+                                <td colspan="5">
+                                        {{ critique.contenu | raw | u.truncate(maxlength2)}}
+                                        {% if critique.contenu | length > maxlength2 %}
+                                        ...
+                                        <a href="{{ path('critique_apercu', {id: critique.id}) }}" class="btn b3 more" >
+                                                        voir plus
+                                        </a>
+                                        {% endif %}                                
+                                </td>
+                        </tr>
+                {% endif %}
         </tbody>
         {% endfor %}
 </table>
