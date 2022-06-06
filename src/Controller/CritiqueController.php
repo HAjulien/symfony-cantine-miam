@@ -81,6 +81,7 @@ class CritiqueController extends AbstractController
             'total' => $total,
             'page' => $page,
             'titre' => 'Liste des avis de : ' . $user->getPseudo(),
+            'Nafpa' => $user->getIdentifiantAfpa(),
         ]);
     }
     

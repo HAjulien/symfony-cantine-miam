@@ -11,17 +11,17 @@
         <h2><a class="usebtn ajout" href="{{ path('produit_add') }}">Ajouter un produits </a></h2>
         <h2><a class="usebtn ajout" href="{{ path('produit_semaine') }}">Produits de la semaine </a></h2>
         <h2><a class="usebtn" href="{{ path('produit_recherche') }}">rechercher <ion-icon name="search"></ion-icon> </a></h2>
-        {% if  app.Request.pathInfo != "/produit/" %}
-                <h2><a class="usebtn retour" href="{{ path('produit_index') }}">retour à la Liste</a></h2>
-        {% endif %}
-        
+        <h2><a class="usebtn retour" href="{{ path('produit_index') }}">retour à la Liste</a></h2>     
 
         <p>
                 {% for category in categories  %}
-                        <span><a class="butonCategorie {{category.nom}} " href="{{ path('produit_filtre', {id: category.id}) }} ">{{category.nom}} </a></span>
+                        {% if category is defined and category is not null and categorieFiltrer is defined %}
+                                        <span><a class="butonCategorie {{ (categorieFiltrer == category) ? category.nom : '' }}" href="{{ path('produit_filtre', {id: category.id}) }}">{{category.nom}} </a></span>
+                        {% else %}
+                                <span><a class="butonCategorie {{category.nom}} " href="{{ path('produit_filtre', {id: category.id}) }} ">{{category.nom}} </a></span>
+                        {% endif %}
                 {% endfor %}
         </p>
-
 
 
         <h3>{{total}} produits</h3>
@@ -31,22 +31,22 @@
                                 <td>image</td>
                                 <td></td>
                                 <td>
-                                        <a href="{{ path('produit_nomMin')}}">
+                                        <a href="{{ path('produit_filtreNomMin', {id: categorieFiltrer.id}) }}">
                                                 <span class="up"></span>
                                         </a>
                                         nom
-                                        <a href="{{ path('produit_nomMax')}}">
+                                        <a href="{{ path('produit_filtreNomMax', {id: categorieFiltrer.id}) }}">
                                                 <span class="down"></span>
                                         </a>
                                 </td>
                                 <td>nb Avis</td>
                                 <td>note moy</td>
                                 <td>
-                                        <a href="{{ path('produit_prixMin')}}">
+                                        <a href="{{ path('produit_filtrePrixMin', {id: categorieFiltrer.id}) }}">
                                                 <span class="up"></span>
                                         </a>
                                         prix
-                                        <a href="{{ path('produit_prixMax')}}">
+                                        <a href="{{ path('produit_filtrePrixMax', {id: categorieFiltrer.id}) }}">
                                                 <span class="down"></span>
                                         </a>
                                 <td>marge</td>

@@ -205,6 +205,22 @@ thead tr{
     background-color: rgba(0,0,0,0.04);
     border-bottom: 1.5px solid rgba(0,0,0,1);
 }
+
+thead tr .up{
+    background-color: var(--green3);
+    font-size: 14px;
+    padding: 0px 7px;
+    margin: 0 8px;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+thead tr .down{
+    background-color: var(--red);
+    font-size: 14px;
+    padding: 0px 7px;
+    margin:0 8px;
+    clip-path: polygon(50% 100%, 0 0, 100% 0);
+}
 tr{
     height: 70px;
     font-size: 18px;

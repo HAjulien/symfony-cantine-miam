@@ -41,7 +41,7 @@ class ProduitRepository extends ServiceEntityRepository
 
 
 
-        /**
+    /**
     * return all product per page 
     * @return void
     */
@@ -53,6 +53,32 @@ class ProduitRepository extends ServiceEntityRepository
         ;
         return $query->getQuery()->getResult();
     }
+    /**
+    * return all product desc -> asc per page 
+    * @return void
+    */
+    public function getPaginatedMax($page, $value){
+        $query = $this->createQueryBuilder('p')
+        ->orderBy($value, 'DESC')
+        ->setFirstResult(($page * $_ENV['LIMIT_PAGINATION_5']) - $_ENV['LIMIT_PAGINATION_5'])
+        ->setMaxResults($_ENV['LIMIT_PAGINATION_5'])
+        ;
+        return $query->getQuery()->getResult();
+    }
+    
+    /**
+    * return all product asc -> desc per page 
+    * @return void
+    */
+    public function getPaginatedMin($page, $value){
+        $query = $this->createQueryBuilder('p')
+        ->orderBy($value, 'ASC')
+        ->setFirstResult(($page * $_ENV['LIMIT_PAGINATION_5']) - $_ENV['LIMIT_PAGINATION_5'])
+        ->setMaxResults($_ENV['LIMIT_PAGINATION_5'])
+        ;
+        return $query->getQuery()->getResult();
+    }
+
 
     /**
     * return number of Products
@@ -75,6 +101,19 @@ class ProduitRepository extends ServiceEntityRepository
         $query = $this->createQueryBuilder('p')
         ->where('p.selectionner = 1')
         ->orderBy('p.category', 'ASC')
+        ->setFirstResult(($page * $_ENV['LIMIT_PAGINATION_5']) - $_ENV['LIMIT_PAGINATION_5'])
+        ->setMaxResults($_ENV['LIMIT_PAGINATION_5'])
+        ;
+        return $query->getQuery()->getResult();
+    }
+    /**
+    * return all product of week per page classe par ...
+    * @return void
+    */
+    public function getPaginatedProduitsSemaineClasser($page, $order, $by){
+        $query = $this->createQueryBuilder('p')
+        ->where('p.selectionner = 1')
+        ->orderBy($order, $by)
         ->setFirstResult(($page * $_ENV['LIMIT_PAGINATION_5']) - $_ENV['LIMIT_PAGINATION_5'])
         ->setMaxResults($_ENV['LIMIT_PAGINATION_5'])
         ;
@@ -121,12 +160,12 @@ class ProduitRepository extends ServiceEntityRepository
     * return all product filter per category per page 
     * @return void
     */
-    public function getPaginatedProduitFiltre($page, $categorieFiltrer){
+    public function getPaginatedProduitFiltre($page, $categorieFiltrer, $order, $by){
         $query = $this->createQueryBuilder('p');
         $query->leftJoin('p.category', 'c');
         $query->andWhere('c.id = :id')
         ->setParameter('id',  $categorieFiltrer)
-        ->orderBy('p.createAt', 'DESC')
+        ->orderBy($order, $by)
         ->setFirstResult(($page * $_ENV['LIMIT_PAGINATION_5']) - $_ENV['LIMIT_PAGINATION_5'])
         ->setMaxResults($_ENV['LIMIT_PAGINATION_5'])
         ;

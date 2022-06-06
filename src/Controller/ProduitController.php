@@ -34,6 +34,76 @@ class ProduitController extends AbstractController
             'titre' => 'Les produits'
         ]);
     }
+    #[Route('/prixMax', name: 'prixMax')]
+    public function PrixMax(ProduitRepository $ProduitRepository, CategoryRepository $categoryRepository, Request $request): Response
+    {
+        $page = (int)$request->query->get("page", 1);
+        $value = 'p.prixAchat';
+        $produit = $ProduitRepository->getPaginatedMax($page, $value);
+        $category = $categoryRepository->findAll();
+        $total = $ProduitRepository->getTotalProduit();
+
+        return $this->render('produit/index.html.twig', [
+            'categories' => $category,
+            'produits' => $produit,
+            'total' => $total,
+            'page' => $page,
+            'titre' => 'Les produits'
+        ]);
+    }
+
+    #[Route('/prixMin', name: 'prixMin')]
+    public function PrixMin(ProduitRepository $ProduitRepository, CategoryRepository $categoryRepository, Request $request): Response
+    {
+        $page = (int)$request->query->get("page", 1);
+        $value = 'p.prixAchat';
+        $produit = $ProduitRepository->getPaginatedMin($page, $value);
+        $category = $categoryRepository->findAll();
+        $total = $ProduitRepository->getTotalProduit();
+
+        return $this->render('produit/index.html.twig', [
+            'categories' => $category,
+            'produits' => $produit,
+            'total' => $total,
+            'page' => $page,
+            'titre' => 'Les produits'
+        ]);
+    }
+    #[Route('/nomMax', name: 'nomMax')]
+    public function nomMax(ProduitRepository $ProduitRepository, CategoryRepository $categoryRepository, Request $request): Response
+    {
+        $page = (int)$request->query->get("page", 1);
+        $value = 'p.nom';
+        $produit = $ProduitRepository->getPaginatedMax($page, $value);
+        $category = $categoryRepository->findAll();
+        $total = $ProduitRepository->getTotalProduit();
+
+        return $this->render('produit/index.html.twig', [
+            'categories' => $category,
+            'produits' => $produit,
+            'total' => $total,
+            'page' => $page,
+            'titre' => 'Les produits'
+        ]);
+    }
+    #[Route('/nomMin', name: 'nomMin')]
+    public function nomMin(ProduitRepository $ProduitRepository, CategoryRepository $categoryRepository, Request $request): Response
+    {
+        $page = (int)$request->query->get("page", 1);
+        $value = 'p.nom';
+        $produit = $ProduitRepository->getPaginatedMin($page, $value);
+        $category = $categoryRepository->findAll();
+        $total = $ProduitRepository->getTotalProduit();
+
+        return $this->render('produit/index.html.twig', [
+            'categories' => $category,
+            'produits' => $produit,
+            'total' => $total,
+            'page' => $page,
+            'titre' => 'Les produits'
+        ]);
+    }
+
 
 
     #[Route('/semaine', name: 'semaine')]
@@ -44,7 +114,80 @@ class ProduitController extends AbstractController
         $category = $categoryRepository->findAll();
         $total = $ProduitRepository->getTotalProduitsSemaine();
 
-        return $this->render('produit/index.html.twig', [
+        return $this->render('produit/semaine.html.twig', [
+            'categories' => $category,
+            'produits' => $produit ,
+            'total' => $total,
+            'page' => $page,
+            'titre' => 'Liste des Produits de la semaine'
+        ]);
+    }
+
+    #[Route('/semaine/prixMax', name: 'semainePrixMax')]
+    public function produitsSemainePrixMax(ProduitRepository $ProduitRepository, CategoryRepository $categoryRepository, Request $request ): Response
+    {
+        $order= "p.prixAchat";
+        $by='DESC';
+        $page = (int)$request->query->get("page", 1);
+        $produit = $ProduitRepository->getPaginatedProduitsSemaineClasser($page, $order, $by);
+        $category = $categoryRepository->findAll();
+        $total = $ProduitRepository->getTotalProduitsSemaine();
+
+        return $this->render('produit/semaine.html.twig', [
+            'categories' => $category,
+            'produits' => $produit ,
+            'total' => $total,
+            'page' => $page,
+            'titre' => 'Liste des Produits de la semaine'
+        ]);
+    }
+    #[Route('/semaine/prixMin', name: 'semainePrixMin')]
+    public function produitsSemainePrixMin(ProduitRepository $ProduitRepository, CategoryRepository $categoryRepository, Request $request ): Response
+    {
+        $order= "p.prixAchat";
+        $by='ASC';
+        $page = (int)$request->query->get("page", 1);
+        $produit = $ProduitRepository->getPaginatedProduitsSemaineClasser($page, $order, $by);
+        $category = $categoryRepository->findAll();
+        $total = $ProduitRepository->getTotalProduitsSemaine();
+
+        return $this->render('produit/semaine.html.twig', [
+            'categories' => $category,
+            'produits' => $produit ,
+            'total' => $total,
+            'page' => $page,
+            'titre' => 'Liste des Produits de la semaine'
+        ]);
+    }
+    #[Route('/semaine/nomMax', name: 'semaineNomMax')]
+    public function produitsSemainenomMax(ProduitRepository $ProduitRepository, CategoryRepository $categoryRepository, Request $request ): Response
+    {
+        $order= "p.nom";
+        $by='DESC';
+        $page = (int)$request->query->get("page", 1);
+        $produit = $ProduitRepository->getPaginatedProduitsSemaineClasser($page, $order, $by);
+        $category = $categoryRepository->findAll();
+        $total = $ProduitRepository->getTotalProduitsSemaine();
+
+        return $this->render('produit/semaine.html.twig', [
+            'categories' => $category,
+            'produits' => $produit ,
+            'total' => $total,
+            'page' => $page,
+            'titre' => 'Liste des Produits de la semaine'
+        ]);
+    }
+    #[Route('/semaine/nomMin', name: 'semaineNomMin')]
+    public function produitsSemainenomMin(ProduitRepository $ProduitRepository, CategoryRepository $categoryRepository, Request $request ): Response
+    {
+        $order= "p.nom";
+        $by='ASC';
+        $page = (int)$request->query->get("page", 1);
+        $produit = $ProduitRepository->getPaginatedProduitsSemaineClasser($page, $order, $by);
+        $category = $categoryRepository->findAll();
+        $total = $ProduitRepository->getTotalProduitsSemaine();
+
+        return $this->render('produit/semaine.html.twig', [
             'categories' => $category,
             'produits' => $produit ,
             'total' => $total,
@@ -98,22 +241,105 @@ class ProduitController extends AbstractController
         ]);
     }
 
-    #[Route('/fitre/{id}', name: 'filtre')]
-    public function filtre( ProduitRepository $ProduitRepository,CategoryRepository $categoryRepository ,Category $category, Request $request, ): Response
+    #[Route('/filtre/{id}', name: 'filtre')]
+    public function filtreCategory( ProduitRepository $ProduitRepository,CategoryRepository $categoryRepository ,Category $category, Request $request, ): Response
     {
         $categorieFiltrer =$category;
+        $order= "p.createAt";
+        $by='DESC';
         $page = (int)$request->query->get("page", 1);
         $category = $categoryRepository->findAll();
-        $produit = $ProduitRepository->getPaginatedProduitFiltre($page, $categorieFiltrer);
+        $produit = $ProduitRepository->getPaginatedProduitFiltre($page, $categorieFiltrer, $order, $by);
         $total = $ProduitRepository->getTotalProduitFiltre($categorieFiltrer);
 
-        return $this->render('produit/index.html.twig', [
+        return $this->render('produit/filtreCategory.html.twig', [
             'categories' => $category,
             'categorieFiltrer' => $categorieFiltrer,
             'produits' => $produit,
             'total' => $total,
             'page' => $page,
-            'titre' => 'Les produits filtrés'
+            'titre' => $categorieFiltrer->getNom(),
+        ]);
+    }
+
+    #[Route('/filtre/prixMax/{id}', name: 'filtrePrixMax')]
+    public function filtreCategoryPrixMax( ProduitRepository $ProduitRepository,CategoryRepository $categoryRepository ,Category $category, Request $request, ): Response
+    {
+        $categorieFiltrer =$category;
+        $order= "p.prixAchat";
+        $by='DESC';
+        $page = (int)$request->query->get("page", 1);
+        $category = $categoryRepository->findAll();
+        $produit = $ProduitRepository->getPaginatedProduitFiltre($page, $categorieFiltrer, $order, $by);
+        $total = $ProduitRepository->getTotalProduitFiltre($categorieFiltrer);
+
+        return $this->render('produit/filtreCategory.html.twig', [
+            'categories' => $category,
+            'categorieFiltrer' => $categorieFiltrer,
+            'produits' => $produit,
+            'total' => $total,
+            'page' => $page,
+            'titre' => $categorieFiltrer->getNom(),
+        ]);
+    }
+    #[Route('/filtre/prixMin/{id}', name: 'filtrePrixMin')]
+    public function filtreCategoryPrixMin( ProduitRepository $ProduitRepository,CategoryRepository $categoryRepository ,Category $category, Request $request, ): Response
+    {
+        $categorieFiltrer =$category;
+        $order= "p.prixAchat";
+        $by='ASC';
+        $page = (int)$request->query->get("page", 1);
+        $category = $categoryRepository->findAll();
+        $produit = $ProduitRepository->getPaginatedProduitFiltre($page, $categorieFiltrer, $order, $by);
+        $total = $ProduitRepository->getTotalProduitFiltre($categorieFiltrer);
+
+        return $this->render('produit/filtreCategory.html.twig', [
+            'categories' => $category,
+            'categorieFiltrer' => $categorieFiltrer,
+            'produits' => $produit,
+            'total' => $total,
+            'page' => $page,
+            'titre' => $categorieFiltrer->getNom(),
+        ]);
+    }
+    #[Route('/filtre/nomMax/{id}', name: 'filtreNomMax')]
+    public function filtreCategoryNomMax( ProduitRepository $ProduitRepository,CategoryRepository $categoryRepository ,Category $category, Request $request, ): Response
+    {
+        $categorieFiltrer =$category;
+        $order= "p.nom";
+        $by='DESC';
+        $page = (int)$request->query->get("page", 1);
+        $category = $categoryRepository->findAll();
+        $produit = $ProduitRepository->getPaginatedProduitFiltre($page, $categorieFiltrer, $order, $by);
+        $total = $ProduitRepository->getTotalProduitFiltre($categorieFiltrer);
+
+        return $this->render('produit/filtreCategory.html.twig', [
+            'categories' => $category,
+            'categorieFiltrer' => $categorieFiltrer,
+            'produits' => $produit,
+            'total' => $total,
+            'page' => $page,
+            'titre' => $categorieFiltrer->getNom(),
+        ]);
+    }
+    #[Route('/filtre/nomMin/{id}', name: 'filtreNomMin')]
+    public function filtreCategoryNomMin( ProduitRepository $ProduitRepository,CategoryRepository $categoryRepository ,Category $category, Request $request, ): Response
+    {
+        $categorieFiltrer =$category;
+        $order= "p.nom";
+        $by='ASC';
+        $page = (int)$request->query->get("page", 1);
+        $category = $categoryRepository->findAll();
+        $produit = $ProduitRepository->getPaginatedProduitFiltre($page, $categorieFiltrer, $order, $by);
+        $total = $ProduitRepository->getTotalProduitFiltre($categorieFiltrer);
+
+        return $this->render('produit/filtreCategory.html.twig', [
+            'categories' => $category,
+            'categorieFiltrer' => $categorieFiltrer,
+            'produits' => $produit,
+            'total' => $total,
+            'page' => $page,
+            'titre' => $categorieFiltrer->getNom(),
         ]);
     }
 

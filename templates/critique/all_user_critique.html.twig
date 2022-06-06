@@ -8,6 +8,7 @@
 {% block body %}
 
         <h1>{{titre}} </h1>
+        <h1> N°AFPA: {{Nafpa}} </h1>
 
         <h2><a class="usebtn retour" href="{{ app.request.headers.get('referer')}}">retour</a></h2>
         <h2><a class="usebtn ajout" href="{{ path('critique_index') }}">aller aux avis</a></h2>
