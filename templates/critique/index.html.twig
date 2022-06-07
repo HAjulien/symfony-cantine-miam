@@ -11,7 +11,7 @@
         <p>
                 {% for category in categories  %}
                         {% if category is defined and category is not null and categorieFiltrer is defined %}
-                                        <span><a class="butonCategorie {{ (categorieFiltrer == category) ? category.nom : '' }}" href="{{ path('produit_filtre', {id: category.id}) }}">{{category.nom}} </a></span>
+                                        <span><a class="butonCategorie {{ (categorieFiltrer == category) ? category.nom : '' }}" href="{{ path('critique_filtreCategory', {id: category.id}) }}">{{category.nom}} </a></span>
                         {% else %}
                                 <span><a class="butonCategorie {{category.nom}} " href="{{ path('critique_filtreCategory', {id: category.id}) }} ">{{category.nom}} </a></span>
                         {% endif %}
@@ -22,7 +22,7 @@
         <thead>
                 <tr>
                         <td>auteur</td>
-                        <td>categorie</td>
+                        <td></td>
                         <td>image</td>
                         <td>produit</td>
                         <td>note /5</td>
@@ -39,10 +39,11 @@
                                         {{ critique.utilisateur.pseudo }}(+)
                                 </a>   
                         </td>
-                        <td> 
-                                <span class=" avisCategorie {{ critique.produit.category.nom }}">
-                                        {{ critique.produit.category.nom }}
-                                </span>
+                        <td>
+                                <a href="{{ path('critique_filtreCategory', {id: critique.produit.category.id}) }}">                        
+                                        <span class=" pastille {{ critique.produit.category.nom }}"></span> 
+                                </a>
+
                         </td>
                         <td> 
                                 <a href="{{ path('critique_filtreProduit', {id: critique.produit.id}) }}" id="a"> 

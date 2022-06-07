@@ -45,20 +45,20 @@ class CritiqueController extends AbstractController
         $categorieFiltrer = $category;
         $category = $categoryRepository->findAll();
         $filtrer =$categorieFiltrer;
-        $tableJoint = 'c.produit';
 
         $page = (int)$request->query->get("page", 1);
 
-        $critique = $critiqueRepository->getPaginatedCritiqueFiltre($page, $filtrer, $tableJoint);
+        $critique = $critiqueRepository->getPaginatedCritiqueCategorie($page, $filtrer);
 
-        $total = $critiqueRepository->getTotalCritiqueFiltre($filtrer, $tableJoint);
+        $total = $critiqueRepository->getTotalCritiqueCategory($filtrer);
 
         return $this->render('critique/index.html.twig', [
+            'categorieFiltrer' => $categorieFiltrer,
             'categories' => $category,
             'critiques' => $critique,
             'total' => $total,
             'page' => $page,
-            'titre' => 'Liste des avis de : ' . $categorieFiltrer->getNom(),
+            'titre' => 'Liste des avis : ' . $categorieFiltrer->getNom(),
         ]);
     }
 
@@ -95,10 +95,12 @@ class CritiqueController extends AbstractController
         $page = (int)$request->query->get("page", 1);
 
         $critique = $critiqueRepository->getPaginatedCritiqueFiltre($page, $filtrer, $tableJoint);
-
+        
+        $avgNote = $critiqueRepository->avgNote($filtrer, $tableJoint);
         $total = $critiqueRepository->getTotalCritiqueFiltre($filtrer, $tableJoint);
 
         return $this->render('critique/produit_all_critiques.html.twig', [
+            'avgNote'=> $avgNote,
             'critiques' => $critique,
             'total' => $total,
             'page' => $page,

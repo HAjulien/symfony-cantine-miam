@@ -54,7 +54,7 @@ class CritiqueRepository extends ServiceEntityRepository
     }
 
     /**
-    * return number of Features
+    * return number of critique
     * @return void
     */
     public function getTotalCritique()
@@ -83,6 +83,39 @@ class CritiqueRepository extends ServiceEntityRepository
     }
 
     /**
+    * return all critiques per CATEGORY 
+    * @return void
+    */
+    public function getPaginatedCritiqueCategorie($page, $filtrer){
+        $query = $this->createQueryBuilder('c')
+        ->join('c.produit', 'p')
+        ->andWhere('p.category = :id')
+        ->setParameter('id', $filtrer)
+        ->orderBy('c.createAt', 'DESC')
+        ->setFirstResult(($page * $_ENV['LIMIT_PAGINATION_5']) - $_ENV['LIMIT_PAGINATION_5'])
+        ->setMaxResults($_ENV['LIMIT_PAGINATION_5'])
+        ;
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+    * return number of critique par CATEGORY
+    * @return void
+    */
+    public function getTotalCritiqueCategory($filtrer )
+    {
+        $query = $this->createQueryBuilder('c')
+        ->select('COUNT(c)')
+        ->join('c.produit', 'p')
+        ->andWhere('p.category = :id')
+        ->setParameter('id', $filtrer)
+        ;
+        //seulement chiffre décimaux texte, pas tableau getSingleScalarResult
+        return $query->getQuery()->getSingleScalarResult();
+    }
+
+
+    /**
     * return number of Features
     * @return void
     */
@@ -97,6 +130,26 @@ class CritiqueRepository extends ServiceEntityRepository
         //seulement chiffre décimaux texte, pas tableau getSingleScalarResult
         return $query->getQuery()->getSingleScalarResult();
     }
+
+    /**
+    * return avg of produit note
+    * @return void
+    */
+    public function avgNote($filtrer, $tableJoint)
+    {
+        $query = $this->createQueryBuilder('c');
+        $query->leftJoin($tableJoint, 'u');
+        $query->andWhere('u.id = :id')
+        ->setParameter('id', $filtrer)
+        ->select('avg(c.note)');      
+        ;
+        //seulement chiffre décimaux texte, pas tableau getSingleScalarResult
+        return $query->getQuery()->getSingleScalarResult();
+    }
+
+
+
+
 //    /**
 //     * @return Critique[] Returns an array of Critique objects
 //     */

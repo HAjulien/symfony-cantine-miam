@@ -8,15 +8,17 @@
 {% block body %}
         <h1>{{titre}} ({{ total }}) </h1>
 
+                {#
                 {% set sommeAvis = 0 %}
                 {% set moyenne = 0 %}
                 {% for critique in critiques %}
                         {% set sommeAvis = sommeAvis +  critique.note  %}
                 {% endfor %}
                 {% set moyenne = (sommeAvis / critiques | length)|round(1)   %}
+                #}
 
-                <h4 class="{{ (moyenne > bonneNote) ? 'bonneNote' : (moyenne > moyenneNote) ? 'moyenneNote' : 'mauvaiseNote' }} titre ">
-                        {{ moyenne }} / 5
+                <h4 class="{{ (avgNote > bonneNote) ? 'bonneNote' : (avgNote > moyenneNote) ? 'moyenneNote' : 'mauvaiseNote' }} titre ">
+                        {{ avgNote|round(1) }} / 5
                 </h4>
                 <div class="img2" >
                         <img src="{{image}}" alt="{{ imageAlt }}"  class="imgEntete">

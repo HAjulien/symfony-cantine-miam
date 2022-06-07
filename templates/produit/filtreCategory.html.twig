@@ -18,7 +18,7 @@
                         {% if category is defined and category is not null and categorieFiltrer is defined %}
                                         <span><a class="butonCategorie {{ (categorieFiltrer == category) ? category.nom : '' }}" href="{{ path('produit_filtre', {id: category.id}) }}">{{category.nom}} </a></span>
                         {% else %}
-                                <span><a class="butonCategorie {{category.nom}} " href="{{ path('produit_filtre', {id: category.id}) }} ">{{category.nom}} </a></span>
+                                <span><a class="butonCategorie {{category.nom}} " href="{{ path('critique_filtre', {id: category.id}) }} ">{{category.nom}} </a></span>
                         {% endif %}
                 {% endfor %}
         </p>

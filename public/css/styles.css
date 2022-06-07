@@ -226,6 +226,12 @@ tr{
     font-size: 18px;
     text-align: center;
 }
+
+.pastille{
+    padding: 1px 10px;
+    margin-inline: 5px;
+    border-radius: 50%;
+}
 /* les messages flash */
 .messageFlash{
     position: fixed;
