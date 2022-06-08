@@ -9,12 +9,15 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
+        {{ dump(produits) }}
+
+    {% for produit in produits %}
+    <h1>{{produit.nom}}</h1>
+        
+    {% endfor %}
     <ul>
         <li>Your controller at <code><a href="{{ 'C:/MAMP/htdocs/symfony-cantine-miam/src/Controller/TestController.php'|file_link(0) }}">src/Controller/TestController.php</a></code></li>
         <li>Your template at <code><a href="{{ 'C:/MAMP/htdocs/symfony-cantine-miam/templates/test/index.html.twig'|file_link(0) }}">templates/test/index.html.twig</a></code></li>
     </ul>
-</div>
 {% endblock %}

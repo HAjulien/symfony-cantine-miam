@@ -39,8 +39,24 @@
                                                 <span class="down"></span>
                                         </a>
                                 </td>
-                                <td>nb Avis</td>
-                                <td>note moy</td>
+                                <td>
+                                        <a href="{{ path('produit_filtreNbNoteMin', {id: categorieFiltrer.id}) }}">
+                                                <span class="up"></span>
+                                        </a>
+                                        nb avis
+                                        <a href="{{ path('produit_filtreNbNoteMax', {id: categorieFiltrer.id}) }}">
+                                                <span class="down"></span>
+                                        </a>
+                                </td>
+                                <td>
+                                        <a href="{{ path('produit_filtreNoteMin', {id: categorieFiltrer.id}) }}">
+                                                <span class="up"></span>
+                                        </a>
+                                        note moy
+                                        <a href="{{ path('produit_filtreNoteMax', {id: categorieFiltrer.id}) }}">
+                                                <span class="down"></span>
+                                        </a>                                
+                                </td>
                                 <td>
                                         <a href="{{ path('produit_filtrePrixMin', {id: categorieFiltrer.id}) }}">
                                                 <span class="up"></span>

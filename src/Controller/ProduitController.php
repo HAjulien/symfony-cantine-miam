@@ -69,6 +69,83 @@ class ProduitController extends AbstractController
             'titre' => 'Les produits'
         ]);
     }
+
+    #[Route('/noteMin', name: 'noteMin')]
+    public function noteMin( ProduitRepository $ProduitRepository, CategoryRepository $categoryRepository, Request $request): Response
+    {
+        $order = 'avg(c.note)';
+        $by = 'ASC';
+        $page = (int)$request->query->get("page", 1);
+        $produit = $ProduitRepository->getPaginatedProduitsNoteClasser($page, $order, $by);
+        $category = $categoryRepository->findAll();
+        $total = $ProduitRepository->getTotalProduit();
+
+        return $this->render('produit/index.html.twig', [
+            'categories' => $category,
+            'produits' => $produit,
+            'total' => $total,
+            'page' => $page,
+            'titre' => 'Les produits'
+        ]);
+    }
+
+    #[Route('/noteMax', name: 'noteMax')]
+    public function noteMax( ProduitRepository $ProduitRepository, CategoryRepository $categoryRepository, Request $request): Response
+    {
+        $order = 'avg(c.note)';
+        $by= 'DESC';
+        $page = (int)$request->query->get("page", 1);
+        $produit = $ProduitRepository->getPaginatedProduitsNoteClasser($page, $order, $by);
+        $category = $categoryRepository->findAll();
+        $total = $ProduitRepository->getTotalProduit();
+
+        return $this->render('produit/index.html.twig', [
+            'categories' => $category,
+            'produits' => $produit,
+            'total' => $total,
+            'page' => $page,
+            'titre' => 'Les produits'
+        ]);
+    }
+
+    #[Route('/nbNoteMin', name: 'nbNoteMin')]
+    public function nbNoteMin( ProduitRepository $ProduitRepository, CategoryRepository $categoryRepository, Request $request): Response
+    {
+        $order = 'COUNT(c.note)';
+        $by = 'ASC';
+        $page = (int)$request->query->get("page", 1);
+        $produit = $ProduitRepository->getPaginatedProduitsNoteClasser($page, $order, $by);
+        $category = $categoryRepository->findAll();
+        $total = $ProduitRepository->getTotalProduit();
+
+        return $this->render('produit/index.html.twig', [
+            'categories' => $category,
+            'produits' => $produit,
+            'total' => $total,
+            'page' => $page,
+            'titre' => 'Les produits'
+        ]);
+    }
+
+    #[Route('/nbNoteMax', name: 'nbNoteMax')]
+    public function nbNoteMax( ProduitRepository $ProduitRepository, CategoryRepository $categoryRepository, Request $request): Response
+    {
+        $order = 'COUNT(c.note)';
+        $by = 'DESC';
+        $page = (int)$request->query->get("page", 1);
+        $produit = $ProduitRepository->getPaginatedProduitsNoteClasser($page, $order, $by);
+        $category = $categoryRepository->findAll();
+        $total = $ProduitRepository->getTotalProduit();
+
+        return $this->render('produit/index.html.twig', [
+            'categories' => $category,
+            'produits' => $produit,
+            'total' => $total,
+            'page' => $page,
+            'titre' => 'Les produits'
+        ]);
+    }
+
     #[Route('/nomMax', name: 'nomMax')]
     public function nomMax(ProduitRepository $ProduitRepository, CategoryRepository $categoryRepository, Request $request): Response
     {
@@ -343,14 +420,96 @@ class ProduitController extends AbstractController
         ]);
     }
 
+    #[Route('/filtre/noteMin/{id}', name: 'filtreNoteMin')]
+    public function filtreCategoryNoteMin( ProduitRepository $ProduitRepository,CategoryRepository $categoryRepository ,Category $category, Request $request, ): Response
+    {
+        $orderBy= 'avg(cr.note)';
+        $categorieFiltrer =$category;
+        $by='ASC';
+        $page = (int)$request->query->get("page", 1);
+        $category = $categoryRepository->findAll();
+        $produit = $ProduitRepository->getPaginatedProduitFiltreNote($page, $categorieFiltrer,$orderBy, $by);
+        $total = $ProduitRepository->getTotalProduitFiltre($categorieFiltrer);
+
+        return $this->render('produit/filtreCategory.html.twig', [
+            'categories' => $category,
+            'categorieFiltrer' => $categorieFiltrer,
+            'produits' => $produit,
+            'total' => $total,
+            'page' => $page,
+            'titre' => $categorieFiltrer->getNom(),
+        ]);
+    }
+
+    #[Route('/filtre/noteMax/{id}', name: 'filtreNoteMax')]
+    public function filtreCategoryNoteMax( ProduitRepository $ProduitRepository,CategoryRepository $categoryRepository ,Category $category, Request $request, ): Response
+    {
+        $orderBy= 'avg(cr.note)';
+        $categorieFiltrer =$category;
+        $by='DESC';
+        $page = (int)$request->query->get("page", 1);
+        $category = $categoryRepository->findAll();
+        $produit = $ProduitRepository->getPaginatedProduitFiltreNote($page, $categorieFiltrer,$orderBy, $by);
+        $total = $ProduitRepository->getTotalProduitFiltre($categorieFiltrer);
+
+        return $this->render('produit/filtreCategory.html.twig', [
+            'categories' => $category,
+            'categorieFiltrer' => $categorieFiltrer,
+            'produits' => $produit,
+            'total' => $total,
+            'page' => $page,
+            'titre' => $categorieFiltrer->getNom(),
+        ]);
+    }
+
+    #[Route('/filtre/nbNoteMin/{id}', name: 'filtreNbNoteMin')]
+    public function filtreCategoryNbNoteMin( ProduitRepository $ProduitRepository,CategoryRepository $categoryRepository ,Category $category, Request $request, ): Response
+    {
+        $orderBy= 'COUNT(cr.note)';
+        $categorieFiltrer =$category;
+        $by='ASC';
+        $page = (int)$request->query->get("page", 1);
+        $category = $categoryRepository->findAll();
+        $produit = $ProduitRepository->getPaginatedProduitFiltreNote($page, $categorieFiltrer,$orderBy, $by);
+        $total = $ProduitRepository->getTotalProduitFiltre($categorieFiltrer);
+
+        return $this->render('produit/filtreCategory.html.twig', [
+            'categories' => $category,
+            'categorieFiltrer' => $categorieFiltrer,
+            'produits' => $produit,
+            'total' => $total,
+            'page' => $page,
+            'titre' => $categorieFiltrer->getNom(),
+        ]);
+    }
+
+    #[Route('/filtre/nbNoteMax/{id}', name: 'filtreNbNoteMax')]
+    public function filtreCategoryNbNoteMax( ProduitRepository $ProduitRepository,CategoryRepository $categoryRepository ,Category $category, Request $request, ): Response
+    {
+        $orderBy= 'COUNT(cr.note)';
+        $categorieFiltrer =$category;
+        $by='DESC';
+        $page = (int)$request->query->get("page", 1);
+        $category = $categoryRepository->findAll();
+        $produit = $ProduitRepository->getPaginatedProduitFiltreNote($page, $categorieFiltrer,$orderBy, $by);
+        $total = $ProduitRepository->getTotalProduitFiltre($categorieFiltrer);
+
+        return $this->render('produit/filtreCategory.html.twig', [
+            'categories' => $category,
+            'categorieFiltrer' => $categorieFiltrer,
+            'produits' => $produit,
+            'total' => $total,
+            'page' => $page,
+            'titre' => $categorieFiltrer->getNom(),
+        ]);
+    }
+
     #[Route("/update/{id}", name:"update")]
     public function updateProduit(Produit $produit, Request $request, ManagerRegistry $doctrine): Response
     {
 
         $form = $this->createForm(ProduitType::class, $produit );
 
-
-        
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $doctrine->getManager();

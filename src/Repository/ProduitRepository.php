@@ -187,6 +187,40 @@ class ProduitRepository extends ServiceEntityRepository
         //seulement chiffre décimaux texte, pas tableau getSingleScalarResult
         return $query->getQuery()->getSingleScalarResult();
     }
+
+
+    /**
+    * return all product classé par note ...
+    * @return void
+    */
+    public function getPaginatedProduitsNoteClasser($page, $order, $by){
+        $query = $this->createQueryBuilder('p')
+        ->leftJoin('p.critiques', 'c')
+        ->orderBy($order, $by)
+        ->groupBy('p.id')
+        ->setFirstResult(($page * $_ENV['LIMIT_PAGINATION_5']) - $_ENV['LIMIT_PAGINATION_5'])
+        ->setMaxResults($_ENV['LIMIT_PAGINATION_5'])
+        ;
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+    * return all product filter per category per page classé par note 
+    * @return void
+    */
+    public function getPaginatedProduitFiltreNote($page, $categorieFiltrer,$orderBy, $by){
+        $query = $this->createQueryBuilder('p');
+        $query->leftJoin('p.category', 'c');
+        $query->leftJoin('p.critiques', 'cr');
+        $query->andWhere('c.id = :id')
+        ->setParameter('id',  $categorieFiltrer)
+        ->orderBy($orderBy, $by)
+        ->groupBy('p.id')
+        ->setFirstResult(($page * $_ENV['LIMIT_PAGINATION_5']) - $_ENV['LIMIT_PAGINATION_5'])
+        ->setMaxResults($_ENV['LIMIT_PAGINATION_5'])
+        ;
+        return $query->getQuery()->getResult();
+    }
 //    /**
 //     * @return Produit[] Returns an array of Produit objects
 //     */

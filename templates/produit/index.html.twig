@@ -39,8 +39,24 @@
                                                 <span class="down"></span>
                                         </a>
                                 </td>
-                                <td>nb Avis</td>
-                                <td>note moy</td>
+                                <td>
+                                        <a href="{{ path('produit_nbNoteMin')}}">
+                                                <span class="up"></span>
+                                        </a>
+                                        nb avis
+                                        <a href="{{ path('produit_nbNoteMax')}}">
+                                                <span class="down"></span>
+                                        </a> 
+                                </td>
+                                <td>
+                                        <a href="{{ path('produit_noteMin')}}">
+                                                <span class="up"></span>
+                                        </a>
+                                        note moy
+                                        <a href="{{ path('produit_noteMax')}}">
+                                                <span class="down"></span>
+                                        </a>                                
+                                </td>
                                 <td>
                                         <a href="{{ path('produit_prixMin')}}">
                                                 <span class="up"></span>
