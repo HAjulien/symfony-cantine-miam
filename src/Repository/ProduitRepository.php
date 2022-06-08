@@ -190,7 +190,7 @@ class ProduitRepository extends ServiceEntityRepository
 
 
     /**
-    * return all product classé par note ...
+    * return all product classé par note ou nb note ...
     * @return void
     */
     public function getPaginatedProduitsNoteClasser($page, $order, $by){
