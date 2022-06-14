@@ -149,11 +149,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
 
-
-
-
-
-
     /**
     * recherche les users en fonction du formulaire
     * @return void

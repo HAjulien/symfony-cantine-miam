@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Equipe;
 use App\Form\EquipeType;
@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/equipe', name: 'equipe_')]
+#[Route('/admin/equipe', name: 'equipe_')]
 class EquipeController extends AbstractController
 {
     #[Route('/', name: 'index')]

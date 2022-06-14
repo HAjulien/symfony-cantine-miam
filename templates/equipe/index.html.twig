@@ -20,6 +20,7 @@
                         <td>surnom</td>
                         <td>image</td>
                         <td>date de création</td>
+                        <td>auteur</td>
                         <td></td>
                 </tr>
         </thead>
@@ -33,6 +34,7 @@
                                 <div><img src="{{equipe.image}}" alt="{{ equipe.imageDescription }}" class="img" ></div>
                         </td>
                         <td> {{equipe.createAt | date("d/m/Y") }}</td>
+                        <td> {{equipe.utilisateur.pseudo}}</td>
                         <td> 
                                 <a href="{{ path('equipe_apercu', {id: equipe.id}) }}" class="btn b3"><ion-icon name="eye-outline"></ion-icon></a>
                                 <a href="{{ path('equipe_update', {id: equipe.id}) }}" class="btn b1"><ion-icon name="create-outline"></ion-icon></a>

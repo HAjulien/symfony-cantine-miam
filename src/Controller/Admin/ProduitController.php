@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Produit;
 use App\Entity\Category;
@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/produit', name: 'produit_')]
+#[Route('/admin/produit', name: 'produit_')]
 class ProduitController extends AbstractController
 {
     #[Route('/', name: 'index')]
@@ -145,7 +145,6 @@ class ProduitController extends AbstractController
             'titre' => 'Les produits'
         ]);
     }
-
 
     #[Route('/prixMax', name: 'prixMax')]
     public function PrixMax(ProduitRepository $ProduitRepository, CategoryRepository $categoryRepository, Request $request): Response
@@ -560,4 +559,6 @@ class ProduitController extends AbstractController
         return New Response("true");
 
     }
+
+
 }

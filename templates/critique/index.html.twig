@@ -36,8 +36,7 @@
                 <tr>
                         <td> 
                                 <a href="{{ path('critique_filtreUser', {id: critique.utilisateur.id}) }}" id="a" class="paddingLeft10" > 
-                                        {{ critique.utilisateur.pseudo }}(+)
-                                </a>   
+                                        {{ critique.utilisateur.pseudo }} <ion-icon name="add-circle-outline" class="voirPlus"></ion-icon>
                         </td>
                         <td>
                                 <a href="{{ path('critique_filtreCategory', {id: critique.produit.category.id}) }}">                        
@@ -52,7 +51,7 @@
                         </td>
                         <td> 
                                 <a href="{{ path('critique_filtreProduit', {id: critique.produit.id}) }}" id="a"> 
-                                {{ critique.produit.nom }} (+)
+                                {{ critique.produit.nom }}  <ion-icon name="add-circle-outline" class="voirPlus"></ion-icon>
                                 </a>
                         </td>
                         <td>

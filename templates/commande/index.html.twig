@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}  {{ titre }} {% endblock %}
+
+        {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/tableau.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('css/accordion.css') }}" type="text/css" />
+        {% endblock %}
+
+{% block body %}
+        <h1> {{ titre }}</h1>
+        {% if  app.Request.pathInfo != "/admin/commande/" %}
+        <h1> N°AFPA: {{Nafpa}} </h1>
+
+        <h2><a class="usebtn retour" href="{{ path('commande_index') }}">Retour à la liste </a></h2>
+        {% endif %}
+        <h3> {{ total }} commandes</h3>
+
+<div class="accordion">
+
+    <div class="libelle">
+        <span>n°commande</span>
+        <span>client</span>
+        <span>nb produit</span>
+        <span>Prix total</span>
+        <span>date</span>
+    </div>
+
+    {% for commande in commandes %}
+
+    {% set sommeCommandes = 0  %}
+    {% set sommeCommandesPrix = 0  %}
+
+        {% for selection in commande.selections %}
+            {% set sommeCommandes = sommeCommandes + selection.quantite %}
+            {% set sommeCommandesPrix = sommeCommandesPrix + (selection.prix * selection.quantite) %}
+        {% endfor %}
+
+	<details>
+		<summary>
+			<span> {{commande.id}} </span>
+            <span>
+                <a href="{{ path('commande_filtreUser', {id: commande.utilisateur.id}) }}" id="a"> 
+                    {{commande.utilisateur.pseudo}} <ion-icon name="add-circle-outline" class="voirPlus">
+                </a>
+            </span>
+            <span> {{sommeCommandes}}</span>
+            {% if commande.utilisateur.roles[0] != 'ROLE_USER' %}
+                <span> {{(sommeCommandesPrix - ((sommeCommandesPrix / 100) * reduction ))|round(1) }} €</span>           
+            {% else %}
+                <span> {{ sommeCommandesPrix }} €</span>
+            {% endif %}
+            <span> {{commande.date | date("h:i d/m/Y") }} </span>
+		</summary>
+
+		<div>
+            <p>
+                <span>nom produit</span>
+                <span>prix unité</span>
+                <span>quantité</span>
+                <span>réduction</span>
+                <span>total</span>
+            </p>
+            {% for selection in commande.selections %}
+            {% set reductionEuro = (((selection.prix / 100) * reduction) * selection.quantite)|round(1) %}
+            {% set prixTotalUnite = (selection.prix * selection.quantite) %}
+                <p>   
+                    <span>{{selection.produit.nom}} </span>
+                    <span>{{selection.prix}} € </span>
+                    <span>{{selection.quantite}} </span>
+                    {% if commande.utilisateur.roles[0] != 'ROLE_USER' %}
+                            <span> {{ reductionEuro }} €</span>
+                        {% else %}
+                            <span> non</span>                        
+                    {% endif %}                    
+                    {% if commande.utilisateur.roles[0] != 'ROLE_USER' %}
+                        <span>{{ prixTotalUnite - reductionEuro }} € </span>
+                    {% else %}
+                        <span>{{ prixTotalUnite }} € </span>
+                    {% endif %}
+
+                </p>
+            {% endfor %}
+        </div>
+	</details>
+
+    {% endfor %}
+</div>
+
+{% endblock %}
+

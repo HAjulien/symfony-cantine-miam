@@ -232,6 +232,28 @@ tr{
     margin-inline: 5px;
     border-radius: 50%;
 }
+
+
+.ROLE_ADMIN::before, .ROLE_PERSONNEL::before, .ROLE_USER::before{
+    padding: 10px;
+    border-radius: 8px;
+    color: var(--white);
+}
+
+.ROLE_PERSONNEL::before{
+    content: "personnel";
+    background-color: var(--blue);
+
+}
+.ROLE_ADMIN::before{
+    content: 'admin';
+    background-color: var(--green2);
+}
+.ROLE_USER::before{
+    content: 'élève';
+    background-color: var(--yellow);
+
+}
 /* les messages flash */
 .messageFlash{
     position: fixed;

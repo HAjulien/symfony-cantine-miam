@@ -67,7 +67,7 @@ class CritiqueRepository extends ServiceEntityRepository
     }
 
     /**
-    * return all critiques per page 
+    * return all critiques per page suivant filtrage
     * @return void
     */
     public function getPaginatedCritiqueFiltre($page, $filtrer, $tableJoint){
@@ -116,7 +116,7 @@ class CritiqueRepository extends ServiceEntityRepository
 
 
     /**
-    * return number of Features
+    * return number of critique
     * @return void
     */
     public function getTotalCritiqueFiltre($filtrer, $tableJoint)

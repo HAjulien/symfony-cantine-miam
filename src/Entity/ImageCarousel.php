@@ -2,12 +2,27 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\ImageCarouselRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Action\NotFoundAction;
+use App\Repository\ImageCarouselRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 #[ORM\Entity(repositoryClass: ImageCarouselRepository::class)]
-#[ApiResource]
+#[ApiResource (
+    attributes: ["pagination_items_per_page" => 3],
+    collectionOperations:["get"],
+    itemOperations:[
+        "get" =>[
+            "controller" => NotFoundAction::class,
+            "openapi_context" =>[
+                "summary" => "hidden",
+            ],
+            "read" => false,
+            "output" => false
+        ]
+    ],
+    )]
+
 class ImageCarousel
 {
     #[ORM\Id]

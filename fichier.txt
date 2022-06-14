@@ -1,0 +1,73 @@
+ ------------------------------------  -------------------------------------------------------------------------------------------------------------
+  Name                                    Path                             description   
+ ------------------------------------  -------------------------------------------------------------------------------------------------------------
+
+  home                                    /                                page accueil
+
+  category_index                          /category/                       page categories accueil affiche toutes les categories     
+  category_recherche                      /category/recherche              page barre recherche et affiche les résultats      
+  category_add                            /category/add                    ajout d'une categorie     
+  category_update                         /category/update/{id}            modification d'une categorie existante     
+  category_delete                         /category/delete/{id}            suppression d'une categorie
+             
+  commande_index                          /commande/                       toutes les commandes
+                       
+  critique_index                          /critique/                       tous les avis  
+  critique_filtreCategory                 /critique/filtreCategory/{id}    affiche les avis selon l'une des catégories    
+  critique_filtreUser                     /critique/filtreUser/{id}        tous les avis de utilisateur enregistré    
+  critique_filtreProduit                  /critique/filtreProduit/{id}     tous les avis sur le produit    
+  critique_apercu                         /critique/apercu/{id}            voir les info complémentaire du produit    
+  critique_delete                         /critique/delete/{id}            suppression de l'avis
+               
+  equipe_index                            /equipe/                         les articles sur les membres du personnel    
+  equipe_recherche                        /equipe/recherche                page barre recherche et affiche les résultats    
+  equipe_add                              /equipe/add                      ajout d'un article sur les membres du personnel  
+  equipe_update                           /equipe/update/{id}              modification d'un article sur les membres du personnel    
+  equipe_apercu                           /equipe/apercu/{id}              voir les info supplémentaires sur l'article    
+  equipe_delete                           /equipe/delete/{id}              suppression de l'article
+                
+  feature_index                           /feature/                        les articles de la page accueil  
+  feature_recherche                       /feature/recherche               page barre recherche et affiche les résultats     
+  feature_add                             /feature/add                     ajout d'un article       
+  feature_update                          /feature/update/{id}             modification d'un article 
+  feature_apercu                          /feature/apercu/{id}             voir les info supplémentaires sur l'article    
+  feature_delete                          /feature/delete/{id}             suppression de l'article
+                                   
+  imageCarousel_index                     /imageCarousel/                  les images qui sont dans slider page accueil mobile 
+  imageCarousel_add                       /imageCarousel/add               ajout d'une nouvelle image   
+  imageCarousel_update                    /imageCarousel/update/{id}       modification de l'image    
+  imageCarousel_delete                    /imageCarousel/delete/{id}       suppression de l'image
+          
+  produit_index                           /produit/                        tous les produits                       
+  produit_semaine                         /produit/semaine                 produits disponible pour cette semaine    
+  produit_recherche                       /produit/recherche               page barre recherche et affiche les résultats    
+  produit_add                             /produit/add                     ajout d'un produit    
+  produit_filtre                          /produit/filtre/{id}             tous les produits filtrés par une categorie    
+  produit_update                          /produit/update/{id}             modification d'un produit    
+  produit_apercu                          /produit/apercu/{id}             voir les info supplémentaires sur le produit    
+  produit_delete                          /produit/delete/{id}             suppression d'un produit    
+  produit_activate                        /produit/activate/{id}           permet de mettre directement un produit dans la selection de la semaine    
+               
+  user_index                              /user/                           tous les users    
+  user_personnel                          /user/personnel                  tous les users membres du personnel    
+  user_nonVerifie                         /user/nonVerifie                 tous les users qui n'ont pas vérifié leur compte    
+  user_recherche                          /user/recherche                  page barre recherche et affiche les résultats    
+  user_add                                /user/add                        ajout d'un users    
+  user_update                             /user/update/{id}                modification d'un user    
+  user_delete                             /user/delete/{id}                suppression d'un user
+                 
+ ------------------------------------ ------------------------------------- ----------------------------------------------------------------------------------
+
+commande marge pour aujourd'hui
+
+SELECT sum(selection.prix * selection.quantite ), DATE( NOW() ) 
+FROM `commande` 
+INNER JOIN selection 
+WHERE selection.commande_id = commande.id AND SUBSTRING(date, 1, 10) = DATE( NOW() );
+
+le menu du jour
+SELECT * 
+FROM `produit`as p
+WHERE p.selectionner = 1 AND p.jour_prevu = DAYOFWEEK(NOW());
+ou
+WHERE p.selectionner = 1 AND p.jour_prevu = (DAYOFWEEK(NOW()) + 1 );

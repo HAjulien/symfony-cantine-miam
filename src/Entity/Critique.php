@@ -2,30 +2,44 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\CritiqueRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CritiqueRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CritiqueRepository::class)]
-#[ApiResource]
+#[ORM\UniqueConstraint(
+    name:'unique_id',
+    columns: ['utilisateur_id', 'produit_id']
+)]
+
+#[ApiResource (
+    normalizationContext: ['groups' => ['read:comment']],
+    )]
+    
 class Critique
 {
+    #[Groups(["read:comment"])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
 
+    #[Groups(["read:comment"])]
     #[ORM\Column(type: 'float')]
     private $note;
 
+    #[Groups(["read:comment"])]
     #[ORM\Column(type: 'text', nullable: true)]
     private $contenu;
 
+    #[Groups(["read:comment"])]
     #[ORM\Column(type: 'datetime')]
     private $createAt;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'critiques')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(["read:comment"])]
     private $utilisateur;
 
     #[ORM\ManyToOne(targetEntity: Produit::class, inversedBy: 'critiques')]

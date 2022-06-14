@@ -12,7 +12,12 @@ use ApiPlatform\Core\Annotation\ApiResource;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 #[ORM\Index(name: 'category', columns: ['nom'], flags: ['fulltext'])]
-#[ApiResource]
+#[ApiResource (
+    attributes: ["pagination_items_per_page" => 3],
+    collectionOperations:["get"],
+    itemOperations:["get"]
+    )]
+    
 class Category
 {
     #[ORM\Id]

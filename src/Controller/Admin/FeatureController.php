@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Feature;
 use App\Form\FeatureType;
@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('feature', name: 'feature_')]
+#[Route('/admin/feature', name: 'feature_')]
 class FeatureController extends AbstractController
 {
     #[Route('/', name: 'index')]

@@ -133,26 +133,6 @@ input[type="checkbox"]:checked:before{
 }
 
 
-.ROLE_ADMIN::before, .ROLE_PERSONNEL::before, .ROLE_USER::before{
-    padding: 10px;
-    border-radius: 8px;
-    color: var(--white);
-}
-
-.ROLE_PERSONNEL::before{
-    content: "personnel";
-    background-color: var(--blue);
-
-}
-.ROLE_ADMIN::before{
-    content: 'admin';
-    background-color: var(--green2);
-}
-.ROLE_USER::before{
-    content: 'élève';
-    background-color: var(--yellow);
-
-}
 /* pour les utilisateur identifié */
 .valide{
     background-color: var(--green2);
@@ -192,7 +172,14 @@ input[type="checkbox"]:checked:before{
     background-color: var(--blue);
 }
 
-.b1:hover, .b2:hover, .b3:hover, .b4:hover{
+.b4{
+    background-color: var(--pink);
+}
+.b5{
+    background-color: var(--grey);
+}
+
+.b1:hover, .b2:hover, .b3:hover, .b4:hover, .b5:hover{
     color: var(--black);
     border: 2px solid #000;
     transition: .2s;
@@ -292,5 +279,17 @@ input[type="checkbox"]:checked:before{
     background-color: var(--green2);
 }
 
+.detail{
+    display: none;
+}
+.plus{
+    display: none;
+    height: 20px;
+    border-top: 1px solid black;
+    border-bottom: .5px solid black;
+}
 
+.plus:hover{
+    background-color: var(--white);
+}
 

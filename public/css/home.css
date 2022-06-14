@@ -62,7 +62,7 @@ a{
 .details{
     position: relative;
     display: grid;
-    grid-template-columns: 43% 57%;
+    grid-template-columns: 50% 50%;
     grid-gap: 20px;
     width: 100%;
     padding: 20px;

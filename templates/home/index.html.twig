@@ -8,11 +8,11 @@
 
 {% block body %}
             <div class="cardBox">
-                <a href="{{ path('test') }}">
+                <a href="{{ path('critique_filtreProduit', {id: produit.id}) }}">
                     <div class="card">
                         <div>
-                            <div class="numbers"> 1.2 </div>
-                            <div class="cardName"> croquette de poisson est le moins populaire </div>
+                            <div class="numbers"> {{produit.note}} </div>
+                            <div class="cardName"> {{produit.nom}} est le moins populaire </div>
                         </div>
                         <div class="iconBox">
                             <ion-icon name="star-half-outline"></ion-icon>
@@ -22,7 +22,7 @@
 
                 <div class="card">
                     <div>
-                        <a href="{{ path('test') }}">
+                        <a href="{{ path('commande_index') }}">
                             <div class="numbers"> 32 </div>
                             <div class="cardName"> couscous a le plus de critique </div>
                         </a>
@@ -34,8 +34,8 @@
 
                 <div class="card">
                     <div>
-                        <a href="{{ path('test') }}">
-                            <div class="numbers"> 120 </div>
+                        <a href="{{ path('commande_index') }}">
+                            <div class="numbers"> {{marge}} </div>
                             <div class="cardName"> marge brute prévue pour aujourd'hui </div>
                         </a>
                     </div>
@@ -46,9 +46,9 @@
 
                 <div class="card">
                     <div>
-                        <a href="{{ path('test') }}">
-                            <div class="numbers"> 20 </div>
-                            <div class="cardName"> nouveaux inscrits </div>
+                        <a href="{{ path('user_index') }}">
+                            <div class="numbers"> {{user}} </div>
+                            <div class="cardName"> nombre total inscrits </div>
                         </a>
                     </div>
                     <div class="iconBox">
@@ -66,158 +66,59 @@
 
                     <div class="cardHeader">
                         <h2>Commandes recentes</h2>
-                        <a href="{{ path('test') }}" class="btn">plus</a>
+                        <a href="{{ path('commande_index') }}" class="btn">plus</a>
                     </div>
 
                     <table>
                         <thead>
                             <tr>
                                 <td>Nom</td>
-                                <td>payé</td>
+                                <td>total</td>
                                 <td>date</td>
                                 <td>Status</td>
                             </tr>
                         </thead>
                         <tbody>
+                        {% for commande in commandes %}
+
+                        {% set sommeCommandes = 0  %}
+                        {% set sommeCommandesPrix = 0  %}
+                            {% for selection in commande.selections %}
+                                {% set sommeCommandesPrix = sommeCommandesPrix + (selection.prix * selection.quantite) %}
+                        {% endfor %}
                             <tr>
-                                <td>Arthur</td>
-                                <td>30.25€</td>
-                                <td>25/5/2022</td>
-                                <td><span class="status personel"> personel </span></td>
+                                <td>{{commande.utilisateur.pseudo}}</td>
+                                <td> {{ sommeCommandesPrix }} €</td>
+                                <td> {{commande.date | date("d/m/Y") }}</td>
+                                <td><span class="{{commande.utilisateur.roles[0]}}"> </span></td>
                             </tr>
-                            <tr>
-                                <td>Lois</td>
-                                <td>10.80€</td>
-                                <td>25/5/2022</td>
-                                <td><span class="status eleve"> élève </span></td>
-                            </tr>
-                            <tr>
-                                <td>Samantha</td>
-                                <td>54.10€</td>
-                                <td>25/5/2022</td>
-                                <td><span class="status personel"> personel </span></td>
-                            </tr>
-                            <tr>
-                                <td>Claude</td>
-                                <td>20.20€</td>
-                                <td>25/5/2022</td>
-                                <td><span class="status eleve"> élève </span></td>
-                            </tr>
-                            <tr>
-                                <td>Claude</td>
-                                <td>20.20€</td>
-                                <td>25/5/2022</td>
-                                <td><span class="status eleve"> élève </span></td>
-                            </tr>
-                            <tr>
-                                <td>Claude</td>
-                                <td>20.20€</td>
-                                <td>25/5/2022</td>
-                                <td><span class="status eleve"> élève </span></td>
-                            </tr>
-                            <tr>
-                                <td>Claude</td>
-                                <td>20.20€</td>
-                                <td>25/5/2022</td>
-                                <td><span class="status eleve"> élève </span></td>
-                            </tr>
-                            <tr>
-                                <td>Claude</td>
-                                <td>20.20€</td>
-                                <td>25/5/2022</td>
-                                <td><span class="status eleve"> élève </span></td>
-                            </tr>
-                            <tr>
-                                <td>Claude</td>
-                                <td>20.20€</td>
-                                <td>25/5/2022</td>
-                                <td><span class="status eleve"> élève </span></td>
-                            </tr>
-                            <tr>
-                                <td>Claude</td>
-                                <td>20.20€</td>
-                                <td>25/5/2022</td>
-                                <td><span class="status eleve"> élève </span></td>
-                            </tr>
-                            <tr>
-                                <td>Claude</td>
-                                <td>20.20€</td>
-                                <td>25/5/2022</td>
-                                <td><span class="status eleve"> élève </span></td>
-                            </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
-                </div>
 
+
+                </div>
                 <div class="recetteJour">
                     <div class="cardHeader">
-                        <h2>plat du jour 25/5/2022</h2>
-                        <a href="{{ path('test') }}" class="btn">modifier</a>
+                        <h2>plat du jour {{today}}</h2>
+                        <a href="{{ path('produit_semaine') }}" class="btn">modifier</a>
                     </div>
                     <table>
+
                         <thead>
                             <tr>
                                 <td>photo</td>
-                                <td>nb vendu</td>
                                 <td>nom du plat</td>
                                 <td>prix</td>
                             </tr>
                         </thead>
+                        {% for menu in menus %}
                         <tr>
-                            <td><div class="imgBox"><img class="imgPlat" src="" alt=""></div></td>
-                            <td>50</td>
-                            <td>burger bacon double chease</td>
-                            <td>4.50€</td>
+                            <td><div class="imgBox"><img class="imgPlat" src="{{menu.image}}" alt="{{menu.altImage}}"></div></td>
+                            <td> {{menu.nom}} </td>
+                            <td>{{menu.prixAchat}} €</td>
                         </tr>
-                        <tr>
-                            <td><div class="imgBox"><img class="imgPlat" src="" alt=""></div></td>
-                            <td>50</td>
-                            <td>burger bacon double chease</td>
-                            <td>4.50€</td>
-                        </tr>
-                        <tr>
-                            <td><div class="imgBox"><img class="imgPlat" src="" alt=""></div></td>
-                            <td>50</td>
-                            <td>burger bacon double chease</td>
-                            <td>4.50€</td>
-                        </tr>
-                        <tr>
-                            <td><div class="imgBox"><img class="imgPlat" src="" alt=""></div></td>
-                            <td>50</td>
-                            <td>burger bacon double chease</td>
-                            <td>4.50€</td>
-                        </tr>
-                        <tr>
-                            <td><div class="imgBox"><img class="imgPlat" src="" alt=""></div></td>
-                            <td>50</td>
-                            <td>burger bacon double chease</td>
-                            <td>4.50€</td>
-                        </tr>
-                        <tr>
-                            <td><div class="imgBox"><img class="imgPlat" src="" alt=""></div></td>
-                            <td>50</td>
-                            <td>burger bacon double chease</td>
-                            <td>4.50€</td>
-                        </tr>
-                        <tr>
-                            <td><div class="imgBox"><img class="imgPlat" src="" alt=""></div></td>
-                            <td>50</td>
-                            <td>burger bacon double chease</td>
-                            <td>4.50€</td>
-                        </tr>
-                        <tr>
-                            <td><div class="imgBox"><img class="imgPlat" src="" alt=""></div></td>
-                            <td>50</td>
-                            <td>burger bacon double chease</td>
-                            <td>4.50€</td>
-                        </tr>
-                        <tr>
-                            <td><div class="imgBox"><img class="imgPlat" src="" alt=""></div></td>
-                            <td>50</td>
-                            <td>burger bacon double chease</td>
-                            <td>4.50€</td>
-                        </tr>
-
+                        {% endfor %}
                     </table>
                 </div>
 

@@ -25,39 +25,45 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ path('commande_index') }}">
+                            <span class="icon"><ion-icon name="cart-outline"></ion-icon></span>
+                            <span class="title"> Dernières commandes</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ path('category_index') }}">
                             <span class="icon"><ion-icon name="grid-outline"></ion-icon></span>
-                            <span class="title"> Les catégories</span>
+                            <span class="title"> Catégories</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ path('produit_index') }}">
                             <span class="icon"><ion-icon name="pizza-outline"></ion-icon></span>
-                            <span class="title"> Nos Produits</span>
+                            <span class="title">Produits</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ path('critique_index') }}">
                             <span class="icon"><ion-icon name="chatbox-ellipses-outline"></ion-icon></span>
-                            <span class="title"> Les derniers avis </span>
+                            <span class="title"> Derniers avis </span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ path('feature_index') }}">
                             <span class="icon"><ion-icon name="document-outline"></ion-icon></span>
-                            <span class="title"> les articles de l'Accueil</span>
+                            <span class="title"> Articles de l'Accueil</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ path('imageCarousel_index') }}">
                             <span class="icon"><ion-icon name="image-outline"></ion-icon></span>
-                            <span class="title"> les images du carousel</span>
+                            <span class="title"> Images du carousel</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ path('equipe_index') }}">
                             <span class="icon"><ion-icon name="document-outline"></ion-icon></span>
-                            <span class="title"> l'équipe</span>
+                            <span class="title"> L'équipe</span>
                         </a>
                     </li>
                     <li>
@@ -68,8 +74,8 @@
                     </li>
                     <li>
                         <a href="{{ path('app_logout') }}">
-                            <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>
-                            <span class="title"> se déconnecter</span>
+                            <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                            <span class="title"> Déconnection</span>
                         </a>
                     </li>
                 </ul>
@@ -154,7 +160,8 @@
         //menu toggle dans le layout side bar
         let toggle = document.querySelector('.toggle');
         let navigation = document.querySelector('.navigation');
-        let main = document.querySelector('.main')
+        let main = document.querySelector('.main');
+
 
         toggle.onclick = function(){
             navigation.classList.toggle('active')
@@ -176,7 +183,7 @@
                 xmlhttp.send() 
             })
         }
-    }
 
+    }
     </script>
 </html>

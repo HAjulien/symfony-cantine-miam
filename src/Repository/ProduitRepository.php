@@ -205,6 +205,34 @@ class ProduitRepository extends ServiceEntityRepository
     }
 
     /**
+    * return one product note plus basse ...
+    * @return void
+    */
+    public function getWorstProduitNote(){
+        $query = $this->createQueryBuilder('p')
+        ->join('p.critiques', 'c')
+        ->select("avg(c.note) as note, p.nom, p.id")
+        ->orderBy('avg(c.note)', 'ASC')
+        ->groupBy('p.id')
+        ->setMaxResults(1)
+        ;
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+    * return one product note plus basse ...
+    * @return void
+    */
+    public function getMenuJour($date){
+        $query = $this->createQueryBuilder('p')
+        ->where('p.selectionner = 1')
+        ->andWhere('p.JourPrevu = :date ')
+        ->setParameter('date',  $date)
+        ;
+        return $query->getQuery()->getResult();
+    }
+
+    /**
     * return all product filter per category per page classé par note 
     * @return void
     */

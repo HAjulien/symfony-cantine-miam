@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\ImageCarousel;
 use App\Form\ImageCarouselType;
@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/imageCarousel', name: 'imageCarousel_')]
+#[Route('/admin/imageCarousel', name: 'imageCarousel_')]
 class ImageCarouselController extends AbstractController
 {
     #[Route('/', name: 'index')]

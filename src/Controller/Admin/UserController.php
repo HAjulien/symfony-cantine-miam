@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Form\SearchUserType;
@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-#[Route('user', name: 'user_')]
+#[Route('/admin/user', name: 'user_')]
 class UserController extends AbstractController
 {
     #[Route('/', name: 'index')]
@@ -143,10 +143,7 @@ class UserController extends AbstractController
     #[Route("/update/{id}", name:"update")]
     public function updateUser(User $user, Request $request, ManagerRegistry $doctrine): Response
     {
-
         $form = $this->createForm(UserUpdateFormType::class, $user );
-
-
         
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

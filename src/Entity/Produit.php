@@ -13,7 +13,12 @@ use ApiPlatform\Core\Annotation\ApiResource;
 
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
 #[ORM\Index(name: 'produit', columns: ['nom', 'description'], flags: ['fulltext'])]
-#[ApiResource]
+#[ApiResource (
+    attributes: ["pagination_items_per_page" => 3],
+    collectionOperations:["get"],
+    itemOperations:["get"],
+    )]
+
 class Produit
 {
     #[ORM\Id]
@@ -59,9 +64,17 @@ class Produit
     #[ORM\OneToMany(mappedBy: 'produit', targetEntity: Critique::class, orphanRemoval: true)]
     private $critiques;
 
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $JourPrevu;
+
+    #[ORM\OneToMany(mappedBy: 'produit', targetEntity: Selection::class)]
+    private $selections;
+
+
     public function __construct()
     {
         $this->critiques = new ArrayCollection();
+        $this->selections = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -218,4 +231,47 @@ class Produit
 
         return $this;
     }
+
+    public function getJourPrevu(): ?int
+    {
+        return $this->JourPrevu;
+    }
+
+    public function setJourPrevu(?int $JourPrevu): self
+    {
+        $this->JourPrevu = $JourPrevu;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Selection>
+     */
+    public function getSelections(): Collection
+    {
+        return $this->selections;
+    }
+
+    public function addSelection(Selection $selection): self
+    {
+        if (!$this->selections->contains($selection)) {
+            $this->selections[] = $selection;
+            $selection->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSelection(Selection $selection): self
+    {
+        if ($this->selections->removeElement($selection)) {
+            // set the owning side to null (unless already changed)
+            if ($selection->getProduit() === $this) {
+                $selection->setProduit(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

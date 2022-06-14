@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Action\NotFoundAction;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\FeatureRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -11,7 +12,21 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 
 #[ORM\Entity(repositoryClass: FeatureRepository::class)]
 #[ORM\Index(name: 'feature', columns: ['title', 'paragraphe'], flags: ['fulltext'])]
-#[ApiResource (attributes: ["pagination_items_per_page" => 3])]
+#[ApiResource (
+    attributes: ["pagination_items_per_page" => 3],
+    collectionOperations:["get"],
+    itemOperations:[
+        "get" =>[
+            "controller" => NotFoundAction::class,
+            "openapi_context" =>[
+                "summary" => "hidden",
+            ],
+            "read" => false,
+            "output" => false
+        ]
+    ],
+
+    )]
 #[ApiFilter(OrderFilter::class, properties: ['id' => 'DESC'])]
 class Feature
 {

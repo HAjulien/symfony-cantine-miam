@@ -254,4 +254,8 @@ thead tr{
     padding-left: 10px;
 }
 
-
+.voirPlus{
+    color: var(--blue2);
+    font-size: 21px;
+    margin: 0 5px;
+}

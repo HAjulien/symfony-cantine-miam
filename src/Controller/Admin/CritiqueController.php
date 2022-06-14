@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Entity\Produit;
@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/critique', name: 'critique_')]
+#[Route('/admin/critique', name: 'critique_')]
 class CritiqueController extends AbstractController
 {
     #[Route('/', name: 'index')]

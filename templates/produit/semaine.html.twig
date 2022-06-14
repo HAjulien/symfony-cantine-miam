@@ -51,6 +51,7 @@
                                         </a>
                                 <td>marge</td>
                                 <td>semaine</td>
+                                <td>jour_prévu</td>
                                 <td></td>
                         </tr>
                 </thead>
@@ -97,8 +98,19 @@
                                 <td>{{ (((produit.prixAchat - produit.prixVente) / produit.prixAchat ) * 100)|round }} %</td>
                                 <td>
                                         <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" name="active" id="customSwitch{{ produit.id }}" data-id="{{ produit.id }}" {{ produit.selectionner ? 'checked' : null}}></td>
+                                                <input class="form-check-input" type="checkbox" name="active" id="customSwitch{{ produit.id }}" data-id="{{ produit.id }}" {{ produit.selectionner ? 'checked' : null}}>
                                         </div>
+                                </td>
+                                <td><select class="select"  data-id="{{ produit.id }}" >
+                                        <option value="">{{produit.jourPrevu}}</option>
+                                        <option value="1">Lundi</option>
+                                        <option value="2">Mardi</option>
+                                        <option value="3">Mercredi</option>
+                                        <option value="4">Jeudi</option>
+                                        <option value="5">Vendredi</option>
+                                        <option value="0">Tout le temps</option>
+                                </select>
+                                </td>
                                 <td> 
                                         <a href="{{ path('produit_apercu', {id: produit.id}) }}" class="btn b3">+</a>
                                         <a href="{{ path('produit_update', {id: produit.id}) }}" class="btn b1"><ion-icon name="create-outline"></ion-icon></a>
