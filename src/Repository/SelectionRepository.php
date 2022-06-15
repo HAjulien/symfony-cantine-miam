@@ -3,8 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Selection;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Selection>
@@ -43,7 +43,7 @@ class SelectionRepository extends ServiceEntityRepository
     * return marge pour aujourd'hui ...
     * @return void
     */
-    public function getMarge($today2){
+    public function getMargeJour($today2){
         $query = $this->createQueryBuilder('s')
         ->select( 'SUM(s.prix * s.quantite) as somme ')
         ->join('s.commande', 'c')
@@ -53,7 +53,23 @@ class SelectionRepository extends ServiceEntityRepository
         ;
         return $query->getQuery()->getSingleScalarResult();
     }
+
+    /**
+    * return marge pour le mois ...
+    * @return void
+    */
+    public function getMargeMois($mois){
+        $query = $this->createQueryBuilder('s')
+        ->select( 'SUM(s.prix * s.quantite) as somme ')
+        ->join('s.commande', 'c')
+        ->where("c.id = s.commande")
+        ->andWhere( 'SUBSTRING(c.date, 3, 5) = :mois')
+        ->setParameter('mois', $mois)
+        ;
+        return $query->getQuery()->getSingleScalarResult();
+    }
     
+
 //    /**
 //     * @return Selection[] Returns an array of Selection objects
 //     */

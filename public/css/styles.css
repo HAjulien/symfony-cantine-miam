@@ -9,7 +9,13 @@
     font-family: 'Unbuntu', sans-serif;
     text-decoration: none;
 }
-
+#a {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    text-decoration: none;
+    color: var(--black);
+}
 :root{
     --pink:#E56399;
     --brown: #7A6563;
@@ -233,6 +239,38 @@ tr{
     border-radius: 50%;
 }
 
+.voirPlus{
+    color: var(--blue2);
+    font-size: 21px;
+    margin: 0 5px;
+}
+.entrée, .boisson, .dessert, .viande, .poisson, .végétarien{
+    color: var(--white);
+
+}
+.avisCategorie{
+    padding: 5px;
+    border-radius: 7px;
+    color: var(--white);
+}
+.entrée{
+    background-color: var(--green3);
+}
+.boisson{
+    background-color: var(--yellow);
+}
+.dessert{
+    background-color: var(--pink);
+}
+.viande{
+    background-color: var(--red);
+}
+.poisson{
+    background-color: var(--blue);
+}
+.végétarien{
+    background-color: var(--green2);
+}
 
 .ROLE_ADMIN::before, .ROLE_PERSONNEL::before, .ROLE_USER::before{
     padding: 10px;

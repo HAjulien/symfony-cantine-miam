@@ -42,7 +42,7 @@
                         </td>
                         <td> {{equipe.createAt | date("d/m/Y") }}</td>
                         <td> 
-                                <a href="{{ path('equipe_apercu', {id: equipe.id}) }}" class="btn b3"><ion-icon name="eye-outline"></ion-icon></a>
+                                <a href="{{ path('equipe_detail', {id: equipe.id}) }}" class="btn b3"><ion-icon name="eye-outline"></ion-icon></a>
                                 <a href="{{ path('equipe_update', {id: equipe.id}) }}" class="btn b1"><ion-icon name="create-outline"></ion-icon></a>
                                 <a href="{{ path('equipe_delete', {id: equipe.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')"><ion-icon name="trash-outline"></ion-icon></a>
                         </td>

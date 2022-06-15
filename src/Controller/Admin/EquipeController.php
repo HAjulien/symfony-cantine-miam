@@ -105,12 +105,12 @@ class EquipeController extends AbstractController
         ]);
     }
 
-    #[Route("/apercu/{id}", name: "apercu")]
-    public function apercu(Equipe $equipe): Response
+    #[Route("/detail/{id}", name: "detail")]
+    public function detail(Equipe $equipe): Response
     {
-        return $this->render('equipe/apercu.html.twig', [
+        return $this->render('equipe/detail.html.twig', [
             'equipe' => $equipe,
-            'title' => 'aperçu de la fiche de l\'employé',
+            'title' => 'détail de la fiche de l\'employé',
 
         ]);
     }

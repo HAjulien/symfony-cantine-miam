@@ -11,8 +11,8 @@
                 <a href="{{ path('critique_filtreProduit', {id: produit.id}) }}">
                     <div class="card">
                         <div>
-                            <div class="numbers"> {{produit.note}} </div>
-                            <div class="cardName"> {{produit.nom}} est le moins populaire </div>
+                            <div class="numbers"> {{produit.note}} / 5 </div>
+                            <div class="cardName"> {{produit.nom}} moins populaire </div>
                         </div>
                         <div class="iconBox">
                             <ion-icon name="star-half-outline"></ion-icon>
@@ -22,9 +22,9 @@
 
                 <div class="card">
                     <div>
-                        <a href="{{ path('commande_index') }}">
-                            <div class="numbers"> 32 </div>
-                            <div class="cardName"> couscous a le plus de critique </div>
+                        <a href="{{ path('critique_filtreProduit', {id: maxCritique.id}) }}">
+                            <div class="numbers"> {{maxCritique.maxCom}} coms</div>
+                            <div class="cardName"> {{maxCritique.nom}} plus commenté note moy: {{maxCritique.note}} </div>
                         </a>
                     </div>
                     <div class="iconBox">
@@ -35,8 +35,13 @@
                 <div class="card">
                     <div>
                         <a href="{{ path('commande_index') }}">
+                        {% if marge != null %}
                             <div class="numbers"> {{marge}} </div>
-                            <div class="cardName"> marge brute prévue pour aujourd'hui </div>
+                        {% else %}
+                            <div class="numbers"> 0 </div>
+                        {% endif %}
+                                
+                            <div class="cardName"> marge brute aujourd'hui, ce mois-ci : {{margeMois}}</div>
                         </a>
                     </div>
                     <div class="iconBox">
@@ -48,7 +53,7 @@
                     <div>
                         <a href="{{ path('user_index') }}">
                             <div class="numbers"> {{user}} </div>
-                            <div class="cardName"> nombre total inscrits </div>
+                            <div class="cardName"> nombre total inscrits dont {{userPersonnel}} personnel </div>
                         </a>
                     </div>
                     <div class="iconBox">
@@ -87,8 +92,14 @@
                                 {% set sommeCommandesPrix = sommeCommandesPrix + (selection.prix * selection.quantite) %}
                         {% endfor %}
                             <tr>
-                                <td>{{commande.utilisateur.pseudo}}</td>
-                                <td> {{ sommeCommandesPrix }} €</td>
+                                <td>
+                                    <a href="{{ path('commande_filtreUser', {id: commande.utilisateur.id}) }}" id="a"> 
+                                        {{commande.utilisateur.pseudo}}  <ion-icon name="add-circle-outline" class="voirPlus">
+                                    </a>
+                                </td>
+                                <td class="{{ (sommeCommandesPrix < faibleMontant) ? 'faibleMontant' : 'fortMontant' }}">
+                                    {{ sommeCommandesPrix }} €
+                                </td>
                                 <td> {{commande.date | date("d/m/Y") }}</td>
                                 <td><span class="{{commande.utilisateur.roles[0]}}"> </span></td>
                             </tr>
@@ -108,6 +119,7 @@
                         <thead>
                             <tr>
                                 <td>photo</td>
+                                <td>type</td>
                                 <td>nom du plat</td>
                                 <td>prix</td>
                             </tr>
@@ -115,6 +127,9 @@
                         {% for menu in menus %}
                         <tr>
                             <td><div class="imgBox"><img class="imgPlat" src="{{menu.image}}" alt="{{menu.altImage}}"></div></td>
+                            <td>  
+                                <span class="pastille {{ menu.category.nom }}"></span>
+                            </td>
                             <td> {{menu.nom}} </td>
                             <td>{{menu.prixAchat}} €</td>
                         </tr>

@@ -40,7 +40,7 @@
                         <td>{{feature.buton}}</td>
                         <td> {{feature.createAt | date("d/m/Y") }}</td>
                         <td> 
-                                <a href="{{ path('feature_apercu', {id: feature.id}) }}" class="btn b3"><ion-icon name="eye-outline"></ion-icon></a>                       
+                                <a href="{{ path('feature_detail', {id: feature.id}) }}" class="btn b3"><ion-icon name="eye-outline"></ion-icon></a>                       
                                 <a href="{{ path('feature_update', {id: feature.id}) }}" class="btn b1"><ion-icon name="create-outline"></ion-icon></a>
                                 <a href="{{ path('feature_delete', {id: feature.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')"><ion-icon name="trash-outline"></ion-icon></a>
                         </td>

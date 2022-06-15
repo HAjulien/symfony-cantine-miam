@@ -71,6 +71,7 @@ class FeatureRepository extends ServiceEntityRepository
     * @return void
     */
     public function search($mots){
+        $mots = htmlentities($mots, ENT_QUOTES, "UTF-8");
         $query = $this->createQueryBuilder('a');
         if($mots != null){
             // en reference au doctrine yaml match_against

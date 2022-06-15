@@ -7,7 +7,6 @@
 	border: 1px solid #000;
 	padding: 1.5em;
 	margin: 5px 0;
-	padding-right: 120px;
 	
 }
 
@@ -79,7 +78,17 @@ summary, .libelle, p{
 	align-items: center;
 	justify-content: space-around;
 }
+summary span{
+	width: 1%;
+}
+.libelle span:nth-child(2){
+	width: 18%;
+	text-align: center;
+}
 
+summary span:nth-child(2){
+	width: 20%;
+}
 p span{
 	width: 22%;
 }
@@ -88,8 +97,17 @@ p:first-child{
 	font-weight: 700;
 }
 
-.voirPlus{
-    color: var(--blue2);
-    font-size: 21px;
-    margin: 0 5px;
+
+.faibleMontant{
+    color: var(--red);
+    font-weight: 700;
+}
+
+.fortMontant{
+    color: var(--green2);
+    font-weight: 700;
+}
+
+.blank{
+	color: transparent;
 }

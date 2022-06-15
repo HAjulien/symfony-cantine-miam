@@ -178,3 +178,13 @@ td:first-child{
     height: 100%;
     object-fit: cover;
 }
+
+.faibleMontant{
+    color: var(--red);
+    font-weight: 700;
+}
+
+.fortMontant{
+    color: var(--green2);
+    font-weight: 700;
+}

@@ -12,7 +12,9 @@
         {% if  app.Request.pathInfo != "/admin/commande/" %}
         <h1> N°AFPA: {{Nafpa}} </h1>
 
-        <h2><a class="usebtn retour" href="{{ path('commande_index') }}">Retour à la liste </a></h2>
+        <h2><a class="usebtn retour" href="{{ app.request.headers.get('referer') }}">retour</a></h2>
+        <h2><a class="usebtn" href="{{ path('commande_index') }}">aller à la liste des commandes </a></h2>
+
         {% endif %}
         <h3> {{ total }} commandes</h3>
 
@@ -24,6 +26,7 @@
         <span>nb produit</span>
         <span>Prix total</span>
         <span>date</span>
+        <span class="blank">___</span>
     </div>
 
     {% for commande in commandes %}
@@ -41,16 +44,17 @@
 			<span> {{commande.id}} </span>
             <span>
                 <a href="{{ path('commande_filtreUser', {id: commande.utilisateur.id}) }}" id="a"> 
-                    {{commande.utilisateur.pseudo}} <ion-icon name="add-circle-outline" class="voirPlus">
+                    {{commande.utilisateur.pseudo}} <ion-icon name="add-circle-outline" class="voirPlus"></ion-icon> 
                 </a>
             </span>
             <span> {{sommeCommandes}}</span>
             {% if commande.utilisateur.roles[0] != 'ROLE_USER' %}
-                <span> {{(sommeCommandesPrix - ((sommeCommandesPrix / 100) * reduction ))|round(1) }} €</span>           
+                <span class="{{ (sommeCommandesPrix < faibleMontant) ? 'faibleMontant' : 'fortMontant' }}"> {{(sommeCommandesPrix - ((sommeCommandesPrix / 100) * reduction ))|round(1) }}€</span>           
             {% else %}
-                <span> {{ sommeCommandesPrix }} €</span>
+                <span class="{{ (sommeCommandesPrix < faibleMontant) ? 'faibleMontant' : 'fortMontant' }}"> {{ sommeCommandesPrix }}€</span>
             {% endif %}
             <span> {{commande.date | date("h:i d/m/Y") }} </span>
+            <span> <a href="{{ path('commande_delete', {id: commande.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')"><ion-icon name="trash-outline"></ion-icon></a> </span>
 		</summary>
 
 		<div>

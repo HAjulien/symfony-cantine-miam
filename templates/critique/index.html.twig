@@ -74,7 +74,7 @@
 
                                         {% if critique.contenu | length > maxlength %}
                                                 ...
-                                                <a href="{{ path('critique_apercu', {id: critique.id}) }}" class="btn b3 more" >
+                                                <a href="{{ path('critique_detail', {id: critique.id}) }}" class="btn b3 more" >
                                                         voir plus
                                                 </a>
                                         {% endif %}

@@ -250,6 +250,11 @@ input[type="checkbox"]:checked:before{
     transform: scale(0.9);
 }
 
+.voirPlus{
+    color: var(--blue2);
+    font-size: 21px;
+    margin: 0 5px;
+}
 
 .entrée, .boisson, .dessert, .viande, .poisson, .végétarien{
     color: var(--white);

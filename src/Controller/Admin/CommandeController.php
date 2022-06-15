@@ -2,8 +2,12 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Commande;
+use App\Entity\Selection;
 use App\Entity\User;
 use App\Repository\CommandeRepository;
+use App\Repository\SelectionRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -49,4 +53,15 @@ class CommandeController extends AbstractController
             'Nafpa' => $user->getIdentifiantAfpa(),
         ]);
     }
+
+    #[Route("/delete/{id}", name: "delete")]
+    public function delete(Commande $commande,SelectionRepository $selectionRepository , ManagerRegistry $doctrine): Response
+    {
+        $em = $doctrine->getManager();
+        $em->remove($commande);
+        $em->flush();
+        $this->addFlash('success', 'commande supprimé !');
+        return $this->redirectToRoute('commande_index');
+    }
+    
 }

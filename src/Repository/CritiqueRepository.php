@@ -114,6 +114,21 @@ class CritiqueRepository extends ServiceEntityRepository
         return $query->getQuery()->getSingleScalarResult();
     }
 
+    /**
+    * return number of critique 
+    * @return void
+    */
+    public function getMaxCritique()
+    {
+        $query = $this->createQueryBuilder('c')
+        ->select('COUNT(c) as maxCom, p.nom as nom , AVG(c.note) as note, p.id ')
+        ->join('c.produit', 'p')
+        ->groupBy('p.id')
+        ->orderBy('maxCom', 'DESC')
+        ;
+        return $query->getQuery()->getResult();
+    }
+
 
     /**
     * return number of critique

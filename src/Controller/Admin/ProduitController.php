@@ -529,10 +529,10 @@ class ProduitController extends AbstractController
         ]);
     }
 
-    #[Route("/apercu/{id}", name: "apercu")]
-    public function apercu(Produit $produit): Response
+    #[Route("/detail/{id}", name: "detail")]
+    public function detail(Produit $produit): Response
     {
-        return $this->render('produit/apercu.html.twig', [
+        return $this->render('produit/detail.html.twig', [
             'produit' => $produit,
             'title' => 'fiche produit'
 

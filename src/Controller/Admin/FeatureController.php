@@ -104,12 +104,12 @@ class FeatureController extends AbstractController
         ]);
     }
 
-    #[Route("/apercu/{id}", name: "apercu")]
-    public function apercu(Feature $feature): Response
+    #[Route("/detail/{id}", name: "detail")]
+    public function detail(Feature $feature): Response
     {
-        return $this->render('feature/apercu.html.twig', [
+        return $this->render('feature/detail.html.twig', [
             'feature' => $feature,
-            'title' => 'aperçu d\' article',
+            'title' => 'détail de l\' article',
 
         ]);
     }

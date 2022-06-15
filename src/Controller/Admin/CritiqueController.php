@@ -110,12 +110,12 @@ class CritiqueController extends AbstractController
         ]);
     }
 
-    #[Route("/apercu/{id}", name:"apercu")]
-    public function apercu(Critique $critique, ): Response
+    #[Route("/detail/{id}", name:"detail")]
+    public function detail(Critique $critique, ): Response
     {
 
-        return $this->render('critique/apercu.html.twig', [
-            'title' => 'aperçu critique',
+        return $this->render('critique/detail.html.twig', [
+            'title' => 'détail de la critique',
             'critique' => $critique
 
         ]);

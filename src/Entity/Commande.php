@@ -24,7 +24,7 @@ class Commande
     #[ORM\JoinColumn(nullable: false)]
     private $utilisateur;
 
-    #[ORM\OneToMany(mappedBy: 'commande', targetEntity: Selection::class)]
+    #[ORM\OneToMany(mappedBy: 'commande', targetEntity: Selection::class, orphanRemoval: true )]
     private $selections;
 
     public function __construct()

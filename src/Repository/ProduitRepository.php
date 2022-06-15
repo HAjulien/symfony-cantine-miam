@@ -226,8 +226,10 @@ class ProduitRepository extends ServiceEntityRepository
     public function getMenuJour($date){
         $query = $this->createQueryBuilder('p')
         ->where('p.selectionner = 1')
+        ->leftJoin('p.category', 'c')
         ->andWhere('p.JourPrevu = :date ')
         ->setParameter('date',  $date)
+        ->orderBy('c.nom', 'DESC')
         ;
         return $query->getQuery()->getResult();
     }
