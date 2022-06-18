@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping\Index;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
@@ -40,6 +41,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 60)]
     private $pseudo;
 
+    #[Assert\Regex(pattern:"/^\d+$/")]
     #[ORM\Column(type: 'string', length: 12, unique: true)]
     private $identifiantAfpa;
 

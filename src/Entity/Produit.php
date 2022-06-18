@@ -11,6 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use ApiPlatform\Core\Annotation\ApiResource;
 
 
+
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
 #[ORM\Index(name: 'produit', columns: ['nom', 'description'], flags: ['fulltext'])]
 #[ApiResource (
@@ -21,12 +22,13 @@ use ApiPlatform\Core\Annotation\ApiResource;
 
 class Produit
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 110)]
+    #[ORM\Column(type: 'string', length: 110, unique: true)]
     private $nom;
 
     #[ORM\Column(type: 'text')]

@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CritiqueRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 #[ORM\Entity(repositoryClass: CritiqueRepository::class)]
 #[ORM\UniqueConstraint(
@@ -19,6 +21,17 @@ use Symfony\Component\Serializer\Annotation\Groups;
     
 class Critique
 {
+
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addPropertyConstraint('note', new Assert\Range([
+            'min' => 0,
+            'max' => 5,
+            'notInRangeMessage' => 'note entre {{ min }} et {{ max }}',
+        ]));
+    }
+
+
     #[Groups(["read:comment"])]
     #[ORM\Id]
     #[ORM\GeneratedValue]

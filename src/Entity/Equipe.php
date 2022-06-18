@@ -70,6 +70,9 @@ class Equipe
     #[ORM\JoinColumn(nullable: false)]
     private $Utilisateur;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $bgcolor;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -167,6 +170,18 @@ class Equipe
     public function setUtilisateur(?User $Utilisateur): self
     {
         $this->Utilisateur = $Utilisateur;
+
+        return $this;
+    }
+
+    public function getBgcolor(): ?string
+    {
+        return $this->bgcolor;
+    }
+
+    public function setBgcolor(?string $bgcolor): self
+    {
+        $this->bgcolor = $bgcolor;
 
         return $this;
     }
