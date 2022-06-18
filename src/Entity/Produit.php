@@ -44,10 +44,10 @@ class Produit
     #[ORM\Column(type: 'datetime')]
     private $createAt;
 
+    #[Groups(["lire:produits"])]
     #[ORM\Column(type: 'float')]
     private $prixAchat;
 
-    #[Groups(["lire:produits"])]
     #[ORM\Column(type: 'float')]
     private $prixVente;
 
