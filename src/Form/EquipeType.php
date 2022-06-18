@@ -26,6 +26,8 @@ class EquipeType extends AbstractType
                 ]
             ])
             ->add('bgcolor', ColorType::class )
+            ->add('colorSurnom', ColorType::class )
+            ->add('colorNom', ColorType::class )
             ->add('Valider', SubmitType::class, array(
                 'attr' => ['class' => 'btn b1'],
             ))
