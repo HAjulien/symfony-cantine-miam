@@ -70,6 +70,7 @@ class Equipe
     #[ORM\JoinColumn(nullable: false)]
     private $Utilisateur;
 
+    #[Groups(["read:equipe"])]
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $bgcolor;
 
