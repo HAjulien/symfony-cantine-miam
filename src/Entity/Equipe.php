@@ -74,6 +74,12 @@ class Equipe
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $bgcolor;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $colorSurnom;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $colorNom;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -183,6 +189,30 @@ class Equipe
     public function setBgcolor(?string $bgcolor): self
     {
         $this->bgcolor = $bgcolor;
+
+        return $this;
+    }
+
+    public function getColorSurnom(): ?string
+    {
+        return $this->colorSurnom;
+    }
+
+    public function setColorSurnom(?string $colorSurnom): self
+    {
+        $this->colorSurnom = $colorSurnom;
+
+        return $this;
+    }
+
+    public function getColorNom(): ?string
+    {
+        return $this->colorNom;
+    }
+
+    public function setColorNom(?string $colorNom): self
+    {
+        $this->colorNom = $colorNom;
 
         return $this;
     }
