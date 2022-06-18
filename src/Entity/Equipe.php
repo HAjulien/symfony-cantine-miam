@@ -74,9 +74,11 @@ class Equipe
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $bgcolor;
 
+    #[Groups(["read:equipe"])]
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $colorSurnom;
 
+    #[Groups(["read:equipe"])]
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $colorNom;
 
