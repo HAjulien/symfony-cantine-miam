@@ -43,6 +43,28 @@
             'attr': {'class': 'champs'}
             }) }}
 
+        {{ form_row(form.bgcolor, {
+            label: 'La couleur arriere plan:',
+            'label_attr': {'class': 'label'},
+            }) }}
+        {{ form_row(form.colorSurnom, {
+            label: 'La couleur du surnom:',
+            'label_attr': {'class': 'label'},
+            }) }}
+
+        {{ form_row(form.colorSurnomContour, {
+            label: 'La couleur du contour du surnom:',
+            'label_attr': {'class': 'label'},
+            }) }}
+        {{ form_row(form.colorNom, {
+            label: 'La couleur du nom:',
+            'label_attr': {'class': 'label'},
+            }) }}
+        {{ form_row(form.colorNomContour, {
+            label: 'La couleur du contour du nom :',
+            'label_attr': {'class': 'label'},
+            }) }}
+
     {{ form_end(form) }}
 <button type="submit"  class="btn b2"><a href="{{ path('feature_index') }}">retour liste des article</a> </button>
     </div>

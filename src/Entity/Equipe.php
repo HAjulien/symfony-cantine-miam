@@ -82,6 +82,14 @@ class Equipe
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $colorNom;
 
+    #[Groups(["read:equipe"])]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $colorSurnomContour;
+
+    #[Groups(["read:equipe"])]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $colorNomContour;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -215,6 +223,30 @@ class Equipe
     public function setColorNom(?string $colorNom): self
     {
         $this->colorNom = $colorNom;
+
+        return $this;
+    }
+
+    public function getColorSurnomContour(): ?string
+    {
+        return $this->colorSurnomContour;
+    }
+
+    public function setColorSurnomContour(string $colorSurnomContour): self
+    {
+        $this->colorSurnomContour = $colorSurnomContour;
+
+        return $this;
+    }
+
+    public function getColorNomContour(): ?string
+    {
+        return $this->colorNomContour;
+    }
+
+    public function setColorNomContour(?string $colorNomContour): self
+    {
+        $this->colorNomContour = $colorNomContour;
 
         return $this;
     }
