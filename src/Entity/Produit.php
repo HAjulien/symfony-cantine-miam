@@ -2,22 +2,24 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation\Slug;
 use App\Repository\ProduitRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
 #[ORM\Index(name: 'produit', columns: ['nom', 'description'], flags: ['fulltext'])]
 #[ApiResource (
-    attributes: ["pagination_items_per_page" => 3],
+    attributes: ["pagination_items_per_page" => 10],
     collectionOperations:["get"],
     itemOperations:["get"],
+    normalizationContext: ['groups' => ['lire:produits']],
     )]
 
 class Produit
@@ -28,9 +30,11 @@ class Produit
     #[ORM\Column(type: 'integer')]
     private $id;
 
+    #[Groups(["lire:produits"])]
     #[ORM\Column(type: 'string', length: 110, unique: true)]
     private $nom;
 
+    #[Groups(["lire:produits"])]
     #[ORM\Column(type: 'text')]
     private $description;
 
@@ -43,18 +47,23 @@ class Produit
     #[ORM\Column(type: 'float')]
     private $prixAchat;
 
+    #[Groups(["lire:produits"])]
     #[ORM\Column(type: 'float')]
     private $prixVente;
 
+    #[Groups(["lire:produits"])]
     #[ORM\Column(type: 'string', length: 150)]
     private $image;
 
+    #[Groups(["lire:produits"])]
     #[ORM\Column(type: 'string', length: 150)]
     private $altImage;
 
+    #[Groups(["lire:produits"])]
     #[ORM\Column(type: 'boolean')]
     private $selectionner;
 
+    #[Groups(["lire:produits"])]
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'produits')]
     #[ORM\JoinColumn(nullable: false)]
     private $category;
@@ -63,9 +72,11 @@ class Produit
     #[ORM\Column(type: 'string', length: 150)]
     private $slug;
 
+    #[Groups(["lire:produits"])]
     #[ORM\OneToMany(mappedBy: 'produit', targetEntity: Critique::class, orphanRemoval: true)]
     private $critiques;
 
+    #[Groups(["lire:produits"])]
     #[ORM\Column(type: 'integer', nullable: true)]
     private $JourPrevu;
 

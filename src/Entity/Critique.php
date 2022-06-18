@@ -38,7 +38,7 @@ class Critique
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[Groups(["read:comment"])]
+    #[Groups(["read:comment", "lire:produits"])]
     #[ORM\Column(type: 'float')]
     private $note;
 
