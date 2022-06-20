@@ -42,17 +42,17 @@ class Critique
     #[ORM\Column(type: 'float')]
     private $note;
 
-    #[Groups(["read:comment"])]
+    #[Groups(["read:comment", "lire:produits"])]
     #[ORM\Column(type: 'text', nullable: true)]
     private $contenu;
 
-    #[Groups(["read:comment"])]
+    #[Groups(["read:comment", "lire:produits"])]
     #[ORM\Column(type: 'datetime')]
     private $createAt;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'critiques')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(["read:comment"])]
+    #[Groups(["read:comment", "lire:produits"])]
     private $utilisateur;
 
     #[ORM\ManyToOne(targetEntity: Produit::class, inversedBy: 'critiques')]
