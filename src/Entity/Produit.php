@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation\Slug;
 use App\Repository\ProduitRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\MongoDbOdm\Filter\SearchFilter;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -21,6 +23,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
     itemOperations:["get"],
     normalizationContext: ['groups' => ['lire:produits']],
     )]
+#[ApiFilter(SearchFilter::class, properties:[
+    'nom' => 'partial',
+    'description' => 'partial',
+    'category.nom' => 'exact'
+    ])]
+
 
 class Produit
 {
@@ -28,6 +36,7 @@ class Produit
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(["lire:produits"])]
     private $id;
 
     #[Groups(["lire:produits"])]

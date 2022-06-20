@@ -48,10 +48,15 @@
             'label_attr': {'class': 'label'},
             'attr': {'class': 'champs'}
             }) }}
-
         {{ form_row(form.selectionner, {
             label: 'selectionner pour cette semaine',
+            'label_attr': {'class': 'label_chekckbox'},
             'attr': {'class': 'valitation'}
+        }) }}
+        {{ form_row(form.jourPrevu, {
+            label: 'Le jour de service:',
+            'label_attr': {'class': 'label'},
+            'attr': {'class': 'champs'}
             }) }}
 
     {{ form_end(form) }}

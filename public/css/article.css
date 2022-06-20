@@ -85,7 +85,19 @@ p{
     color: #CEFF1A;
     text-decoration: underline;
 }
-
+.valitation{
+    height: 25px;
+    width: 25px;
+    margin-left: 5%;
+    margin: 20px 0 40px 5%;
+}
+.label_chekckbox{
+    font-size: 20px;
+    font-weight: 500;
+    color: #CEFF1A;
+    text-decoration: underline;
+    margin: 5px;
+}
 #cke_feature_paragraphe, #cke_produit_description, #cke_equipe_contenu{
     width: 90%;
     margin: 20px 40px;
