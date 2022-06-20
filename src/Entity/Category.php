@@ -14,7 +14,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 #[ORM\Index(name: 'category', columns: ['nom'], flags: ['fulltext'])]
 #[ApiResource (
-    attributes: ["pagination_items_per_page" => 3],
     collectionOperations:["get"],
     itemOperations:["get"]
     )]
