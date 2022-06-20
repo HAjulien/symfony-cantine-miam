@@ -38,6 +38,7 @@ class Category
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Produit::class)]
     private $produits;
 
+    #[Groups(["lire:produits"])]
     #[ORM\Column(type: 'string', length: 20, nullable: true)]
     private $couleur;
 
