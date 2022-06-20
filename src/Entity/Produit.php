@@ -18,7 +18,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
 #[ORM\Index(name: 'produit', columns: ['nom', 'description'], flags: ['fulltext'])]
 #[ApiResource (
-    attributes: ["pagination_items_per_page" => 10],
+    attributes: ["pagination_items_per_page" => 12],
     collectionOperations:["get"],
     itemOperations:["get"],
     normalizationContext: ['groups' => ['lire:produits']],
