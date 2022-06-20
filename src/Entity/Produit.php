@@ -26,7 +26,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ApiFilter(SearchFilter::class, properties:[
     'nom' => 'partial',
     'description' => 'partial',
-    'category.nom' => 'partial'
+    'category.id' => 'exact'
     ])]
 
 
