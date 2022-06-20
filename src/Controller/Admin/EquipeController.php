@@ -8,6 +8,7 @@ use App\Form\SearchUserType;
 use App\Repository\EquipeRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -55,11 +56,13 @@ class EquipeController extends AbstractController
     }
 
     #[Route("/add", name:"add")]
-    public function addEquipier(Request $request, ManagerRegistry $doctrine): Response
+    public function addEquipier(Request $request, ManagerRegistry $doctrine, Security $security): Response
     {
+        
         $equipe = new Equipe();
+        //on récupére l'utilisateur connecté et on injecte dans le formulaire
+        $equipe->setUtilisateur($security->getUser());
         $form = $this->createForm(EquipeType::class, $equipe);
-
         
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

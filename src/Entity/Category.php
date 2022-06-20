@@ -38,6 +38,9 @@ class Category
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Produit::class)]
     private $produits;
 
+    #[ORM\Column(type: 'string', length: 20, nullable: true)]
+    private $couleur;
+
     public function __construct()
     {
         $this->produits = new ArrayCollection();
@@ -104,6 +107,18 @@ class Category
                 $produit->setCategory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCouleur(): ?string
+    {
+        return $this->couleur;
+    }
+
+    public function setCouleur(?string $couleur): self
+    {
+        $this->couleur = $couleur;
 
         return $this;
     }
