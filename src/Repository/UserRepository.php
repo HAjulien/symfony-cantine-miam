@@ -3,11 +3,14 @@
 namespace App\Repository;
 
 use App\Entity\User;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Types\StringType;
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
  * @extends ServiceEntityRepository<User>
@@ -19,7 +22,10 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry,
+    private UserPasswordHasherInterface $userPasswordHasher,
+    private EntityManagerInterface $entityManager
+    )
     {
         parent::__construct($registry, User::class);
     }
@@ -40,6 +46,28 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function create($data){
+        $user = new User();
+        $user->setEmail($data->email);
+        $user->setPseudo($data->pseudo);
+        $user->setIdentifiantAfpa($data->identifiantAfpa);
+        $user->setTelephone($data->telephone);
+        $user->setPointFidelite(0);
+
+        // hash the password (based on the security.yaml config for the $user class)
+        $hashedPassword = $this->userPasswordHasher->hashPassword(
+            $user,
+            $data->password
+        );
+        $user->setPassword($hashedPassword);
+        // $password = $this->userPasswordHasher->hashPassword($data->password,$user);
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+
+        return $user;
+
     }
 
     /**
