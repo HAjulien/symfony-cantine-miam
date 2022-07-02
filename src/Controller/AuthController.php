@@ -58,7 +58,8 @@ class AuthController extends AbstractController
                     'email' => $email,
                     'password' => $password,
                     'identifiantAfpa' => $Afpa,
-                    'emailtest' => filter_var( $data->email, FILTER_VALIDATE_EMAIL)
+                    'emailtest' => filter_var( $data->email, FILTER_VALIDATE_EMAIL),
+                    'erreur' => 'erreur'
             ]);
         };
 
@@ -66,7 +67,18 @@ class AuthController extends AbstractController
         
         return new JsonResponse([
             'user' => $this->serializer->serialize($user, 'json')
-        ]);
+        ], 201); 
     }
-}
 
+    #[Route('/profile', name:'user.profile')]
+    public function profile(Security $security) : JsonResponse
+    {
+
+        $currentUser= $security->getUser();
+        $user = $this->serializer->serialize($currentUser, 'json');
+
+        return new JsonResponse([
+            'user' => $user,
+        ],);
+    }
+} 

@@ -84,25 +84,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                        {% for commande in commandes %}
+                            {% for commande in commandes %}
 
-                        {% set sommeCommandes = 0  %}
-                        {% set sommeCommandesPrix = 0  %}
-                            {% for selection in commande.selections %}
-                                {% set sommeCommandesPrix = sommeCommandesPrix + (selection.prix * selection.quantite) %}
-                        {% endfor %}
-                            <tr>
-                                <td>
-                                    <a href="{{ path('commande_filtreUser', {id: commande.utilisateur.id}) }}" id="a"> 
-                                        {{commande.utilisateur.pseudo}}  <ion-icon name="add-circle-outline" class="voirPlus">
-                                    </a>
-                                </td>
-                                <td class="{{ (sommeCommandesPrix < faibleMontant) ? 'faibleMontant' : 'fortMontant' }}">
-                                    {{ sommeCommandesPrix }} €
-                                </td>
-                                <td> {{commande.date | date("d/m/Y") }}</td>
-                                <td><span class="{{commande.utilisateur.roles[0]}}"> </span></td>
-                            </tr>
+                                {% set sommeCommandes = 0  %}
+                                {% set sommeCommandesPrix = 0  %}
+                                {% for selection in commande.selections %}
+                                    {% set sommeCommandesPrix = sommeCommandesPrix + (selection.prix * selection.quantite) %}
+                                {% endfor %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ path('commande_filtreUser', {id: commande.utilisateur.id}) }}" id="a"> 
+                                            {{commande.utilisateur.pseudo}}  <ion-icon name="add-circle-outline" class="voirPlus">
+                                        </a>
+                                    </td>
+                                    <td class="{{ (sommeCommandesPrix < faibleMontant) ? 'faibleMontant' : 'fortMontant' }}">
+                                        {{ sommeCommandesPrix }} €
+                                    </td>
+                                    <td> {{commande.date | date("d/m/Y") }}</td>
+                                    <td><span class="{{commande.utilisateur.roles[0]}}"> </span></td>
+                                </tr>
                             {% endfor %}
                         </tbody>
                     </table>
@@ -125,14 +125,14 @@
                             </tr>
                         </thead>
                         {% for menu in menus %}
-                        <tr>
-                            <td><div class="imgBox"><img class="imgPlat" src="{{menu.image}}" alt="{{menu.altImage}}"></div></td>
-                            <td>  
-                                <span class="pastille {{ menu.category.nom }}"></span>
-                            </td>
-                            <td> {{menu.nom}} </td>
-                            <td>{{menu.prixAchat}} €</td>
-                        </tr>
+                            <tr>
+                                <td><div class="imgBox"><img class="imgPlat" src="{{menu.image}}" alt="{{menu.altImage}}"></div></td>
+                                <td>  
+                                    <span class="pastille {{ menu.category.nom }}"></span>
+                                </td>
+                                <td> {{menu.nom}} </td>
+                                <td>{{menu.prixAchat}} €</td>
+                            </tr>
                         {% endfor %}
                     </table>
                 </div>

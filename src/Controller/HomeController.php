@@ -21,7 +21,7 @@ class HomeController extends AbstractController
         $today2 = date("y-m-d");
         $mois = date("y-m");
         $date=date('w');
-        $commande = $commandeRepository->getCommandeRecente();
+        $commandes = $commandeRepository->getCommandeRecente();
         $marge = $selectionRepository->getMargeJour($today2);
         $margeMois = $selectionRepository->getMargeMois($mois);
         $produit = $ProduitRepository->getWorstProduitNote();
@@ -42,7 +42,7 @@ class HomeController extends AbstractController
             'today2' => $today2,
             'menus' => $menu,
             'produit' => $produit[0],
-            'commandes' => $commande,
+            'commandes' => $commandes,
             'user' => $user,
             'userPersonnel' => $userPersonnel,
         ]);

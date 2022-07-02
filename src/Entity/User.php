@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping\Index;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -17,6 +18,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 // pour faire les recherches
 #[ORM\Index(name: 'user', columns: ['pseudo', 'identifiant_afpa'], flags: ['fulltext'])]
 #[UniqueEntity(fields: ['email'], message: 'Un compte existe déjâ avec cette email.')]
+#[ApiResource]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
 

@@ -4,10 +4,13 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CritiqueRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Controller\Api\CritiqueCreateController;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 #[ORM\Entity(repositoryClass: CritiqueRepository::class)]
 #[ORM\UniqueConstraint(
@@ -17,8 +20,34 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 #[ApiResource (
     normalizationContext: ['groups' => ['read:comment']],
+    collectionOperations:[
+        'get', 
+        "post" => [
+            "security" => "is_granted('IS_AUTHENTICATED_FULLY')",
+            "controller" => \App\Controller\Api\CritiqueCreateController::class,
+            "denormalization_context" => ['groups' => ['create:critique']]
+            ]
+    ],
+    itemOperations: [
+        'get' => [
+            "controller" => \App\Controller\Api\EmptyController::class,
+            "read" => false,
+            "deserialize" => false
+
+        ],
+        "put" => [
+            "security" => "is_granted('EDIT_CRITIQUE', object)",
+            "denormalization_context" => ['groups' => ['update:critique']]
+        ],
+        "delete" => [
+            "security" => "is_granted('EDIT_CRITIQUE', object)"
+        ],
+        ]
     )]
-    
+    #[ApiFilter(SearchFilter::class, properties:[
+        'produit' => 'exact',
+    ])]
+
 class Critique
 {
 
@@ -38,11 +67,11 @@ class Critique
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[Groups(["read:comment", "lire:produits"])]
+    #[Groups(["read:comment", "lire:produits", "create:critique", "update:critique"])]
     #[ORM\Column(type: 'float')]
     private $note;
 
-    #[Groups(["read:comment", "lire:produits"])]
+    #[Groups(["read:comment", "lire:produits", "create:critique", "update:critique"])]
     #[ORM\Column(type: 'text', nullable: true)]
     private $contenu;
 
@@ -54,7 +83,8 @@ class Critique
     #[ORM\JoinColumn(nullable: false)]
     #[Groups(["read:comment", "lire:produits"])]
     private $utilisateur;
-
+    
+    #[Groups(["read:comment", "create:critique"])]
     #[ORM\ManyToOne(targetEntity: Produit::class, inversedBy: 'critiques')]
     #[ORM\JoinColumn(nullable: false)]
     private $produit;

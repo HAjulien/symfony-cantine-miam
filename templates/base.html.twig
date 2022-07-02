@@ -179,7 +179,7 @@
         for(let button of activate) {
             button.addEventListener("click", function(){
                 let xmlhttp = new XMLHttpRequest
-                xmlhttp.open("get", `/produit/activate/${this.dataset.id}`)
+                xmlhttp.open("get", `/admin/produit/activate/${this.dataset.id}`)
                 xmlhttp.send() 
             })
         }

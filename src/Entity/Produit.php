@@ -2,16 +2,17 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiFilter;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation\Slug;
 use App\Repository\ProduitRepository;
 use Gedmo\Mapping\Annotation as Gedmo;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 
 
 
@@ -25,9 +26,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
     )]
 #[ApiFilter(SearchFilter::class, properties:[
     'nom' => 'partial',
+    'JourPrevu' => 'exact',
     'description' => 'partial',
-    'category.id' => 'exact'
+    'category.id' => 'exact',
     ])]
+#[ApiFilter(BooleanFilter::class, properties: ['selectionner'])]
 
 
 class Produit
