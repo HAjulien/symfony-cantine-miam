@@ -24,7 +24,7 @@ class AuthController extends AbstractController
         
     }
 
-    #[Route('/register', name:'user.register')]
+    #[Route('/register', name:'user.register', methods:["POST", "GET"])]
     public function app(Request $request) : JsonResponse
     {
         $data = json_decode($request->getContent());
@@ -70,7 +70,7 @@ class AuthController extends AbstractController
         ], 201); 
     }
 
-    #[Route('/profile', name:'user.profile')]
+    #[Route('/profile', name:'user.profile', methods:["POST", "GET"])]
     public function profile(Security $security) : JsonResponse
     {
 
