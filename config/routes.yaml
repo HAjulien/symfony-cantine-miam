@@ -4,6 +4,3 @@
 
 login:
     path: /api/login
-    methods: ['POST', 'GET']
-    defaults:
-        _format: json
