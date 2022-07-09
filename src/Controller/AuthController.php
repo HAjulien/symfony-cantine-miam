@@ -54,12 +54,12 @@ class AuthController extends AbstractController
             or !$uppercase or !$lowercase or !$number or strlen($password) < 8
             ){
                 return new JsonResponse([
-                    'pseudo' => $pseudo,
-                    'email' => $email,
-                    'password' => $password,
-                    'identifiantAfpa' => $Afpa,
-                    'emailtest' => filter_var( $data->email, FILTER_VALIDATE_EMAIL),
-                    'erreur' => 'erreur'
+                    'erreur' => 'erreur',
+                    // 'pseudo' => $pseudo,
+                    // 'email' => $email,
+                    // 'password' => $password,
+                    // 'identifiantAfpa' => $Afpa,
+                    // 'emailtest' => filter_var( $data->email, FILTER_VALIDATE_EMAIL)
             ]);
         };
 

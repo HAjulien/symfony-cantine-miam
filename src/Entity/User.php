@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 // pour faire les recherches
 #[ORM\Index(name: 'user', columns: ['pseudo', 'identifiant_afpa'], flags: ['fulltext'])]
 #[UniqueEntity(fields: ['email'], message: 'Un compte existe déjâ avec cette email.')]
-#[ApiResource]
+
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
 

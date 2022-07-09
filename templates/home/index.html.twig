@@ -11,7 +11,7 @@
                 <a href="{{ path('critique_filtreProduit', {id: produit.id}) }}">
                     <div class="card">
                         <div>
-                            <div class="numbers"> {{produit.note}} / 5 </div>
+                            <div class="numbers"> {{produit.note|round(1, 'floor')}} / 5 </div>
                             <div class="cardName"> {{produit.nom}} moins populaire </div>
                         </div>
                         <div class="iconBox">
@@ -24,7 +24,7 @@
                     <div>
                         <a href="{{ path('critique_filtreProduit', {id: maxCritique.id}) }}">
                             <div class="numbers"> {{maxCritique.maxCom}} coms</div>
-                            <div class="cardName"> {{maxCritique.nom}} plus commenté note moy: {{maxCritique.note}} </div>
+                            <div class="cardName"> {{maxCritique.nom}} plus commenté note moy: {{maxCritique.note|round(1, 'floor')}} </div>
                         </a>
                     </div>
                     <div class="iconBox">

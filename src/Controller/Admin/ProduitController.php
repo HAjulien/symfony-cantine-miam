@@ -559,6 +559,60 @@ class ProduitController extends AbstractController
         return New Response("true");
 
     }
+    #[Route("/jourPrevu/{id}/0", name: "ToutLeTemps")]
+    public function ToutLeTemps(Produit $produit, ManagerRegistry $doctrine): Response
+    {
+        $produit->setJourPrevu(0);
+        $em = $doctrine->getManager();
+        $em->flush();
+        return New Response("true");
+
+    }
+    #[Route("/jourPrevu/{id}/1", name: "lundi")]
+    public function lundi(Produit $produit, ManagerRegistry $doctrine): Response
+    {
+        $produit->setJourPrevu(1);
+        $em = $doctrine->getManager();
+        $em->flush();
+        return New Response("true");
+
+    }
+    #[Route("/jourPrevu/{id}/2", name: "mardi")]
+    public function mardi(Produit $produit, ManagerRegistry $doctrine): Response
+    {
+        $produit->setJourPrevu(2);
+        $em = $doctrine->getManager();
+        $em->flush();
+        return New Response("true");
+
+    }
+    #[Route("/jourPrevu/{id}/3", name: "mercredi")]
+    public function mercredi(Produit $produit, ManagerRegistry $doctrine): Response
+    {
+        $produit->setJourPrevu(3);
+        $em = $doctrine->getManager();
+        $em->flush();
+        return New Response("true");
+
+    }
+    #[Route("/jourPrevu/{id}/4", name: "jeudi")]
+    public function jeudi(Produit $produit, ManagerRegistry $doctrine): Response
+    {
+        $produit->setJourPrevu(4);
+        $em = $doctrine->getManager();
+        $em->flush();
+        return New Response("true");
+
+    }
+    #[Route("/jourPrevu/{id}/5", name: "vendredi")]
+    public function vendredi(Produit $produit, ManagerRegistry $doctrine): Response
+    {
+        $produit->setJourPrevu(5);
+        $em = $doctrine->getManager();
+        $em->flush();
+        return New Response("true");
+
+    }
 
 
 }

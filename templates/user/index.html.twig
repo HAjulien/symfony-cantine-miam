@@ -60,7 +60,7 @@
                                         </span>
                                 {% endif %}
                                 <a href="{{ path('user_update', {id: user.id}) }}" class="btn b1"><ion-icon name="create-outline"></ion-icon></a>
-                                <a href="{{ path('user_delete', {id: user.id}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')"><ion-icon name="trash-outline"></ion-icon></a>
+                                <a href="{{ path('user_delete', {id: user.id, _csrf_token: csrf_token('delete')}) }}" class="btn b2"  onclick="return confirm('Suppression ? ')"><ion-icon name="trash-outline"></ion-icon></a>
                         </td>
                 </tr>
         {% endfor %}
