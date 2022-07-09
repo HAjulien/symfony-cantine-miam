@@ -132,7 +132,6 @@ input[type="checkbox"]:checked:before{
     transition: 0.3s;
 }
 
-
 /* pour les utilisateur identifié */
 .valide{
     background-color: var(--green2);

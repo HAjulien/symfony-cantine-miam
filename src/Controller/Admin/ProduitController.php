@@ -559,15 +559,7 @@ class ProduitController extends AbstractController
         return New Response("true");
 
     }
-    #[Route("/jourPrevu/{id}/0", name: "ToutLeTemps")]
-    public function ToutLeTemps(Produit $produit, ManagerRegistry $doctrine): Response
-    {
-        $produit->setJourPrevu(0);
-        $em = $doctrine->getManager();
-        $em->flush();
-        return New Response("true");
 
-    }
     #[Route("/jourPrevu/{id}/1", name: "lundi")]
     public function lundi(Produit $produit, ManagerRegistry $doctrine): Response
     {
@@ -613,6 +605,14 @@ class ProduitController extends AbstractController
         return New Response("true");
 
     }
+    #[Route("/jourPrevu/{id}/6", name: "ToutLeTemps")]
+    public function ToutLeTemps(Produit $produit, ManagerRegistry $doctrine): Response
+    {
+        $produit->setJourPrevu(6);
+        $em = $doctrine->getManager();
+        $em->flush();
+        return New Response("true");
 
+    }
 
 }

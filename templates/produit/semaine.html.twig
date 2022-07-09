@@ -102,13 +102,22 @@
                                         </div>
                                 </td>
                                 <td><select class="select"  data-id="{{ produit.id }}" >
-                                        <option value="">{{produit.jourPrevu}}</option>
+                                        <option value="">
+                                                {% if produit.jourPrevu == 1 %} Lundi
+                                                {% elseif produit.jourPrevu == 2 %} Mardi
+                                                {% elseif produit.jourPrevu == 3 %} Mercredi
+                                                {% elseif produit.jourPrevu == 4 %} Jeudi
+                                                {% elseif produit.jourPrevu == 5 %} Vendredi
+                                                {% elseif produit.jourPrevu == 6 %} Tout le temps
+                                                {% else %}
+                                                {% endif %}
+                                        </option>
                                         <option value="1">Lundi</option>
                                         <option value="2">Mardi</option>
                                         <option value="3">Mercredi</option>
                                         <option value="4">Jeudi</option>
                                         <option value="5">Vendredi</option>
-                                        <option value="0">Tout le temps</option>
+                                        <option value="6">Tout le temps</option>
                                 </select>
                                 </td>
                                 <td> 
