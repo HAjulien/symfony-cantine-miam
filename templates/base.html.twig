@@ -189,7 +189,7 @@
                 let xmlhttp = new XMLHttpRequest
                 let jour = jourChoisi.value
                 //console.log(`/admin/produit/jourPrevu/${this.dataset.id}/${jour}`);
-                xmlhttp.open("get", `/admin/produit/jourPrevu/${this.dataset.id}/${jour}`)
+                xmlhttp.open("get", `/admin/produit/jourPrevu/${this.dataset.id}/?jourSemaine=${jour}`)
                 xmlhttp.send() 
             })
         }
