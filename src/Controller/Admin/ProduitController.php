@@ -560,8 +560,8 @@ class ProduitController extends AbstractController
 
     }
 
-    #[Route("/jourPrevu/{id}", name: "lundi")]
-    public function lundi(Produit $produit, ManagerRegistry $doctrine, Request $request): Response
+    #[Route("/jourPrevu/{id}", name: "jourPrevu")]
+    public function jourPrevu(Produit $produit, ManagerRegistry $doctrine, Request $request): Response
     {
         $jourSemaine = (int)$request->query->get("jourSemaine");
         $produit->setJourPrevu($jourSemaine);
