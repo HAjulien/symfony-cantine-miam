@@ -101,7 +101,7 @@
                                                 <input class="form-check-input" type="checkbox" name="active" id="customSwitch{{ produit.id }}" data-id="{{ produit.id }}" {{ produit.selectionner ? 'checked' : null}}>
                                         </div>
                                 </td>
-                                <td><select class="select"  data-id="{{ produit.id }}" >
+                                <td><select class="select"  data-id="{{ produit.id }}" data-token="{{ csrf_token("jourChange") }}" >
                                         <option value="">
                                                 {% if produit.jourPrevu == 1 %} Lundi
                                                 {% elseif produit.jourPrevu == 2 %} Mardi

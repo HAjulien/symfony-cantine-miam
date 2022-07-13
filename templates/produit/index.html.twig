@@ -113,8 +113,9 @@
                                 <td>{{ (((produit.prixAchat - produit.prixVente) / produit.prixAchat ) * 100)|round }} %</td>
                                 <td>
                                         <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" name="active" id="customSwitch{{ produit.id }}" data-id="{{ produit.id }}" {{ produit.selectionner ? 'checked' : null}}></td>
+                                                <input class="form-check-input" type="checkbox" name="active" id="customSwitch{{ produit.id }}" data-id="{{ produit.id }}" data-token="{{ csrf_token("switch") }}" {{ produit.selectionner ? 'checked' : null}}>
                                         </div>
+                                </td>
                                 <td> 
                                         <a href="{{ path('produit_detail', {id: produit.id}) }}" class="btn b3">+</a>
                                         <a href="{{ path('produit_update', {id: produit.id}) }}" class="btn b1"><ion-icon name="create-outline"></ion-icon></a>

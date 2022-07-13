@@ -84,10 +84,10 @@
             <div class="main">
                 <div class="topbar">
                     <div class="toggle"><ion-icon name="menu-outline"></ion-icon></div>
-                    <div>Bienvenue ADMIN/ 
+                    <div>Bienvenue {{ app.user.pseudo }}/ 
                         <span> <a href="{{ path('app_logout') }}">se déconnecter</a></span>
                     </div>
-                    <div class="user"> <img src="" alt=""></div>
+                    <div class="user"> <img src="https://cdn-icons-png.flaticon.com/512/5325/5325339.png" alt=""></div>
                 </div>
                 
                 {% for message in app.flashes('success') %}
@@ -179,7 +179,7 @@
         for(let button of activate) {
             button.addEventListener("click", function(){
                 let xmlhttp = new XMLHttpRequest
-                xmlhttp.open("get", `/admin/produit/activate/${this.dataset.id}`)
+                xmlhttp.open("get", `/admin/produit/activate/${this.dataset.id}?_CSRF=${this.dataset.token}`)
                 xmlhttp.send() 
             })
         }
@@ -189,7 +189,7 @@
                 let xmlhttp = new XMLHttpRequest
                 let jour = jourChoisi.value
                 //console.log(`/admin/produit/jourPrevu/${this.dataset.id}/${jour}`);
-                xmlhttp.open("get", `/admin/produit/jourPrevu/${this.dataset.id}/?jourSemaine=${jour}`)
+                xmlhttp.open("get", `/admin/produit/jourPrevu/${this.dataset.id}?jourSemaine=${jour}&_CSRF=${this.dataset.token}`)
                 xmlhttp.send() 
             })
         }

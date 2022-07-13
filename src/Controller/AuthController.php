@@ -76,7 +76,6 @@ class AuthController extends AbstractController
 
         $currentUser= $security->getUser();
         $user = $this->serializer->serialize($currentUser, 'json');
-
         return new JsonResponse([
             'user' => $user,
         ],);

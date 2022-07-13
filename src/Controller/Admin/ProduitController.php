@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Csrf\CsrfToken;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 #[Route('/admin/produit', name: 'produit_')]
 class ProduitController extends AbstractController
@@ -550,25 +552,34 @@ class ProduitController extends AbstractController
     }
 
     #[Route("/activate/{id}", name: "activate")]
-    public function active(Produit $produit, ManagerRegistry $doctrine): Response
+    public function active(Produit $produit, ManagerRegistry $doctrine, Request $request, CsrfTokenManagerInterface $csrfTokenManager): Response
     {
 
-        $produit->setSelectionner(($produit->isSelectionner()) ? false : true);
-        $em = $doctrine->getManager();
-        $em->flush();
-        return New Response("true");
-
+        $token = new CsrfToken('switch', $request->query->get('_CSRF'));
+        if($csrfTokenManager->isTokenValid($token)){
+            $produit->setSelectionner(($produit->isSelectionner()) ? false : true);
+            $em = $doctrine->getManager();
+            $em->flush();
+            return New Response("true");
+        } else {
+            return New Response('false');
+        }
     }
 
     #[Route("/jourPrevu/{id}", name: "jourPrevu")]
-    public function jourPrevu(Produit $produit, ManagerRegistry $doctrine, Request $request): Response
+    public function jourPrevu(Produit $produit, ManagerRegistry $doctrine, Request $request, CsrfTokenManagerInterface $csrfTokenManager): Response
     {
-        $jourSemaine = (int)$request->query->get("jourSemaine");
-        $produit->setJourPrevu($jourSemaine);
-        $em = $doctrine->getManager();
-        $em->flush();
-        return New Response("true");
+        $token = new CsrfToken('jourChange', $request->query->get('_CSRF'));
 
+        if($csrfTokenManager->isTokenValid($token)){
+            $jourSemaine = (int)$request->query->get("jourSemaine");
+            $produit->setJourPrevu($jourSemaine);
+            $em = $doctrine->getManager();
+            $em->flush();
+            return New Response("true");
+        } else {
+            return New Response('false');
+        }
     }
 
 }
