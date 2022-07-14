@@ -16,7 +16,7 @@ class HomeController extends AbstractController
     #[Route('/', name: 'home')]
     public function index(ProduitRepository $ProduitRepository, UserRepository $userRepository, CommandeRepository $commandeRepository, SelectionRepository $selectionRepository, CritiqueRepository $critiqueRepository): Response
     {
-        //$this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->denyAccessUnlessGranted("ROLE_ADMIN");
 
         $today = date("d/m/y");
         $today2 = date("y-m-d");
