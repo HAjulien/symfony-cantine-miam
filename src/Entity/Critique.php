@@ -19,7 +19,6 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 )]
 
 #[ApiResource (
-    order: ["createAt" => "DESC"],
     normalizationContext: ['groups' => ['read:comment']],
     collectionOperations:[
         'get', 
@@ -49,6 +48,11 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
         'produit' => 'exact',
         'utilisateur.id' => 'exact'
     ])]
+    #[ApiFilter(OrderFilter::class, properties:[
+        "createAt" => "DESC"
+
+    ])]
+
 
 class Critique
 {
