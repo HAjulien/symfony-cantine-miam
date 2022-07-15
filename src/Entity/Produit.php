@@ -23,7 +23,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
     collectionOperations:["get"],
     itemOperations:["get"],
     normalizationContext: ['groups' => ['lire:produits']],
-    order: ["critiques.createAt" => "DESC"]
+    order: ["critiques.createAt" => "ASC"]
     )]
 #[ApiFilter(SearchFilter::class, properties:[
     'nom' => 'partial',
