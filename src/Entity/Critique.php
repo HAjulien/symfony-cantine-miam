@@ -9,7 +9,6 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 #[ORM\Entity(repositoryClass: CritiqueRepository::class)]
@@ -48,11 +47,6 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
         'produit' => 'exact',
         'utilisateur.id' => 'exact'
     ])]
-    #[ApiFilter(OrderFilter::class, properties:[
-        "createAt" => "DESC"
-
-    ])]
-
 
 class Critique
 {
