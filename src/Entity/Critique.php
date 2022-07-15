@@ -19,6 +19,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 )]
 
 #[ApiResource (
+    order: ["createAt" => "DESC"],
     normalizationContext: ['groups' => ['read:comment']],
     collectionOperations:[
         'get', 
