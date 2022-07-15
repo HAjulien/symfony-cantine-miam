@@ -23,6 +23,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
     collectionOperations:["get"],
     itemOperations:["get"],
     normalizationContext: ['groups' => ['lire:produits']],
+    order: ["critiques.createAt" => "DESC"]
     )]
 #[ApiFilter(SearchFilter::class, properties:[
     'nom' => 'partial',
@@ -31,6 +32,7 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
     'category.id' => 'exact',
     ])]
 #[ApiFilter(BooleanFilter::class, properties: ['selectionner'])]
+
 
 
 class Produit
