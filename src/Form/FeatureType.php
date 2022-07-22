@@ -26,9 +26,9 @@ class FeatureType extends AbstractType
             ->add('buton')
             ->add('chemin', ChoiceType::class, [
                 'choices' => [
-                    'about' => '/about',
+                    'menu' => '/menuSemaine',
                     'équipe' => '/equipe',
-                    'plat' => '/plat',
+                    'plat' => '/nosPlats',
                     'click & collect' => '/clickcollet'
 
                 ],
