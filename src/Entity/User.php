@@ -67,7 +67,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
-    #[Groups(["read:comment","read:equipe", "lire:produits"], ["update:user"])]
+    #[Groups(["read:comment","read:equipe", "lire:produits","update:user"])]
     #[ORM\Column(type: 'string', length: 60)]
     private $pseudo;
 
