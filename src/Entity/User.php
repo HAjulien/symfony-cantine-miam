@@ -37,7 +37,11 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
             ],
             "read" => false,
             "output" => false
-        ]
+        ],
+        "put" => [
+            "security" => "is_granted('EDIT_USER', object)",
+            "denormalization_context" => ['groups' => ["update:user"]]
+        ],
     ],
 
     )]
@@ -49,7 +53,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
-
+    
+    #[Groups(["update:user"])]    
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     private $email;
 
@@ -62,7 +67,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
-    #[Groups(["read:comment","read:equipe", "lire:produits"])]
+    #[Groups(["read:comment","read:equipe", "lire:produits"], ["update:user"])]
     #[ORM\Column(type: 'string', length: 60)]
     private $pseudo;
 
@@ -73,6 +78,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'integer', nullable: true)]
     private $pointFidelite;
 
+    #[Groups(["update:user"])]    
     #[ORM\Column(type: 'string', length: 15, nullable: true)]
     private $telephone;
 
